@@ -1,0 +1,3732 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*
+Template Name: Foxture
+*/
+
+/*================================================
+1. Default CSS
+2. Header Menu CSS
+3. Home Three Hero Area CSS
+4. Home Three Category Area CSS
+4. Home Three Cta Area CSS
+5. Home Three New Arrival Area CSS
+6. Home Three New Arrival Area CSS
+7. Customer Benefit Area CSS
+8. Home Three Blog Area CSS
+9. Footer Area CSS
+
+
+10.Shope Two Page CSS
+11.Shop Details Page CSS
+12.Login Page CSS
+13.404 Page CSS
+14.Contact Page CSS
+15.Cart Page CSS
+16.CheckOut Page CSS
+
+
+
+17.Home two menu Area CSS
+18.Home two hero Area CSS
+19.Home Two Category Area CSS
+20.Home Two Arrival Area CSS
+21.Home Two Deal area CSS
+22.Home Two Blog Area CSS
+23.Home Flash Light Area CSS
+
+
+
+24.Home One Offer Area CSS
+25.Home One Cta Shop Area CSS
+26.Home One Best Product Area CSS
+27.Home One How We Work Area CSS
+28.Home One Favorite Area CSS
+29.Home One Blog Area CSS
+30.Home One Testimonial Area CSS
+31.Home One Subscribe-area Area CSS
+32.Home One Featured Product Area CSS
+33.Home One Hero Area CSS
+
+
+
+=================================================*/
+
+
+
+
+//@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/*================================================
+1. Default CSS
+=================================================*/
+
+/* Color Variable */
+$primarycolor:#B9B288;
+$headerfontcolor:#303030;
+$paragraphfontcolor:#919191;
+
+/* Font Variable */
+$headerfont: 'Poppins', sans-serif;
+$paragraphfont:'Poppins', sans-serif;
+
+
+.alignleft {
+  float: left;
+  margin-right: 15px;
+}
+
+.alignright {
+  float: right;
+  margin-left: 15px;
+}
+
+.aligncenter {
+  display: block;
+  margin: 0 auto 15px;
+}
+
+
+a {
+  color: unset;
+  text-decoration: none;
+
+  &:focus {
+    outline: 0 solid;
+  }
+  &:hover {
+    text-decoration: none;
+    color: unset;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 15px;
+  font-family: $headerfont;
+  color: $headerfontcolor;
+}
+
+h1, h2, h3{
+  font-weight: 400;
+}
+
+h4, h5, h6{
+  font-weight: 500;
+}
+
+html, body {
+  font-family: $paragraphfont;
+  color: $paragraphfontcolor;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+input:focus, textarea:focus, button:focus {
+  outline: none;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+i.bx{
+  vertical-align: middle;
+}
+
+.shape{
+  position: absolute;
+}
+
+
+/* Remove Chrome Input Field's Unwanted Yellow Background Color */
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #FAFAFA inset !important;
+
+  &:hover, &:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #FAFAFA inset !important;
+  }
+}
+
+.mt-100 {
+  margin-top: 100px;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.mt-24{
+  margin-top: 24px;
+}
+
+.mb-76 {
+  margin-bottom: 76px;
+}
+
+.pt-100 {
+  padding-top: 100px;
+}
+
+.pb-76 {
+  padding-bottom: 76px;
+}
+
+.pb-100{
+  padding-bottom: 100px;
+}
+
+.common-btn {
+  display: inline-block;
+  color: #000;
+  font-size: 14px;
+  padding: 11px 39px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: .6s;
+  text-transform: uppercase;
+  &:hover{
+    color: #fff;
+    border: 1px solid transparent;
+    &:before{
+      width: 100%;
+    }
+  }
+  &:before{
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    background: $headerfontcolor;
+    width: 0;
+    height: 100%;
+    transition: .5s;
+    z-index: -1;
+  }
+}
+
+.section-title{
+  h3{
+    font-size: 30px;
+    margin-bottom: 0;
+  }
+  p{
+    font-size: 14px;
+    margin-bottom: 0;
+    margin-top: 12px;
+  }
+}
+
+.breadcrumb-area {
+  background: #FCFCFC;
+  padding: 53px 0;
+  .breadcrumb-content {
+    h3 {
+      font-size: 30px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+  }
+  
+  .breadcrumb-link {
+    p {
+      font-size: 14px;
+      display: inline-block;
+      margin-bottom: 0;
+      color: $headerfontcolor;
+    }
+    span {
+      background: $headerfontcolor;
+      height: 2px;
+      width: 8px;
+      border-radius: 50px;
+      margin-right: 5px;
+      margin-left: 5px;
+      margin-bottom: 3px;
+      display: inline-block;
+    }
+  }
+}
+
+
+
+/*================================================
+2. Header Menu CSS
+=================================================*/
+
+.hamburger {
+  position: relative;
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  border: 5px solid transparent;
+  display: none;
+  z-index: 1;
+
+  span {
+    width: 100%;
+    height: 2px;
+    background: #2B2024;
+    display: block;
+    position: absolute;
+    right: 0;
+    transition: all 0.3s;
+
+    &.h-top {
+      top: 0;
+    }
+
+    &.h-bottom {
+      bottom: 0;
+      width: 27px;
+    }
+
+    &.h-middle {
+      top: 50%;
+      margin-top: -1px;
+      width: 25px;
+    }
+  }
+
+  &.h-active span {
+    width: 100%;
+
+    &.h-top {
+      transform: rotate(45deg);
+      top: 50%;
+      margin-top: -1px;
+    }
+
+    &.h-middle {
+      transform: translateX(-30px);
+      opacity: 0;
+    }
+
+    &.h-bottom {
+      transform: rotate(-45deg);
+      bottom: 50%;
+      margin-bottom: -1px;
+    }
+  }
+}
+
+.bottombar {
+  background-color: #08509e;
+}
+
+.logo, .main-nav, .menu-right-item{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  justify-content: center;
+}
+
+.menu-right-item {
+  justify-content: end;
+  li {
+    display: inline-block;
+    color: $headerfontcolor;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0 10px;
+    position: relative;
+    span {
+      width: 2px;
+      height: 13px;
+      background: #000;
+      display: inline-block;
+    }
+  }
+  i {
+    color: #000;
+    font-size: 20px;
+    span {
+      position: absolute;
+      right: -12px;
+      top: -8px;
+      background: #000000;
+      color: #fff;
+      height: 22px;
+      width: 22px;
+      font-size: 11px;
+      text-align: center;
+      font-weight: 700;
+      border-radius: 50%;
+      line-height: 21px;
+      font-family: $headerfont;
+    }
+  }
+}
+
+.header-menu-area {
+  width: 100%;
+  z-index: 9;
+  padding: 7px 0;
+  padding-right: 24px;
+}
+
+.menu-category-icon {
+  i {
+    font-size: 27px;
+    padding: 28px 24px;
+    color: #000;
+  }
+}
+
+.has-child-menu {
+  span {
+    position: absolute;
+    right: 23px;
+    top: 12px;
+    background: #000000;
+    color: #fff;
+    height: 22px;
+    width: 22px;
+    font-size: 12px;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 50%;
+    line-height: 23px;
+  }
+}
+
+.home-two-header-menu{
+  .has-child-menu{
+    &:after {
+      position: absolute;
+      right: 4px;
+      top: 24px;
+      font-family: "boxicons";
+      content: "";
+      font-size: 20px;
+      color: #2b202442;
+      transition: all .4s;
+    }
+  }
+  .main-nav>ul>li:hover.has-child-menu:after {
+    transform: rotate(180deg);
+  }
+}
+
+.main-nav {
+  > ul > li {
+    display: inline-block;
+    position: relative;
+    padding-right: 16px;
+    padding: 28px 24px;
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+
+    &:hover {
+
+      > a {
+        color: $primarycolor;
+
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+
+    > a {
+      display: block;
+      text-decoration: none;
+      color: $headerfontcolor;
+      font-size: 15px;
+      font-family: $headerfont;
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s;
+
+      &.active {
+        color: $primarycolor;
+      }
+    }
+  }
+
+  ul li .sub-menu {
+    position: absolute;
+    left: 0;
+    top: 81px;
+    right: 0;
+    min-width: 170px;
+    list-style: none;
+    margin: 0;
+    padding: 20px 20px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9999;
+    transform: translateY(20px);
+    transition: all 0.3s;
+    background: #000;
+    box-shadow: 7px 10px 40px rgba(13, 52, 79, 0.1);
+
+    &:before {
+      position: absolute;
+      content: "";
+      background: #000;
+      height: 13px;
+      width: 36px;
+      bottom: 99.5%;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    li .sub-menu {
+      right: -200px;
+      left: inherit;
+      top: 0;
+    }
+
+    > li {
+      display: block;
+      margin: 0 0px 16px 0px;
+      position: relative;
+      &:last-child{
+        margin-bottom: 0;
+      }
+
+      a {
+        color: #C5C5C5;
+        line-height: 1;
+        font-size: 14px;
+        font-weight: 400;
+        text-decoration: none;
+        transition: all 0.3s;
+
+        &:hover {
+          border-bottom: 1px solid $primarycolor;
+        }
+      }
+    }
+  }
+
+  .fl {
+    width: 30px;
+    font-size: 20px;
+    line-height: 35px;
+    text-align: center;
+    color: #fff;
+    font-style: normal;
+    position: absolute;
+    right: -5px;
+    top: 0;
+    z-index: 999;
+    display: none;
+    cursor: pointer;
+
+    &:before {
+      font-size: 14px;
+      text-align: center;
+      line-height: 35px;
+    }
+  }
+
+  > ul > li {
+    + li > .sub-menu {
+      left: 15px;
+    }
+
+    &:hover > .sub-menu {
+      transform: translateY(0);
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  ul li .sub-menu li {
+    &:hover > .sub-menu, .sub-menu li:hover > .sub-menu {
+      transform: translateY(0);
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.slideInUp {
+  visibility: hidden;
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+  transition: all 1s ease-out;
+}
+
+.is-active .slideInUp {
+  visibility: visible;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.slideInUp2 {
+  transition-delay: 0.3s;
+}
+
+
+.sticky {
+  position: fixed !important;
+  top: 0;
+  background: #FCFCFC;
+  z-index: 99;
+  animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
+  box-shadow: 0 2px 28px 0 rgba(0, 0, 0, .01);
+  padding-top: unset;
+} 
+
+
+
+/*================================================
+3. Home Three Hero Area CSS
+=================================================*/
+.home-three-hero-area{
+  background: #FCFCFC;
+}
+ 
+.single-home-three-hero-img{
+  position: relative;
+  z-index: 1;
+  .home-three-hero-slide-shape{
+    right: 20px;
+    top: 80px;
+    z-index: -1;
+    width: 66%;
+  }
+}
+
+.home-three-hero-slide-content-wrap{
+  .slick-dots {
+    position: absolute;
+    left: 99%;
+    display: flex;
+    bottom: -166px;
+    z-index: 1;
+    li{
+      display: inline-block;
+      margin: 0 5px;
+      button{
+        font-size: 0;
+        line-height: 0;
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        cursor: pointer;
+        color: #000;
+        border: 0;
+        outline: none;
+        background: #000;
+        padding: 0;
+        border-radius: 50%;
+      }
+    }
+    li.slick-active {
+      button{
+        background: $primarycolor;
+        color: $primarycolor;
+      }
+    }
+  }
+}
+.single-home-three-hero-content {
+  h1 {
+    font-size: 60px;
+    margin-bottom: 0;
+  }
+  p{
+    font-size: 14px;
+    margin-bottom: 32px;
+    margin-top: 18px;
+  }
+  .home-three-hero-btn-wrap{
+    margin-left: 1px;
+  }
+}
+
+/*================================================
+4. Home Three Category Area CSS
+=================================================*/
+.category-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  a {
+    font-size: 18px;
+    font-weight: 500;
+    color: $headerfontcolor;
+  }
+  h3 {
+    font-size: 30px;
+    margin-bottom: 0;
+  }
+}
+
+.home-three-category-box-wrap {
+  background: #F5F5F5;
+  position: relative;
+  padding: 30px;
+  transition: .5s;
+  margin-bottom: 24px;
+  &:hover{
+    background: #FAF1F1;
+    .home-three-category-hover-content{
+      a{
+        display: inline-block;
+      }
+    }
+  }
+  .home-three-category-hover-content{
+    position: absolute;
+    bottom: 30px;
+    h4{
+      font-size: 18px;
+      margin-bottom: 7px;
+    }
+    a{
+      color: #292929;
+      font-size: 15px;
+      font-weight: 500;
+      display: none;
+      border-bottom: 1px solid $primarycolor;
+      padding-bottom: 1px;
+      transition: .5s;
+      text-transform: uppercase;
+    }
+  }
+
+}
+
+.home-three-category-margin{
+  margin-top: 19px;
+}
+
+/*================================================
+5. Home Three Cta Area CSS
+=================================================*/
+.home-three-cta-wrap{
+  position: relative;
+  overflow: hidden;
+  &:hover{
+    &:before {
+      left: 0;
+      right: 0;
+      opacity: 0;
+      width: auto;
+    }
+    &:after {
+      top: 0;
+      bottom: 0;
+      opacity: 0;
+      width: auto;
+    }
+  } 
+  &:after {
+    background: rgba(255, 255, 255, 0.6);
+    bottom: 50%;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    opacity: 1;
+    width: 0;
+    transition: all 900ms linear;
+  }
+  &:before {
+    background: rgba(255, 255, 255, 0.3);
+    bottom: 0;
+    content: "";
+    left: 50%;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    opacity: 1;
+    width: 0;
+    transition: all 900ms linear;
+  }
+  .home-three-cta-content {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    h3 {
+      font-size: 30px;
+    }
+    h5{
+      font-size: 18px;
+      color: $primarycolor;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+
+
+/*================================================
+6. Home Three New Arrival Area CSS
+=================================================*/
+.home-three-new-arrival-tab-wrap{
+  margin-top: 20px;
+  .nav {
+    justify-content: center;
+  }
+
+  .nav-link {
+    background: none;
+    border: none;
+    font-size: 14px;
+    margin: 0 22px;
+    color: $paragraphfontcolor;
+    padding: 0;
+  }
+
+  .nav-link.active, .nav-pills .show > .nav-link {
+    color: $primarycolor;
+    background-color: unset;
+  }
+  .tab-content{
+    margin-top: 50px;
+  }
+}
+
+.arrival-box{
+  margin-bottom: 24px;
+  &:hover{
+    .home-three-product-option{
+      ul {
+        transform: scaleY(1);
+        bottom: 20px;
+     }
+    }
+  }
+  .arrival-box-content {
+    padding-top: 14px;
+    h5 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: 0;
+      color: $primarycolor;
+      font-size: 14px;
+    }
+  }
+  .arrival-box-img {
+    position: relative;
+    img {
+      width: 100%;
+    }
+    .arrival-box-img-cta {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      span {
+        font-size: 14px;
+        background: #292929;
+        color: #fff;
+        padding: 5px 12px;
+      }
+    }
+  } 
+}
+
+.home-three-product-option{
+  ul{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    transition: .3s;
+    transform: scaleY(0);
+    transform-origin: 100% 100%;
+    li{
+      background: #fff;
+      margin-right: 1px;
+      color: #000000;
+      padding: 2px 10px;
+      font-size: 23px;
+      transition: all .5s;
+      &:hover {
+        background: #B9B288;
+        color: #fff;
+      }
+      i {
+        font-size: 23px;
+      }
+    }
+  }
+}
+
+.home-three-arrival-box {
+  margin-bottom: 44px;
+}
+.mb-56{
+  margin-bottom:56px;
+}
+
+/*================================================
+7. Customer Benefit Area CSS
+=================================================*/
+.customer-benefit-area{
+  background: #F3EFE4;
+  padding: 80px 0 54px 0;
+}
+
+.customer-benefit-box{
+  margin-bottom: 24px;
+  .customer-benefit-content{
+    h4{
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    p{
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+  }
+  
+  .customer-benefit-icon {
+    display: inline-block;
+    background: #FFF;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    padding: 14px;
+    margin-bottom: 18px;
+  }
+}
+
+
+/*================================================
+8. Home Three Blog Area CSS
+=================================================*/
+.bolo-wrap-slide, .single-home-two-arrival-slide{
+  .owl-dots {
+    text-align: center;
+    .owl-dot {
+      border: none;
+      height: 12px;
+      width: 12px;
+      background: #000;
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+    .owl-dot.active{
+      background: $primarycolor;
+    }
+  }
+
+}
+
+.single-blog-box{
+  margin-bottom: 24px;
+  .blog-img {
+    img {
+      width: 100%;
+    }
+  }
+  .blog-content {
+    padding: 15px 15px 0 15px;
+    h5 {
+      font-size: 18px;
+      line-height: 24px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+/*================================================
+9. Footer Area CSS
+=================================================*/
+.footer-design-two-area {
+  background: #EFEDE1;
+  padding: 80px 0 56px 0;
+}
+
+.footer-wrap-design-two{
+  padding-bottom: 40px;
+}
+
+.single-widget{
+  margin-bottom: 24px;
+  .footer-title {
+    h4 {
+      font-size: 18px;
+      position: relative;
+      margin-bottom: 40px;
+      &:before {
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        content: "";
+        background: $primarycolor;
+        height: 2px;
+        width: 30px;
+      }
+    }
+  }
+  .footer-left-content {
+    p {
+      font-size: 14px;
+      color: $headerfontcolor;
+      margin-bottom: 0;
+    }
+    h3 {
+      font-size: 14px;
+      color: $primarycolor;
+      margin-bottom: 5px;
+      margin-top: 20px;
+      text-transform: uppercase;
+    }
+  }
+  .footer-link {
+    li {
+      color: $headerfontcolor;
+      font-size: 14px;
+      margin-bottom: 10px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+  .footer-app-download {
+    h4 {
+      font-size: 15px;
+      margin-bottom: 23px;
+      line-height: 24px;
+    }
+    li {
+      display: inline-block;
+      margin: 0 5px 5px 0px;
+    }
+  }
+}
+
+.copy-right-social {
+  li {
+    display: inline-block;
+    color: #292929 ;
+    margin: 0 10px 0 0px;
+  }
+}
+
+.copy-right-contend{
+  p{
+    font-size: 14px;
+    text-align: right;
+  }
+}
+
+.copyright-area-design-one{
+  background: #F8F6ED;
+  padding: 20px 0 ;
+  .copy-right-contend{
+    p{
+      color: $primarycolor;
+    }
+  }
+}
+
+
+/*================================================
+10. Shope Two Page CSS
+=================================================*/
+.price-range{
+  $include-html-range-slider-classes: true !default;
+
+$range-slider-margin: 20px 0 !default;
+$range-slider-track-height: 6px !default;
+$range-slider-track-full-color: #aaa !default;
+$range-slider-track-included-color: #000 !default;
+$range-slider-thumb-diameter: 30px !default;
+$range-slider-thumb-diameter-medium: $range-slider-thumb-diameter !default;
+$range-slider-thumb-diameter-large: $range-slider-thumb-diameter-medium !default;
+$range-slider-thumb-color: $primarycolor !default;
+$range-slider-output-color: #aaa !default;
+$range-slider-output-border: 1px solid $range-slider-output-color !default;
+$range-slider-output-border-radius: 4px !default;
+$range-slider-output-background: #fff !default;
+$range-slider-output-height: 2.5em !default;
+$range-slider-output-height-medium: $range-slider-output-height !default;
+$range-slider-output-height-large: $range-slider-output-height-medium !default;
+$range-slider-output-bottom-spacing: 1em !default;
+$range-slider-output-bottom-spacing-medium: $range-slider-output-bottom-spacing !default;
+$range-slider-output-bottom-spacing-large: $range-slider-output-bottom-spacing-medium !default;
+$range-slider-output-zindex: null !default;
+$range-slider-thumb-margin-top: ($range-slider-thumb-diameter / -2 + $range-slider-track-height / 2) !default; // used for centering verically
+$range-slider-thumb-margin-top-medium: ($range-slider-thumb-diameter-medium / -2 + $range-slider-track-height / 2) !default; // used for centering verically
+$range-slider-thumb-margin-top-large: ($range-slider-thumb-diameter-large / -2 + $range-slider-track-height / 2) !default; // used for centering verically
+
+// We use this to do clear floats
+@mixin clearfix() {
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
+}
+
+// default foundation screen size variables
+$small-screen: 640px;
+$medium-screen: 1024px;
+$large-screen: 1440px;
+// additional, in between screen sizes:
+$xlarge-screen: 1660px;
+$tablet-portrait: 768px;
+$mobile-small: 480px;
+$mobile-minimum: 320px;
+$mobile-small-screen: 479px;
+@mixin breakpoint($break) {
+  @if $break == large {
+    // 1440 + desktop
+    @media (min-width:( #{$large-screen})) { @content; }
+  }
+  @else if $break == medium {
+    // 1024 + tablet landscape and small desktop
+    @media (min-width: (#{$medium-screen})) { @content; }
+  }
+  @else if $break == tablet-only{
+    // 640-1023
+    @media (min-width: #{$mobile-screen}) and (max-width: #{$medium-screen - 1}){ @content; }
+  }
+  @else if $break == tablet{
+    // 768 + tablet portrait
+    @media (min-width: (#{$tablet-portrait})) { @content; }
+  }
+  @else if $break == small{
+    // 640 +
+    @media (min-width: (#{$small-screen})) { @content; }
+  }
+  @else if $break == xsmall{
+    // 480 +
+    @media (min-width: (#{$mobile-small-screen})){ @content; }
+  }
+}
+
+@if $include-html-range-slider-classes != false {
+	.range-slider {
+		@include clearfix();
+		position: relative;
+		text-align: center;
+    margin-bottom: 47px;
+
+		.track {
+			bottom: $range-slider-thumb-diameter / 2;
+			height: 2px;
+			left: 0;
+			margin-bottom: $range-slider-track-height / -4;
+			position: absolute;
+			width: 0;
+			z-index: 50;
+
+			// Small up
+			@include breakpoint(small) {
+				bottom: $range-slider-thumb-diameter-medium / 2;
+			}
+
+			// Medium up
+			@include breakpoint(medium) {
+				bottom: $range-slider-thumb-diameter-large / 2;
+			}
+
+			&--full {
+				background: $range-slider-track-full-color;
+				width: 100%;
+			}
+
+			&--included {
+				background: $range-slider-track-included-color;
+				border-radius: $range-slider-track-height / 2;
+			}
+		}
+
+		.slider-thumb {
+			background: $range-slider-thumb-color;
+			border-radius: 50%;
+			cursor: pointer;
+			display: none;
+			display: block\9; //IE hack to display for IE9 and up
+			height: $range-slider-thumb-diameter;
+			left: 0;
+			position: absolute;
+			width: $range-slider-thumb-diameter;
+			z-index: 101;
+
+			// IE10+ hack
+			@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+				display: block;
+			}
+
+			// Small up
+      @include breakpoint(small) {
+        height: $range-slider-thumb-diameter-medium;
+        width: $range-slider-thumb-diameter-medium;
+      }
+
+      // Medium up
+      @include breakpoint(medium) {
+        height: $range-slider-thumb-diameter-large;
+        width: $range-slider-thumb-diameter-large;
+      }
+    }
+
+    [type=range] {
+      -webkit-appearance: none;
+      background: none;
+      height: $range-slider-thumb-diameter;
+			margin: 0;
+			outline: none;
+			padding: 0;
+			pointer-events: none;
+			position: relative;
+			width: 100%;
+			z-index: 75;
+
+			// Small up
+			@include breakpoint(small) {
+				height: $range-slider-thumb-diameter-medium;
+			}
+
+			// Medium up
+			@include breakpoint(medium) {
+				height: $range-slider-thumb-diameter-large;
+			}
+
+			&:focus {
+				outline: none;
+			}
+
+			&::-moz-focus-outer {
+				border: 0;
+			}
+
+			&:first-of-type {
+				float: left;
+				margin-bottom: -1 * $range-slider-thumb-diameter;
+
+				// Small up
+				@include breakpoint(small) {
+					margin-bottom: -1 * $range-slider-thumb-diameter-medium;
+				}
+
+				// Medium up
+				@include breakpoint(medium) {
+					margin-bottom: -1 * $range-slider-thumb-diameter-large;
+				}
+			}
+
+			&:last-of-type {
+				float: right;
+				margin-bottom: 0;
+			}
+
+			// Note that while we're repeating code here,
+			// that's necessary as you can't comma-separate these type of selectors.
+			// Browsers will drop the entire selector if it doesn't understand a part of it.
+			// https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
+
+			//////////////////////////////////////
+			// Track styling
+			//////////////////////////////////////
+			&::-webkit-slider-runnable-track {
+				background: none;
+				border: 0;
+				height: $range-slider-track-height;
+				z-index: -1;
+			}
+
+			&::-ms-fill-lower {
+				background: none;
+				border: 0;
+			}
+
+			&::-ms-fill-upper {
+				background: none;
+				border: 0;
+			}
+
+			&::-ms-track {
+				background: transparent;
+				border: 0;
+  				border-color: transparent;
+				color: transparent;
+				height: $range-slider-track-height;
+				z-index: -1;
+			}
+
+			&:focus::-ms-fill-lower {
+				background: none;
+				border: 0;
+			}
+
+			&:focus::-ms-fill-upper {
+				background: none;
+				border: 0;
+			}
+
+			&::-moz-range-track {
+				-moz-appearance: none;
+				background: none;
+				border: 0;
+				height: $range-slider-track-height;
+				z-index: -1;
+			}
+
+			//////////////////////////////////////
+			// Slider thumb styling
+			//////////////////////////////////////
+			&::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				background: $range-slider-thumb-color;
+				border: 0;
+				border-radius: 50%;
+				cursor: pointer;
+				height: $range-slider-thumb-diameter;
+				margin-top: $range-slider-thumb-margin-top;
+				outline: 0;
+				pointer-events: all;
+				position: relative;
+				width: $range-slider-thumb-diameter;
+				z-index: 100;
+
+				// Small up
+				@include breakpoint(small) {
+					height: $range-slider-thumb-diameter-medium;
+					margin-top: $range-slider-thumb-margin-top-medium;
+					width: $range-slider-thumb-diameter-medium;
+				}
+
+				// Medium up
+				@include breakpoint(medium) {
+					height: $range-slider-thumb-diameter-large;
+					margin-top: $range-slider-thumb-margin-top-large;
+					width: $range-slider-thumb-diameter-large;
+				}
+			}
+
+			&::-ms-thumb {
+				background: $range-slider-thumb-color;
+				border: 0;
+				border-radius: 50%;
+				cursor: pointer;
+				height: $range-slider-thumb-diameter;
+				margin-top: 0;
+				pointer-events: all;
+				position: relative;
+				width: $range-slider-thumb-diameter;
+				z-index: 100;
+
+				// Small up
+				@include breakpoint(small) {
+					height: $range-slider-thumb-diameter-medium;
+					width: $range-slider-thumb-diameter-medium;
+				}
+
+				// Medium up
+				@include breakpoint(medium) {
+					height: $range-slider-thumb-diameter-large;
+					width: $range-slider-thumb-diameter-large;
+				}
+			}
+
+			&::-moz-range-thumb {
+				-moz-appearance: none;
+				background: $range-slider-thumb-color;
+				border: 0;
+				border-radius: 50%;
+				cursor: pointer;
+				height: $range-slider-thumb-diameter;
+				margin-top: $range-slider-thumb-margin-top;
+				pointer-events: all;
+				position: relative;
+				width: $range-slider-thumb-diameter;
+				z-index: 100;
+
+				// Small up
+				@include breakpoint(small) {
+					height: $range-slider-thumb-diameter-medium;
+					margin-top: $range-slider-thumb-margin-top-medium;
+					width: $range-slider-thumb-diameter-medium;
+				}
+
+				// Medium up
+				@include breakpoint(medium) {
+					height: $range-slider-thumb-diameter-large;
+					margin-top: $range-slider-thumb-margin-top-large;
+					width: $range-slider-thumb-diameter-large;
+				}
+			}
+		}
+
+		.output,
+		output {
+			color: #000;
+			display: inline-block;
+			position: absolute;
+			text-align: center;
+			top: 100%;
+			transform: translate(-50%, 0);
+			z-index: $range-slider-output-zindex;
+      font-size: 14px;
+      font-weight: 400;
+		}
+	}
+}
+}
+
+.shope-sidebar-wrap{
+  margin-bottom: 30px;
+  &:last-child{
+    margin-bottom: 0;
+  }
+}
+
+.shop-sidebar-title {
+  position: relative;
+  padding-bottom: 38px;
+  &:before {
+    position: absolute;
+    content: "";
+    height: 1px;
+    width: 50px;
+    background: #F5F5F5;
+    top: 60%;
+  }
+  h4 {
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+}
+
+.shop-sidebar-category-list {
+  li {
+    font-size: 14px;
+    margin-bottom: 12px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.sidebar-color {
+  li {
+    display: inline-block;
+    a {
+      font-size: 0;
+      height: 20px;
+      width: 20px;
+      margin-right: 16px;
+      border-radius: 50%;
+      display: block;
+    }
+  }
+}
+
+
+.shop-sidebar-arrival-wrap {
+  display: flex;
+  margin-bottom: 24px;
+  &:last-child{
+    margin-bottom: 0;
+  }
+  .shop-sidebar-arrival-img {
+    width: 100%;
+    max-width: 60px;
+  }
+  .shop-sidebar-arrival-content {
+    padding-left: 10px;
+    h4 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+    p {
+      margin-bottom: 0;
+      font-size: 14px;
+      color: $primarycolor;
+    }
+  }
+}
+
+.shop-two-showing-wrap {
+  border-bottom: 1px solid #F5F5F5;
+  padding-bottom: 10px;
+  margin-bottom: 50px;
+}
+
+.grid-list-icon {
+  li {
+    display: inline-block;
+    i {
+      font-size: 27px;
+      color: #E1E1E1;
+    }
+  }
+}
+
+
+.shop-two-showing {
+  text-align: right;
+  li {
+    display: inline-block;
+    color: #000000;
+    font-size: 14px;
+    position: relative;
+    margin-left: 20px;
+    &:first-child{
+      margin-left: 0px;
+    }
+    .shop-category-select {
+      display: inline-block;
+      padding: 3px 1px;
+      border: 1px solid #C5C5C5;
+      appearance: none;
+      text-align: center;
+      margin-left: 5px;
+      &:focus {
+        outline: 0px none #fff !important;
+      }
+    }
+  }
+}
+
+
+.short-list {
+  position: absolute;
+  right: 0;
+  top: 108%;
+  transform: scale(0);
+  transition: .4s;
+  z-index: 2;
+  ul {
+    background: #F5F5F5;
+    border: 1px solid #dddddd69;
+  }
+  li {
+    display: block;
+    margin-left: 0;
+    padding: 5px 0px;
+    border-bottom: 1px solid #dddddd69;
+    &:last-child{
+      border-bottom: none;
+    }
+    span {
+      border: none;
+      margin-left: 0px;
+    }
+  }
+}
+
+.short-list-active{
+  transform: scale(1);
+}
+
+
+
+.home-one-product-box{
+  margin-bottom: 40px;
+
+  &:hover{
+    .home-one-product-img{
+      .home-one-product-option {
+        ul{
+          transform: scaleY(1);
+          bottom: 20px;
+        }
+      }
+    }
+  }
+  .home-one-product-img {
+    position: relative;
+    img {
+      width: 100%;
+    }
+    .home-one-product-option {
+      ul {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        transition: .3s;
+        transform: scaleY(0);
+        transform-origin: 100% 100%;
+        li {
+          background: #fff;
+          margin-right: 1px;
+          color: #000000;
+          padding: 2px 10px;
+          font-size: 23px;
+          transition:all .5s;
+          &:hover{
+            background: $primarycolor;
+            color: #fff;
+          }
+          i{
+            font-size: 23px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.home-one-product-img-cta {
+  position: absolute;
+  top: 0px;
+  font-size: 14px;
+  transform-origin: left top;
+  transform: rotate(270deg) translateX(-100%);
+  left: 0px;
+  padding: 2px 10px;
+  background: #000000;
+  border: 1px solid #000;
+  color: #fff;
+}
+
+.home-one-product-img-cta-design-two{
+  background: none;
+  color: $headerfontcolor;
+  border: 1px solid #707070;
+}
+
+.home-one-product-content{
+  padding-top: 7px;
+  h4 {
+    font-size: 16px;
+    margin-bottom: 4px;
+    margin-top: 6px;
+  }
+  .product-review {
+    li {
+      display: inline-block;
+      i {
+        font-size: 14px;
+        color: $primarycolor;
+        margin-right: 2px;
+      }
+      span {
+        font-size: 14px;
+      }
+    }
+  } 
+  .home-one-product-price-list {
+    li {
+      display: inline-block;
+      color: #292929 ;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    del {
+      color: $paragraphfontcolor;
+      font-size: 14px;
+      font-weight: 400;
+      margin-left: 5px;
+    }
+  }
+  .home-one-product-color-list {
+    margin-top: 8px;
+    ul{
+      display: flex;
+      li {
+        height: 14px;
+        width: 18px;
+        display: inline-block;
+        cursor: pointer;
+        margin-right: 5px;
+        &:last-child{
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.pagination-wrap {
+  margin-top: 10px;
+  li {
+    display: inline-block;
+    margin-right: 15px;
+    &:last-child{
+      margin-right: 0;
+    }
+    a{
+      display:block;
+      height: 40px;
+      width: 48px;
+      border: 1px solid #000000;
+      color: #000000;
+      text-align: center;
+      line-height: 39px;
+      font-size: 14px;
+      transition: .5s;
+      &:hover{
+        background: #000;
+        color: #fff;
+      }
+    }
+    span {
+      font-size: 35px;
+      color: #000;
+      line-height: 0;
+    }
+  }
+}
+
+
+.shop-grid-none{
+  display: none;
+}
+
+
+li.shop-grid-active-color i{
+  color: #292929;
+}
+
+/*================================================
+11. Shop Details Page CSS
+==========================================*/
+.shop-img-deails{
+  position: relative;
+  .shop-details-img-cta {
+    left: 40px;
+  }
+  .img-expand {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    i{
+      color: #707070;
+    }
+  }
+}
+
+.shop-img-deails-wrap{
+  .nav-link {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0 10px 0 0;
+  }
+  .nav-link.active, .nav-pills .show > .nav-link {
+    color: none;
+    background-color: unset;
+  }
+  .nav{
+    margin-top: 10px;
+  }
+}
+
+.shop-details-content-wrap{
+  .shop-details-reoduct-content{
+    padding-top: 0px;
+    h3{
+      font-size: 30px;
+      margin-bottom: 3px;
+    }
+  }
+}
+
+
+.shop-details-add-cart-wrap{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  .cart-button-wrap {
+    .cart-btn {
+      background: #000;
+      color: #fff;
+      font-size: 14px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      margin: 0 20px;
+      justify-content: center;
+    }
+  }
+  .cart-heart {
+    i {
+      height: 44px;
+      width: 60px;
+      border: 1px solid #C5C5C5;
+      display: flex;
+      align-items: center;
+      color: #000;
+      justify-content: center;
+    }
+  }
+}
+
+.add-cart-content{
+  p{
+    font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+  }
+}
+
+.shop-details-brand{
+  padding: 25px 0;
+  border-top:1px solid #F5F5F5;
+  border-bottom:1px solid #F5F5F5;
+  margin-bottom: 27px;
+  li{
+    color: $headerfontcolor;
+    margin-bottom: 10px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    span{
+      color: $paragraphfontcolor;
+      margin-left: 5px;
+    }
+  }
+}
+
+.shop-details-share{
+  li{
+    display: inline-block;
+    color: #000;
+    margin: 0 5px 0 0;
+    span{
+      color: $headerfontcolor;
+      margin-right: 8px;
+    }
+  }
+}
+
+
+/* -- quantity box -- */
+
+.quantity {
+  display: flex;  
+  .input-text.qty {
+    width: 68px;
+    height: 44px;
+    padding: 0 5px;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid #C5C5C5;
+  }
+  input {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+    box-shadow: none;
+  }
+  .minus,.plus {
+    padding: 7px 10px 8px;
+    width: 68px;
+    height: 44px;
+    background-color: #ffffff;
+    border: 1px solid #C5C5C5;
+    cursor:pointer;
+  }
+  .minus {
+    border-right: 0;
+  }
+  .plus {
+    border-left: 0; 
+  }
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0; 
+  }
+  .minus:focus, .plus:focus {
+    outline: none; 
+  }
+}
+
+.single-details-content-wrap {
+  margin-bottom: 40px;
+  &:last-child{
+    margin-bottom: 0;
+  }
+}
+
+.shop-details-content-title {
+  h4 {
+    display: inline-block;
+    border-bottom: 2px solid #F5F5F5;
+    padding-bottom: 10px;
+    margin-bottom: 22px;
+    font-size: 18px;
+  }
+}
+
+.shop-details-content-description {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #F5F5F5;
+  p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+
+.shop-details-review {
+  li {
+    i {
+      font-size: 14px;
+      color: $primarycolor;
+      margin-right: 2px;
+    }
+  }
+}
+
+.review-box-wrap{
+  background: #FAFAFA;
+  padding: 40px 40px;
+  .single-review-box{
+    vertical-align: middle;
+    h3{
+      font-size: 14px;
+      margin-bottom: 0;
+      &:first-child{
+        color: $primarycolor;
+        display: inline-block;
+        border-bottom: 1px solid #E3E3E3;
+        padding-bottom: 3px;
+        margin-bottom: 15px;
+      }
+    }
+    p{
+      margin-bottom: 20px;
+      margin-top: 15px;
+      font-size: 14px;
+      border-bottom: 1px solid #E3E3E3;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+.shop-details-contat-input {
+  margin-top: 5px;
+}
+
+.contat-input {
+  position: relative;
+  input,  textarea {
+    width: 100%;
+    background: #FAFAFA;
+    border: none;
+    padding: 13px 20px;
+    margin-bottom: 9px;
+  }
+  .form-check-label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  .form-check-label-first{
+    margin-top: 0;
+  }
+  .form-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
+.shop-details-review-btn{
+  background: #000;
+  color: #fff;
+  border:none;
+  text-transform: unset;
+  &:hover {
+    color: #fff;
+    border: none;
+  }
+  &:before{
+    border: none;
+  }
+}
+
+.shop-check {
+  display: block;
+  position: relative;
+  margin-bottom: 22px;
+  cursor: pointer;
+  font-size: 14px;
+  user-select: none;
+  padding-left: 23px;
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 13px;
+    width: 15px;
+    border-radius: 2px;
+    background-color: #C8C8C8;
+    /* Create the checkmark/indicator (hidden when not checked) */
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 5px;
+      top: 2px;
+      width: 5px;
+      height: 8px;
+      border: solid #fff;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+  }
+  input:checked ~ .checkmark {
+    background-color: $primarycolor;
+  }
+}
+
+
+
+/* Show the checkmark when checked */
+.shop-check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/*================================================
+12. Login Page CSS
+=================================================*/
+.login-content-title {
+  h4 {
+    font-size: 18px;
+  }
+}
+
+.shop-check{
+  a{
+    color: $primarycolor;
+  }
+}
+
+/*================================================
+13. 404 Page CSS
+=================================================*/
+.error-btn-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.error-content {
+  margin-bottom: 40px;
+  border-bottom: 1px solid #F5F5F5;
+  padding-bottom: 32px;
+  p {
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  h4 {
+    font-size: 100px;
+    margin-bottom: 10px;
+  }
+}
+
+.error-search{
+  margin-bottom: 40px;
+  position: relative;
+   input {
+    overflow: hidden;
+    width: 100%;
+    padding: 13px 42px 13px 26px;
+    border: none;
+    background: #FAFAFA;
+    position: relative;
+  }
+   button {
+    border: none;
+    background: #000;
+    position: absolute;
+    right: 0;
+    font-size: 24px;
+    color: #fff;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    padding: 0 23px;
+  }
+}
+
+/*================================================
+14. Contact Page CSS
+=================================================*/
+.location-map {
+  iframe {
+    width: 100%;
+    display: table-cell;
+    height: 100%;
+  }
+}
+
+.contact-form-wrap {
+  .shop-details-contat-input {
+    margin-top: 0;
+  }
+}
+
+/*================================================
+15. Cart Page CSS
+=================================================*/
+.single-cart-product-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .single-cart-img {
+    display: flex;
+    align-items: center;
+    p {
+      margin-bottom: 0;
+      color: #919191;
+      font-size: 14px;
+      padding-left: 12px;
+    }
+  }  
+  .single-cart-product-x-icon {
+    i {
+      color: #B0B0B0;
+    }
+  }
+}
+
+.cart-product-details-wrap{
+  padding-top: 35px;
+  border-top: 1px solid #F5F5F5;
+  .minus, .plus{
+    width: 40px;
+  }
+  .input-text.qty {
+    width: 40px;
+  }
+  tbody, td, tfoot, th, thead, tr {
+    vertical-align: middle;
+    text-align: center;
+    color: $headerfontcolor;
+  }
+  th {
+    font-weight: 500;
+    font-size: 18px;
+    background: #F5F5F5;
+    position: relative;
+    &:first-child{
+      text-align: left;
+    }
+    &:last-child{
+      &:before{
+        display: none;
+      }
+    }
+    &:before {
+      position: absolute;
+      content: "";
+      height: 85%;
+      width: 1px;
+      background: #fff;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  td {
+    border-right: 1px solid #F4F4F4;
+    &:last-child{
+      border-right:0;
+    }
+  }
+
+  .table{
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+
+  tbody {
+    border: 1px solid #F4F4F4;
+    border-top: none;
+  }
+  thead {
+    border: 1px solid #F5F5F5;
+  }
+
+  .table>:not(caption)>*>* {
+    padding: 16px 10px;
+  }
+
+  .table>:not(:last-child)>:last-child>* {
+    border: none;
+  }
+
+  .cart-quantity {
+    justify-content: center;
+    .minus {
+      border: none;
+    }
+    .plus {
+      border: none;
+    }
+    .input-text.qty{
+      border: 1px solid #F5F5F5;
+      border-top: none;
+      border-bottom: none;
+    }
+  }
+}
+
+.apply-copon{
+  margin-bottom: 0;
+   button {
+    background:$headerfontcolor;
+    font-size: 14px;
+  }
+  input {
+    padding: 13px 150px 13px 26px;
+  }
+}
+
+.cart-total-title {
+  background: #F4F4F4;
+  padding: 25px 20px;
+  h4 {
+    margin-bottom: 0;
+    font-size: 18px;
+  }
+}
+.cart-total-body {
+  
+  border: 1px solid #F5F5F5;
+  border-top: none;
+  padding: 5px 20px;
+  li {
+    font-size: 14px;
+    color: $headerfontcolor;
+    padding: 19px 0;
+    border-bottom: 1px solid #F4F4F4;
+    &:last-child{
+      border-bottom: none;
+    }
+    &:nth-child(2) {
+      border-bottom: none;
+      padding: 0;
+      margin-top: 19px;
+      margin-bottom: -7px;
+    }
+    &:nth-child(4) {
+      margin-top: -37px;
+    }
+    &:nth-child(3) {
+      border-bottom: none;
+    }
+    span {
+      float: right;
+      i{
+        color: #E1E1E1;
+        cursor: pointer;
+      }
+    }
+  }
+  .cart-total-body-title {
+    font-size: 18px;
+    display: inline-block;
+    font-weight: 500;
+  }
+}
+
+.update-cart-content-wrap {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  p {
+    margin-bottom: 0;
+    font-size: 14px;
+    padding-right: 16px;
+    color: $paragraphfontcolor;
+  }
+}
+
+
+.update-cart-content-btn {
+  border-radius: unset;
+  padding: 15px 39px;
+}
+
+
+.click-address {
+  position: relative;
+}
+
+.cart-address-change-wrap {
+  position: absolute;
+  z-index: 2;
+  background: $headerfontcolor;
+  width: 100%;
+  padding: 15px 20px;
+  top: 94%;
+  transform: scale(0);
+  transition: .4s;
+  p {
+    margin-bottom: 11px;
+    color: $primarycolor;
+    cursor: pointer;
+    transition: .2s;
+    &:hover{
+      color: #fff;
+    }
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+
+.short-cart-active{
+  transform: scale(1);
+}
+
+/*================================================
+16. CheckOut Page CSS
+=================================================*/
+.checkout-form-wrap{
+  .shop-check {
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+}
+.checkout-bill-title{
+  h4 {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+}
+
+.checkout-product-details-wrap{
+  padding-top: 30px;
+  border-top: 0;
+  th {
+    text-align: right;
+    &:before {
+      display: none;
+   }
+  }
+  .table > :not(caption) > * > * {
+    padding: 16px 25px;
+  }
+  tr{
+    &:nth-child(3){
+      td{
+        color: $headerfontcolor;
+      }
+    }
+    td {
+      text-align: left;
+      font-size: 14px;
+      color: $paragraphfontcolor;
+      &:last-child{
+        text-align: right;
+      }
+    }
+  }
+  .table{
+    margin-bottom: 0;
+  }
+}
+
+.payment-option-wrap{
+  padding: 46px 25px;
+  border: 1px solid #F4F4F4;
+  border-top: 0;
+  label{
+    font-size: 14px;
+    color: $headerfontcolor;
+  }
+  .form-check-input {
+    border: 3px solid #000000;
+    &:checked {
+      background-color: $primarycolor;
+      border-color: $primarycolor;
+    }
+    &:focus{
+      display: none;
+    }
+  }
+  .form-check {
+    p {
+      padding: 10px 18px;
+      background: #FAFAFA;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+  }
+  ul {
+    text-align: right;
+    li {
+      color: $headerfontcolor;
+      margin-bottom: 25px;
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/*================================================
+17. Home two menu Area CSS
+=================================================*/
+
+
+.home-two-menu-top-cta {
+  background: $primarycolor;
+  padding: 10px 50px;
+  .menu-shipping {
+    p {
+      margin-bottom: 0;
+      font-size: 14px;
+      color: $headerfontcolor;
+    }
+  }
+  
+  .menu-top-login-wrap {
+    text-align: right;
+    h4 {
+      margin-bottom: 0;
+      font-size: 15px;
+    }
+  }
+}
+
+.home-two-header-menu{
+  padding: 0 50px;
+  .main-nav {
+    justify-content: center;
+  }
+  .main-nav > ul > li{
+    &:last-child {
+      padding-right: unset;
+    }
+  }
+  .logo {
+    justify-content: start;
+  }
+  .menu-right-item {
+    li {
+      padding: 0 8px;
+      &:last-child{
+        padding-right: 0;
+      }
+      span {
+        width: 1px;
+        height: 16px;
+        background: #E1E1E1;
+        margin-bottom: -4px;
+      }
+    }
+  }
+}
+
+.home-two-mobile-menu-area{
+  li {
+    padding: 0 8px;
+    &:last-child{
+      padding-right: 0;
+    }
+    span {
+      width: 1px;
+      height: 16px;
+      background: #E1E1E1;
+      margin-bottom: -4px;
+    }
+  }
+}
+
+.home-two-customer-benefit-area{
+  background: #D5CDA5;
+}
+
+/*================================================
+18. Home two hero Area CSS
+=================================================*/
+.home-two-hero-img-slide {
+  img {
+    width: 100%;
+  }
+}
+.home-two-hero-area{
+  background:#000 ;
+}
+
+.home-two-hero-slide-wrap {
+  padding-bottom: 183px;
+  position: relative;
+  .owl-nav {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    button {
+      color: #fff;
+      background: none;
+      border: 2px solid $primarycolor;
+      height: 50px;
+      width: 50px;
+      display: inline-block;
+      font-size: 26px;
+      i {
+        font-size: 21px;
+      }
+    }
+    button.owl-next{
+      background: $primarycolor;
+      margin-left: .5px;
+    }
+  }
+  .owl-item .home-two-hero-content-wrap {
+    transition: all 2s ease 0s;
+    transform: translateY(-150px);
+  }
+  .owl-item.active .home-two-hero-content-wrap{
+    transform: translateY(0px);
+  }
+} 
+
+.home-two-hero-content-wrap {
+  p {
+    color: $primarycolor;
+    font-size: 13px;
+    margin-bottom: 23px;
+  }
+  h3 {
+    color: #C5C5C5;
+    font-size: 30px;
+    line-height: 42px;
+    margin-top: 22px;
+    margin-bottom: 15px;
+  }
+  .home-two-hero-title-focus {
+    background: $primarycolor;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 2px;
+    p {
+      font-size: 14px;
+      color: $headerfontcolor;
+      margin-bottom: 0;
+    }
+  }
+  .home-two-hero-btn{
+    font-size: 14px;
+    color: #C5C5C5;
+    border: 1px solid $primarycolor;
+    padding: 10px 20px;
+    display: inline-block;
+    border-radius: 2px;
+    transition:all 1s ease 0s;
+    &:hover{
+      background: #fff;
+      color: $headerfontcolor;
+      border: 1px solid #fff;
+    }
+  }
+}
+
+/*================================================
+19. Home Two Category Area CSS
+=================================================*/
+.home-two-category-box {
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  &:hover{
+    &:before{
+      opacity: 1;
+      transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, 45deg) translate3d(0, 120%, 0);
+    }
+  }
+  &:before{
+    background: rgba(255, 255, 255, 0.3);
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    position: absolute;
+    transition: all .8s ease-in-out;
+    transform: scale3d(1.9, 1.4, 1) rotate3d(0, 0, 1, 45deg) translate3d(0, -120%, 0);
+    width: 100%;
+    z-index: 1;
+  }
+  .home-two-category-img{
+    img{
+      width: 100%;
+    }
+  }
+  .home-two-category-img-name {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    h4{
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+/*================================================
+20. Home Two Arrival Area CSS
+=================================================*/
+.home-two-arrival-area{
+  background: #EFEDE1;
+}
+
+.single-home-two-arrival-box {
+  position: relative;
+  margin-bottom: 24px;
+  .home-two-arrival-img{
+    img{
+      width: 100%;
+    }
+    .home-two-arrival-content {
+      position: absolute;
+      bottom: 22px;
+      width: 100%;
+      p {
+        margin-bottom: 0;
+        font-size: 14px;
+        color: $primarycolor;
+      }
+      h5 {
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+    }
+    .home-two-arrival-cta{
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      span{
+        font-size: 14px;
+        color: $headerfontcolor;
+        padding: 4px 8px;
+        border: 1px solid #000;
+      }
+    }
+    .home-two-arrival-cta-1{
+      span{
+        color: $primarycolor;
+        border: 1px solid $primarycolor;
+      }
+    }
+    .home-two-arrival-cta-3{
+      transform-origin: left;
+      transform: rotate(-90deg);
+      left: 14px;
+      top: 53px;
+      span{
+        background: #292929;
+        border: 1px solid #292929;
+        color: #fff;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+/*================================================
+21. Home Two Deal area CSS
+=================================================*/
+
+.today-deal-count {
+  ul {
+    display: flex;
+    align-items: center;
+  }
+  li {
+    display: inline-block;
+    margin-right: 20px;
+    &:last-child{
+      margin-right: 0px;
+    }
+    &:first-child{
+      margin-left: 15px;
+    }
+    h2, p{
+      font-size: 14px;
+      margin-bottom: 0;
+      color: $headerfontcolor;
+    }
+    span {
+      font-size: 18px;
+      color: $headerfontcolor;
+      font-weight: 500;
+    }
+    .deal-coming-soon {
+      border: 1px solid $primarycolor;
+      border-radius: 5px;
+      height: 44px;
+      width: 60px;
+      padding: 4px;
+    }
+  }
+}
+
+.home-two-deal-bg {
+  background: #FAFAFA;
+}
+.home-two-deal-bg-1 {
+  padding: 16px 0;
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.home-two-deal-bg-2 {
+  padding: 30px 18px 6px 18px;
+}
+
+.deal-tab-list-wrap{
+  .nav-link {
+    background: none;
+    border: none;
+    font-size: 14px;
+    margin: 0 15px;
+    color: $headerfontcolor;
+    padding: 0;
+    text-transform: uppercase;
+  }
+  .nav-link.active,  .nav-pills .show > .nav-link{
+    background-color: unset;
+    color: $primarycolor;
+  }
+  .nav {
+    justify-content: end;
+  }
+}
+
+.home-two-deal-item{
+  position: relative;
+  margin-bottom: 24px;
+  .home-two-deal-item-img {
+    img{
+      width: 100%;
+    }
+  }
+}
+
+.home-two-deal-item-content {
+  position: absolute;
+}
+.home-two-deal-item-content-type-1{
+  top: 30px;
+  left: 30px;
+}
+
+.home-two-deal-item-content-type-2{
+  left:18px;
+  bottom: 22px;
+}
+
+.home-two-deal-type-one-content {
+  p {
+    font-size: 14px;
+    margin-bottom: 0;
+    color: $primarycolor;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    line-height:42px;
+  }
+}
+
+.home-two-deal-type-two-content{
+  h4{
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+  p{
+    font-size: 14px;
+    color: $headerfontcolor;
+    margin-bottom: 0;
+  }
+  .product-review{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    li{
+      display: inline-block;
+      i{
+        font-size: 14px;
+        color: $primarycolor;
+        margin-right: 2px;
+      }
+      span{
+        font-size: 14px;
+        color: $headerfontcolor;
+      }
+    }
+  }
+}
+
+
+
+/*================================================
+22. Home Two Blog Area CSS
+=================================================*/
+.home-two-blog-box{
+  margin-bottom: 24px;
+  &:hover{
+    .home-two-blog-img{
+      img{
+        filter: grayscale(70%);
+        transform: scale(1.007);
+      }
+    }
+  }
+  .home-two-blog-img{
+    overflow: hidden;
+    img{
+      width: 100%;
+      transition: .4s;
+    }
+  }
+}
+.home-two-blog-content {
+  padding-top: 14px;
+  p {
+    font-size: 14px;
+    margin-bottom: 0;
+    color: $primarycolor;
+  }
+  h4{
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+}
+
+/*================================================
+23. Home Flash Light Area CSS
+=================================================*/
+
+
+.flash-light-box-wrap{
+  position: relative;
+  &.light-active{
+    &::before{
+    position: absolute;
+    content: "";
+   // background-image: url(..//images/home-two/flash-light-overlay.png);
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    transition: all 4s;
+    }
+  }
+  .flash-light-content-wrap{
+    position: absolute;
+    right: 16%;
+    top: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    h3{
+      font-size: 30px;
+      margin-bottom: 0;
+      display: inline-block;
+      background: $primarycolor;
+      border-radius: 34px;
+      padding: 12px 32px;
+    }
+    span{
+      height: 20px;
+      width: 20px;
+      margin-left: 10px;
+      background: #FD9391;
+      border-radius: 50%;
+      display: inline-block;
+      border: 4px solid #fff;
+      cursor: pointer;
+    }
+  }
+}
+
+
+/*================================================
+24. Home One Offer Area CSS
+=================================================*/
+.home-one-offer-product-area-padding{
+  padding: 0 78px;
+}
+
+.home-one-offer-item {
+  z-index: 1;
+  transition: all .5s;
+  background: #F5F5F5;
+  &:before {
+    position: absolute;
+    content: "";
+    height: 0;
+    width: 100%;
+    background: #EAE5C9;
+    z-index: -1;
+    transition: all .5s;
+  }
+  &:hover {
+    &:before {
+      height: 100%;
+    }
+    .home-two-deal-type-one-content{
+      p{
+        &:first-child{
+          transform: rotateX(360deg);
+        }
+      }
+    }
+  }
+  .home-two-deal-type-one-content {
+    p {
+      transition: .5s;
+      a {
+        color: $headerfontcolor;
+        display: inline-block;
+        border-bottom: 1px solid $primarycolor;
+        padding-bottom: 2px;
+      }
+    }
+  }
+}
+
+
+
+/*================================================
+25. Home One Cta Shop Area CSS
+=================================================*/
+
+.home-one-cta-shop-area {
+  background: #F5F5F5;
+  padding: 34px 0;
+}
+
+.home-one-cta-shop-wrap {
+  p {
+    margin-bottom: 0;
+    font-size: 14px;
+    a {
+      color: $primarycolor;
+      display: inline-block;
+      border-bottom: 1px solid $primarycolor;
+      line-height: 11px;
+    }
+  }
+} 
+
+/*================================================
+26. Home One Best Product Area CSS
+=================================================*/
+.home-one-best-product-area-top {
+  padding:0 0 15px 0;
+  position: relative;
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.home-two-best-btn-wrap{
+  margin-top: 26px;
+  display: flex;
+  justify-content: center;
+  .home-two-best-btn {
+    border-radius: unset;
+    padding: 11px 30px;
+  }
+}
+
+.home-one-best-product-list-wrap{
+  .nav {
+    justify-content: center;
+  }
+  .nav-link {
+    background: none;
+    border: none;
+    font-size: 14px;
+    margin: 0 15px;
+    color: $paragraphfontcolor;
+    padding: 0;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  .nav-link.active,  .nav-pills .show > .nav-link {
+    background-color: unset;
+    color: #B9B288;
+    position: relative;
+    &:before{
+      position: absolute;
+      content: "";
+      height: 2px;
+      width: 100%;
+      background: $primarycolor;
+      bottom: -23px;
+      left: 0;
+    }
+  }
+}
+
+.home-one-best-product-see-all {
+  text-align: right;
+  a {
+    font-size: 15px;
+    i {
+      font-size: 14px;
+      margin-left: 2px;
+    }
+  }
+}
+
+
+/*================================================
+27. Home Three Hero Area CSS
+=================================================*/
+
+.how-we-work-area{
+  background: #F5F5F5;
+  padding: 80px 0 56px 0;
+}
+
+.how-we-work-box{
+  margin-bottom: 24px;
+  .home-two-deal-type-one-content {
+    span {
+      font-size: 14px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    p{
+      a {
+        color: $headerfontcolor;
+        display: inline-block;
+        border-bottom: 1px solid #B9B288;
+        padding-bottom: 2px;
+      }
+    }
+  }
+
+  .how-we-work-icon {
+    i {
+      font-size: 34px;
+      color: #000;
+    }
+  }
+  
+  .how-we-work-content {
+    h4 {
+      font-size: 18px;
+      margin-top: 13px;
+    }
+    p {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+  }
+}
+
+
+
+
+/*================================================
+28. Home One Favorite Area CSS
+=================================================*/
+.home-one-favorite-product-area{
+  background: #EFEDE1;
+}
+
+.single-home-one-favorite-slide {
+  position: relative;
+  .owl-nav{
+    .owl-prev, .owl-next{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid $primarycolor;
+      background: none;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      color: $primarycolor;
+      left: -47px;
+      transition: .4s;
+      &:hover{
+        background: $primarycolor;
+        color: #fff;
+      }
+    }
+    .owl-next{
+      left: auto;
+      right: -47px;
+    }
+  }
+}
+
+/*================================================
+29. Home One Blog Area CSS
+=================================================*/
+.single-home-one-blog-box {
+  position: relative;
+  &:hover{
+    .home-one-blog-content{
+      background: $primarycolor;
+      p{
+        color: #fff;
+      }
+      h4{
+        color: #fff;
+      }
+    }
+  }
+}
+
+.home-one-bolo-wrap-slide{
+  .owl-dots .owl-dot{
+    background: #FAF1F1;
+    height: 15px;
+    width: 15px;
+  }
+}
+
+
+.blog-meta-date {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  span {
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+    background: #292929;
+    padding: 4px 12px;
+  }
+}
+
+.home-one-blog-content{
+  background: #FAFAFA;
+  padding: 25px 30px;
+  margin-top: -1px;
+  transition: all 1s ease 0s;
+  p{
+    color: $headerfontcolor;
+    transition: .4s;
+  }
+  h4 {
+    margin-top: 5px;
+    margin-bottom: 0px;
+    transition: .4s;
+  }
+}
+
+/*================================================
+30. Home One Testimonial Area CSS
+=================================================*/
+
+.testimonial-area{
+  background: #F5F5F5;
+  padding: 80px 0;
+}
+
+.testimonial-wrap{
+  .owl-item {
+    img {
+      display: inline-block;
+      width: unset;
+    }
+  }
+  .owl-nav {
+    .owl-prev, .owl-next{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid $primarycolor;
+      background: none;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      color: $primarycolor;
+      left: 0px;
+      transition: .4s;
+    }
+    .owl-next {
+      left: auto;
+      right: 0px;
+    }
+  }
+  .owl-dots {
+    text-align: center;
+    margin-top: 15px;
+    .owl-dot{
+      border: none;
+      height: 15px;
+      width: 15px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      margin: 0 5px;
+    }
+    .owl-dot.active{
+      background: $primarycolor;
+    }
+  }
+}
+
+.single-testimonial{
+  .testimonial-img{
+    margin-bottom: 17px;
+  }
+  .testimonial-content{
+    h4{
+      font-size: 18px;
+      margin-bottom: 0;
+    }
+    h5{
+      font-size: 15px;
+      margin-bottom: 0;
+    }
+    p{
+      font-size: 14px;
+      color: $primarycolor;
+      font-style: italic;
+      margin-top: 10px;
+      margin-bottom: 16px;
+      padding: 0 175px;
+    }
+  }
+}
+
+/*================================================
+31. Home One Subscribe-area Area CSS
+=================================================*/
+.subscribe-area{
+  background: #FAFAFA;
+  padding: 80px 0;
+}
+
+.subscribe-content {
+  h3{
+    font-size: 30px;
+  }
+  p {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+}
+
+.subscribe-search {
+  input {
+    border: 1px solid #8E8E8E;
+    padding: 10px 150px 10px 26px;
+  }
+  button {
+    background: $primarycolor;
+    padding: 0 32px;
+    border-left: 1px solid #8E8E8E;
+  }
+}
+
+/*================================================
+32. Home One Featured Product Area CSS
+=================================================*/
+.home-one-featured-box{
+  &:hover{
+    .home-one-featured-img{
+      .home-one-featured-cta{
+        span{
+          background: $primarycolor;
+          border: 1px solid $primarycolor;
+        }
+      }
+      .home-one-featured-content{
+        p{
+          position: relative;
+          opacity: 1;
+          bottom: 0px;
+        }
+      }
+    }
+  }
+  .home-one-featured-img{
+    .home-one-featured-content{
+      bottom: 15px;
+      left: 20px;
+      h3{
+        font-size: 14px;
+        color: $primarycolor;
+        margin-bottom: 8px;
+      }
+      h5{
+        font-weight: 500;
+        font-size: 18px;
+      }
+      p{
+        font-size: 15px;
+        font-weight: 500;
+        color: $headerfontcolor;
+        position: absolute;
+        bottom: -10px;
+        opacity: 0;
+        transition: .7s;
+        del{
+          color: $paragraphfontcolor;
+          font-size: 14px;
+        }
+      }
+    }
+    .home-one-featured-cta{
+      span{
+        background: #292929;
+        color: #fff;
+        border: 1px solid #292929;
+        transition: .5s;
+      }
+    }
+  }
+}
+
+
+/*================================================
+33. Home One Hero Area CSS
+=================================================*/
+.hone-one-header-menu-area {
+  position: absolute;
+}
+
+.home-one-hero-area{
+  //background-image: url(..//images/home-one/home-one-hero-bg-img.png);
+  background-size: cover;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+
+
+.single-home-one-hero-img{
+  position: relative;
+  .home-one-hero-slide-shape{
+    top:18px;
+    right: 0px;
+    z-index: -1;
+  }
+}
+
+.home-one-hero-slide-img-wrap{
+  position: relative;
+  .slick-dots {
+    position: absolute;
+    right: 68px;
+    top: 50%;
+    &:before {
+      position: absolute;
+      background: #fff;
+      content: "";
+      height: 172%;
+      width: .3px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    button {
+      border: 1px solid #000;
+      background: #F5F5F5;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 20px;
+      position: relative;
+      margin-bottom: 5px;
+      color: $headerfontcolor;
+      &:before {
+        position: absolute;
+        content: "";
+        height: 10px;
+        width: .1px;
+        background: #000;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      &:after {
+        position: absolute;
+        content: "";
+        height: 10px;
+        width: .1px;
+        background: #000;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+
+.single-home-one-hero-content{
+  h1{
+    font-size: 40px;
+  }
+  span {
+    font-size: 14px;
+    color: $primarycolor;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+}
+
+.home-one-hero-btn {
+  background: #000;
+  color: #fff;
+  padding: 11px 28px;
+}
+
+.home-one-hero-padding{
+  padding-left: 170px;
+}
+
+/*================================================
+34. Home Three Hero Area CSS
+=================================================*/
+
+
+/*
+============================================
+============= Preloader CSS ================
+*/
+.preloader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background: #fff;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  .sk-cube-grid {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .sk-cube-grid .sk-cube {
+    width: 33%;
+    height: 33%;
+    background-color: $primarycolor;
+    float: left;
+    -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+            animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; 
+  }
+  .sk-cube-grid .sk-cube1 {
+    -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s; }
+  .sk-cube-grid .sk-cube2 {
+    -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s; }
+  .sk-cube-grid .sk-cube3 {
+    -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s; }
+  .sk-cube-grid .sk-cube4 {
+    -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s; }
+  .sk-cube-grid .sk-cube5 {
+    -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s; }
+  .sk-cube-grid .sk-cube6 {
+    -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s; }
+  .sk-cube-grid .sk-cube7 {
+    -webkit-animation-delay: 0s;
+            animation-delay: 0s; }
+  .sk-cube-grid .sk-cube8 {
+    -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s; }
+  .sk-cube-grid .sk-cube9 {
+    -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s; }
+  
+  @-webkit-keyframes sk-cubeGridScaleDelay {
+    0%, 70%, 100% {
+      -webkit-transform: scale3D(1, 1, 1);
+              transform: scale3D(1, 1, 1);
+    } 35% {
+      -webkit-transform: scale3D(0, 0, 1);
+              transform: scale3D(0, 0, 1); 
+    }
+  }
+  
+  @keyframes sk-cubeGridScaleDelay {
+    0%, 70%, 100% {
+      -webkit-transform: scale3D(1, 1, 1);
+              transform: scale3D(1, 1, 1);
+    } 35% {
+      -webkit-transform: scale3D(0, 0, 1);
+              transform: scale3D(0, 0, 1);
+    } 
+  }
+
+/*
+============= Preloader CSS END ================
+================================================
+*/
+
+
+/*Back to Top btn*/
+
+.back-to-top-btn{
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  background: #fff;
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+  text-align: center;
+  line-height: 33px;
+  display: none;
+  z-index: 9999;
+  border: 1px solid $primarycolor;
+  transition: .3s;
+
+  i{
+    color: $primarycolor;
+    font-size: 22px;
+    &::before{
+      vertical-align: middle;
+    }
+  }
+}
+
+/*Back to Top btn end*/
+
+
+/*Newalwtter Popup*/
+.nlmbgOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000000;
+  opacity: .85;
+  filter: alpha(opacity=85);
+  -moz-opacity: .85;
+  z-index: 9;
+  display: none;
+}
+.nlmPopupWindow {
+  display: none;
+  position: fixed;
+  width: auto;
+  max-width: 800px;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: 0px auto;
+  z-index: 99;
+  transform: translateY(-50%);
+}
+a#btnClose {
+  display: block;
+  position: absolute;
+  left: 31px;
+  top: 20px;
+  z-index: 2;
+  i {
+    font-size: 18px;
+    border: 1px solid $headerfontcolor;
+    height: 30px;
+    width: 30px;
+    line-height: 28px;
+    color: #000;
+    text-align: center;
+  }
+}
+
+.newsletter-content-wrap {
+  background: #FAFAFA;
+  padding: 30px;
+  position: relative;
+  .newsletter-content{
+    border-bottom: 1px solid #F5F5F5;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+  }
+  
+  .newsletter-condition-form {
+    h3 {
+      font-size: 14px;
+      margin-bottom: 27px;
+      a {
+        color: $primarycolor;
+      }
+    }
+  }
+  
+  .newsletter-search {
+    button {
+      border-left: none;
+    }
+  }
+}
+.newsletter-img-wrap{
+  background: #FEFEFE;
+  height: 100%;
+  width: 100%;
+}
+
+/*Newalwtter Popup End*/
+
+
+.search-bar-wrap {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background: rgba(33, 37, 41, 0.9);
+  color: #fff;
+  top: 0;
+  transition: all .5s;
+  transform: translateY(-100%);
+  .search-bar-content{
+    position: fixed;
+    width: 60%;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: 0px auto;
+    z-index: 9;
+    transform: translateY(-50%);
+  }
+
+  .search-close {
+    position: absolute;
+    right: 50px;
+    top: 40px;
+    font-size: 62px;
+    cursor: pointer;
+    transition: .1s;
+    display: inline-block;
+    line-height: 0;
+    &:hover{
+      color: $primarycolor;
+      transform: rotate(90deg);
+    }
+  }
+
+  .search-bar-inner {
+    h2 {
+      color: #fff;
+      font-size: 50px;
+      font-weight: 200;
+      margin-bottom: 30px;
+    }
+  }
+
+  .search-wrap-search{
+    input {
+      padding: 15px 150px 15px 26px;
+      border: none;
+    }
+    button {
+      padding: 0 60px;
+      border: none;
+    }
+  }
+}
+
+.search-bar-wrap.show-search{
+  transform: translateY(0);
+}
+
+
+
+
+
+
+
+
+.cursor {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  border: 1px solid #000;
+  transition: all 200ms ease-out;
+  position: fixed;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  transform: translate(calc(-50% + 15px), -50%);
+  z-index: 99999;
+}
+
+.cursor2 {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: #000;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: width .3s, height .3s, opacity .3s;
+  z-index: 99999;
+}
+
+.home-two-cursor{
+  border: 1px solid $primarycolor;
+}
+
+.home-two-cursor2{
+  background-color: $primarycolor;
+}
+
+.hover {
+  // background-color: $primarycolor;
+  // opacity: 0.8;
+}
+
+.cursorinnerhover {
+  width: 50px;
+  height: 50px;
+  opacity: .5;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
