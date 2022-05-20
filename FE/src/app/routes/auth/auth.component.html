@@ -239,24 +239,18 @@
 					<div class="login-content-title">
 						<h4>Returning login</h4>
 					</div>
-					<form id="contact-form" action="mail.php" method="POST" class="contat-input">
+					<form id="contact-form" class="contat-input" [formGroup]="loginForm">
 						<div class="row">
 							<div class="col-xl-6 col-lg-6 col-sm-6 col-6">
-								<label class="form-check-label form-check-label-first">Your Name*</label>
-								<input type="text" name="name">
+								<label class="form-check-label form-check-label-first">Your Email*</label>
+								<input type="text" name="name" formControlName="email">
 							</div>
 							<div class="col-xl-6 col-lg-6 col-sm-6 col-6">
-								<label class="form-check-label form-check-label-first">Your Email*</label>
-								<input type="email" name="email">
-							</div>
-							<div class="col-xl-12 col-lg-12 col-sm-12 col-12">
-								<label class="shop-check">Save my name, email, and password for the next time login.
-								  <input type="checkbox">
-								  <span class="checkmark"></span>
-								</label>
+								<label class="form-check-label form-check-label-first">Your Password*</label>
+								<input type="email" name="email" formControlName="password">
 							</div>
 							<div class="details-page-reply-btn-wrap">
-								<button type="submit" class="common-btn shop-details-review-btn">Submit</button>
+								<button type="submit" class="common-btn shop-details-review-btn" (click)="onLogin()">Submit</button>
 							</div>
 							<p class="form-message"></p>
 						</div>

@@ -3,10 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './routes/home/home.component';
-import { AuthComponent } from './routes/auth/auth.component';
 import { LoaderComponent } from './core/components/loader/loader.component';
 import { RoutesModule } from './routes/routes.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,8 +15,10 @@ import { RoutesModule } from './routes/routes.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RoutesModule
+    RoutesModule,
+    HttpClientModule
   ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })
