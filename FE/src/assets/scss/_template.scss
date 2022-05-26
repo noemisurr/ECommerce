@@ -410,7 +410,6 @@ input:-webkit-autofill {
       right: 4px;
       top: 24px;
       font-family: "boxicons";
-      content: "";
       font-size: 20px;
       color: #2b202442;
       transition: all .4s;
@@ -2833,7 +2832,7 @@ li.shop-grid-active-color i{
     &::before{
     position: absolute;
     content: "";
-   // background-image: url(..//images/home-two/flash-light-overlay.png);
+   // background-image: url(..//images//flash-light-overlay.png);
     height: 100%;
     width: 100%;
     opacity: 1;

@@ -20,7 +20,7 @@ class AuthController extends Controller
         if( $user != null ) return response(['message' => 'user already exist'], 401);
 
         try{
-            User::create([
+            $new = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => md5($data['password']),
@@ -29,7 +29,7 @@ class AuthController extends Controller
         } catch ( Exception $exc ) {
             return response(['message' => 'user not created'], 500);
         }
-        return $this->login($request);
+        return response(['user' => $new], 201);
     }
 
     public function login( Request $request )
