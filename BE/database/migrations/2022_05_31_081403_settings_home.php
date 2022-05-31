@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('settings_home', function (Blueprint $table) {
-            $table->id();
+            $table->string('id_position');
             $table->string('src');
             $table->string('alt')->nullable();
             $table->string('size')->nullable();
