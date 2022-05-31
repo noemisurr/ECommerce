@@ -555,7 +555,6 @@
   })(jQuery);
 
   var rangeSlider = $("#facet-price-range-slider");
-  console.log(rangeSlider, 'rangedi cazz');
 //   if (rangeSlider.length > 0) {
     rangeSlider.RangeSlider({
       output: {

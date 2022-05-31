@@ -8,6 +8,10 @@ import { AuthService } from './auth.service';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
+  isErrorLogin: boolean = false
+  isErrorSignUp: boolean = false
+  isUserCreated: boolean = false
+  errorMessage: string = ''
 
   confirmValidator = (control: FormControl): { [ k: string]: boolean }  => {
     if(!control.value) {
@@ -45,18 +49,27 @@ export class AuthComponent implements OnInit {
 
 
   onLogin() {
+    this.isErrorLogin = false
     this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe((res) => {
-      console.log(res)
+      localStorage.setItem('jwt', res.token)
       this.router.navigateByUrl('/home')
+    }, (err) => {
+      this.isErrorLogin = true
+      this.errorMessage = err.error.message
     })
   }
 
   onRegister() {
-    this.authService.register(this.name?.value, this.email?.value, this.password?.value).subscribe((res) => {
-      console.log(res);
-      //messaggio errore o creazione
-      //svuotare il form
-    })
+    this.isErrorSignUp = false
+    // this.authService.register(this.name?.value, this.email?.value, this.password?.value).subscribe((res) => {
+    //   this.isUserCreated = true
+    //   //messaggio errore o creazione
+    //   //svuotare il form
+    // }, (err) => {
+    //   this.isErrorSignUp = true
+    //   this.errorMessage = err.error.message
+    // })
+    this.isUserCreated = true
   }
 
 }
