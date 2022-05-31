@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('telephone')->nullable();
             $table->string('birth')->nullable();
             $table->string('id_user_type')->references('id')->on('user_type');
+            $table->string('jwt')->nullable();
         });
     }
 
