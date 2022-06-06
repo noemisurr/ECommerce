@@ -15,14 +15,14 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition($email = '', $user_type = 2)
+    public function definition($email = '', $id_user_type = 2)
     {
         return [
             'name' => $this->faker->firstName(),
             'surname' => $this->faker->lastName(),
             'email' => $email,
             'password' => '5f4dcc3b5aa765d61d8327deb882cf99', // password
-            'id_user_type' => $user_type
+            'id_user_type' => $id_user_type
         ];
     }
 

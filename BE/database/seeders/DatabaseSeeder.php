@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::factory()->create(['email'=>'admin@admin.com', 'user_type'=>1]);
+        User::factory()->create(['email'=>'sadmin@enterprise-consulting.it', 'id_user_type'=>1]);
     }
 }

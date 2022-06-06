@@ -26,8 +26,8 @@ const routes: Routes = [
         path: 'physical/sub-category',
         component: SubCategoryComponent,
         data: {
-          title: "Sub Category",
-          breadcrumb: "Sub Category"
+          title: "Products",
+          breadcrumb: "Products"
         }
       },
       {
@@ -66,8 +66,8 @@ const routes: Routes = [
         path: 'digital/digital-sub-category',
         component: DigitalSubCategoryComponent,
         data: {
-          title: "Sub Category",
-          breadcrumb: "Sub Category"
+          title: "Products",
+          breadcrumb: "Products"
         }
       },
       {

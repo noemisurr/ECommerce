@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SettingsHome extends Model
+class HomePositionModel extends Model
 {
     use HasFactory;
     public $timestamps = false;
 
-    protected $table = 'settings_home';
+    protected $table = 'home_position';
     protected $fillable = [
         'id',
-        'name',
-        'url',
-        'alt',
-        'size',
-        'id_position'
+        'name'
     ];
 }

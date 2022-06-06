@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('settings_home', function (Blueprint $table) {
-            $table->string('id_position');
-            $table->string('src');
+            $table->id();
+            $table->string('name');
+            $table->string('url');
             $table->string('alt')->nullable();
             $table->string('size')->nullable();
+            $table->string('id_position')->references('id')->on('home_position');
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings_home');
+        //
     }
 };

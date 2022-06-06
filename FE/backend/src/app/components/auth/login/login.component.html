@@ -143,12 +143,12 @@
                                             <form [formGroup]="loginForm" 
                                                 class="form-horizontal auth-form" novalidate="">
                                                 <div class="form-group">
-                                                    <input required="" name="login[username]" type="email"
+                                                    <input required="" formControlName="email" type="email"
                                                         class="form-control" placeholder="Username"
                                                         id="exampleInputEmail1">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input required="" name="login[password]" type="password"
+                                                    <input required="" formControlName="password" type="password"
                                                         class="form-control" placeholder="Password">
                                                 </div>
                                                 <div class="form-terms">
@@ -157,16 +157,16 @@
                                                             id="customControlAutosizing">
                                                         <label class="custom-control-label"
                                                             for="customControlAutosizing">Remember me</label>
-                                                        <a href="javascript:void(0)"
+                                                        <!-- <a href="javascript:void(0)"
                                                             class="btn btn-default forgot-pass">lost your
-                                                            password</a>
+                                                            password</a> -->
                                                     </div>
                                                 </div>
                                                 <div class="form-button">
-                                                    <button class="btn btn-primary" type="submit">Login</button>
+                                                    <button class="btn btn-primary" type="submit" (click)="onLogin()">Login</button>
                                                 </div>
                                                 <div class="form-footer">
-                                                    <span>Or Login up with social platforms</span>
+                                                    <!-- <span>Or Login up with social platforms</span>
                                                     <ul class="social">
                                                         <li><a class="icon-facebook" href="javascript:void(0)"></a></li>
                                                         <li><a class="icon-twitter" href="javascript:void(0)"></a></li>
@@ -174,13 +174,13 @@
                                                         </li>
                                                         <li><a class="icon-pinterest" href="javascript:void(0)"></a>
                                                         </li>
-                                                    </ul>
+                                                    </ul> -->
                                                 </div>
                                             </form>
                                         </div>
                                     </ng-template>
                                 </ngb-tab>
-                                <ngb-tab>
+                                <!-- <ngb-tab>
                                     <ng-template ngbTabTitle><i class="icon-unlock mr-2"></i> Register
                                         <ng-template ngbTabContent>
                                             <form [formGroup]="registerForm" 
@@ -205,10 +205,10 @@
                                                                     Conditions</a></span></label>
                                                     </div>
                                                 </div>
-                                                <div class="form-button">
+                                                 <div class="form-button">
                                                     <button class="btn btn-primary" type="submit">Register</button>
-                                                </div>
-                                                <div class="form-footer">
+                                                </div> -->
+                                                <!-- <div class="form-footer">
                                                     <span>Or Sign up with social platforms</span>
                                                     <ul class="social">
                                                         <li><a href="javascript:void(0)"><i
@@ -220,20 +220,20 @@
                                                         <li><a href="javascript:void(0)"><i
                                                                     class="icon-pinterest"></i></a></li>
                                                     </ul>
-                                                </div>
+                                                </div> 
                                             </form>
                                         </ng-template>
                                     </ng-template>
-                                </ngb-tab>
+                                </ngb-tab> -->
                             </ngb-tabset>
                         </div>
                     </div>
                 </div>
             </div>
-            <a [routerLink]="'/dashboard/default'" class="btn btn-primary back-btn">
+            <!-- <a [routerLink]="'/dashboard/default'" class="btn btn-primary back-btn">
                 <app-feather-icons [icon]="'arrow-left'"></app-feather-icons>
                 back
-            </a>
+            </a> -->
         </div>
     </div>
 </div>

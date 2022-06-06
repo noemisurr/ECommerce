@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/components/auth/services/auth.service';
 import { NavService } from '../../service/nav.service';
 
 @Component({
@@ -14,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   @Output() rightSidebarEvent = new EventEmitter<boolean>();
 
-  constructor(public navServices: NavService) { }
+  constructor(public navServices: NavService, private authService: AuthService, private router: Router) { }
 
   collapseSidebar() {
     this.open = !this.open;
@@ -31,5 +33,11 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit() {  }
+
+  onLogout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigateByUrl('/')
+    })
+  }
 
 }

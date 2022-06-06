@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { digitalSubCategoryDB } from 'src/app/shared/tables/digital-sub-category';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from '../../services/product.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-digital-sub-category',
@@ -11,9 +13,7 @@ export class DigitalSubCategoryComponent implements OnInit {
   public closeResult: string;
   public digital_sub_categories = []
 
-  constructor(private modalService: NgbModal) {
-    this.digital_sub_categories = digitalSubCategoryDB.digital_sub_category;
-  }
+  constructor(private modalService: NgbModal, private productService: ProductService) {}
 
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -22,6 +22,7 @@ export class DigitalSubCategoryComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -37,27 +38,24 @@ export class DigitalSubCategoryComponent implements OnInit {
       position: 'right'
     },
     columns: {
-      img: {
-        title: 'Image',
-        type: 'html',
-      },
-      product_name: {
+      name: {
         title: 'Name'
       },
       price: {
         title: 'Price'
       },
-      status: {
-        title: 'Status',
-        type: 'html',
-      },
-      category: {
-        title: 'Sub Category',
+      id_category: {
+        title: 'Category',
       }
     },
   };
 
   ngOnInit() {
+    this.getAllProducts()
+  }
+
+  getAllProducts() {
+    this.productService.getAll().subscribe()
   }
 
 }

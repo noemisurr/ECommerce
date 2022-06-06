@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +10,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  public loginForm: FormGroup;
-  public registerForm: FormGroup;
+  public loginForm: FormGroup = this.formBuilder.group({
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]]
+  });
 
-  constructor(private formBuilder: FormBuilder) {
-    this.createLoginForm();
-    this.createRegisterForm();
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
+
+  get email() {
+    return this.loginForm.get('email')
+  }
+
+  get password() {
+    return this.loginForm.get('password')
   }
 
   owlcarousel = [
@@ -36,26 +45,19 @@ export class LoginComponent implements OnInit {
     dots: true
   };
 
-  createLoginForm() {
-    this.loginForm = this.formBuilder.group({
-      userName: [''],
-      password: [''],
-    })
-  }
-  createRegisterForm() {
-    this.registerForm = this.formBuilder.group({
-      userName: [''],
-      password: [''],
-      confirmPassword: [''],
-    })
-  }
-
 
   ngOnInit() {
   }
 
-  onSubmit() {
-    
+  onSubmit() {}
+
+  onLogin() {
+    this.authService.login(this.email.value, this.password.value).subscribe((res) => {
+      localStorage.setItem('jwt', res.jwt)
+      this.router.navigateByUrl('/dashboard/default')
+    }, (err) => {
+      console.log(err) // TODO: gestire
+    })
   }
 
 }

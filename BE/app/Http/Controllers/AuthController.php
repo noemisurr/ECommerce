@@ -8,6 +8,7 @@ use DateTime;
 use DateTimeZone;
 use Exception;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -43,7 +44,7 @@ class AuthController extends Controller
         $jwt = JWT::encode($this->_generateTokenPayload($user->id), $_ENV['JWT_SECRET'], 'HS256');
         $user->jwt = $jwt;
         $user->save();
-        return response(['token' => $jwt], 200);
+        return response($user, 200);
     }
 
     /**
@@ -61,5 +62,21 @@ class AuthController extends Controller
             "exp" => $date_now->add(new DateInterval('PT60M'))->getTimestamp(),
             "user_id" => $user_id
         );
+    }
+
+    public function me( Request $request ) {
+        $token = $request->bearerToken();
+        $payload = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
+        $user = User::find($payload->user_id);
+        if( !isset($user) ) return response(['message' => 'user not found'], 401);
+        return response($user, 200);
+    }
+
+    public function logout( Request $request ) {
+        $loggedUser = resolve(User::class);
+
+        $loggedUser->jwt = '/';
+        
+        return response(['message' => 'user logging out'], 200);
     }
 }
