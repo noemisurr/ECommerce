@@ -20,7 +20,7 @@ export class MediaHomeService {
     return this.http.put<SettingsHome>(`${environment.apiUrl}/backoffice/settings_home/${settings.id}`, settings)
   }
 
-  createHomeMedia(settings: SettingsHome) {
+  createHomeMedia(settings) {
     return this.http.post<SettingsHome>(`${environment.apiUrl}/backoffice/settings_home`, settings)
   }
 

@@ -17,18 +17,24 @@ class AuthController extends Controller
     {
         $data = $request->all();
         //controllo che l'utente esista
+        
         $user = User::where('email', '=', $data['email'])->first();
+
         if( $user != null ) return response(['message' => 'user already exist'], 401);
 
         try{
             $new = User::create([
                 'name' => $data['name'],
+                'surname' => $data['surname'],
                 'email' => $data['email'],
                 'password' => md5($data['password']),
+                'telephone' => $data['telephone'],
+                'birth' => $data['birth'],
+                'id_user_type' => $data['id_user_type'],                
                 'jwt' => ''
             ]);
         } catch ( Exception $exc ) {
-            return response(['message' => 'user not created'], 500);
+            return response(['message' => 'user not created', 'eccezione'=> $exc], 500);
         }
         return response(['user' => $new], 201);
     }
@@ -41,9 +47,13 @@ class AuthController extends Controller
         // controllo che l'utente esista e che la password sia corretta
         if ( !isset($user) || md5($data['password']) !== $user->password ) return response(['message' => 'wrong credentials'], 401);
         // generiamo un token
-        $jwt = JWT::encode($this->_generateTokenPayload($user->id), $_ENV['JWT_SECRET'], 'HS256');
-        $user->jwt = $jwt;
-        $user->save();
+        try {
+            $jwt = JWT::encode($this->_generateTokenPayload($user->id), $_ENV['JWT_SECRET'], 'HS256');
+            $user->jwt = $jwt;
+            $user->save();
+        }catch( Exception $exc ) {
+            return response(['message' => 'user not created', 'eccezione'=> $exc], 500);
+        }
         return response($user, 200);
     }
 

@@ -34,3 +34,9 @@ export interface Images {
     src?: string;
     variant_id?: any[];
 }
+
+export interface Tag {
+    id: string,
+    id_tag: string,
+    id_variation: string
+  }

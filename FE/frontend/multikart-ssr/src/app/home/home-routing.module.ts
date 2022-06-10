@@ -7,7 +7,7 @@ import { FurnitureComponent } from './furniture/furniture.component';
 
 const routes: Routes = [
   {
-    path: 'furniture',
+    path: '',
     component: FurnitureComponent
   }
 ];

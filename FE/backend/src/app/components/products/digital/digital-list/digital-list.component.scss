@@ -1,0 +1,16 @@
+.flex-row {
+    display: flex;
+    flex-direction: row;
+
+    button {
+        margin-left: 20px;
+    }
+}
+
+.margin{
+    margin: 10px 0;
+
+    &-20{
+        padding-bottom: 50px
+    }
+}

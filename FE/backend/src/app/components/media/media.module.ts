@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { MediaRoutingModule } from './media-routing.module';
 import { MediaComponent } from './media/media.component';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -21,7 +23,10 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     CommonModule,
     MediaRoutingModule,
     DropzoneModule,
-    Ng2SmartTableModule
+    NzTableModule,
+    NzPopconfirmModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

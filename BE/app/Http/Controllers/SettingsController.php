@@ -63,7 +63,7 @@ class SettingsController extends Controller
         if (isset($data['src'])) $setting->src = $data['src'];
         if (isset($data['alt'])) $setting->alt = $data['alt'];
         if (isset($data['size'])) $setting->size = $data['size'];
-        if (isset($data['id_position'])) $setting->size = $data['id_position'];
+        if (isset($data['id_position'])) $setting->id_position = $data['id_position'];
 
         try {
             $setting->save();

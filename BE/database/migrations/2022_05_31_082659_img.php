@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('img', function (Blueprint $table) {
             $table->id();
-            $table->string('src');
-            $table->string('alt')->nullable();
-            $table->string('size')->nullable();
+            $table->string('url');
+            $table->string('description')->nullable();
             $table->string('id_variation')->references('id')->on('variation');
         });
     }

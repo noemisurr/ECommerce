@@ -21,6 +21,10 @@ import { SettingModule } from './components/setting/setting.module';;
 import { ReportsModule } from './components/reports/reports.module';
 import { AuthModule } from './components/auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { IconModule } from '@ant-design/icons-angular';
 
 @NgModule({
   declarations: [
@@ -45,9 +49,12 @@ import { HttpClientModule } from '@angular/common/http';
     MediaModule,
     MenusModule,
     UsersModule,
-    HttpClientModule
+    HttpClientModule,
+    NzTableModule,
+    NzPopconfirmModule,
+    IconModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

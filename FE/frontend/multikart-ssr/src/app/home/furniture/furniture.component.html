@@ -16,8 +16,7 @@
     <div class="container-fluid">
         <div class="row partition3">
             <div class="col-md-4" *ngFor="let collection of collections">
-                <a [routerLink]="['/shop/collection/left/sidebar']" 
-                   [queryParams]="{ category: 'furniture'}">
+                <a routerLink="/shop">
                     <div class="collection-banner p-right text-right">
                         <img [src]="collection.image" alt="collection" class="img-fluid">
                         <div class="contain-banner banner-3">
@@ -51,8 +50,7 @@
                 <ng-container *ngFor="let product of getCollectionProducts(collection) | slice:0:8">
                   <div class="product-box">
                     <app-product-box-one 
-                      [product]="product"
-                      [currency]="productService?.Currency">    
+                      [product]="product">    
                     </app-product-box-one>
                   </div>
                 </ng-container>
@@ -69,7 +67,7 @@
 <!-- Parallax banner -->
 <section class="p-0">
     <div class="full-banner parallax-banner3 parallax text-center p-left"
-        [ngStyle]="{'background-image': 'url(assets/images/parallax/5.jpg)'}">
+        [style.background-image]="background">
         <div class="container">
             <div class="row">
                 <div class="col">

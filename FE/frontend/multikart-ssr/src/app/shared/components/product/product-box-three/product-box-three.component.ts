@@ -12,7 +12,7 @@ import { ProductService } from "../../../services/product.service";
 export class ProductBoxThreeComponent implements OnInit {
 
   @Input() product: Product;
-  @Input() currency: any = this.productService.Currency; // Default Currency
+    // Default Currency
   @Input() cartModal: boolean = false; // Default False
   
   @ViewChild("quickView") QuickView: QuickViewComponent;

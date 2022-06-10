@@ -33,36 +33,35 @@ export class NavService {
 	}
 
 	MENUITEMS: Menu[] = [
-		{
-			title: 'home', type: 'sub', active: false, children: [
-				{
-					title: 'clothing', type: 'sub', active: false, children: [
-						{ path: '/home/fashion', title: 'fashion-01', type: 'link' },
-						{ path: '/home/fashion-2', title: 'fashion-02', type: 'link' },
-						{ path: '/home/fashion-3', title: 'fashion-03', type: 'link' }
-					]
-				},
-				{ path: '/home/vegetable', title: 'vegetable', type: 'link' },
-				{ path: '/home/watch', title: 'watch', type: 'link' },
-				{ path: '/home/furniture', title: 'furniture', type: 'link' },
-				{ path: '/home/flower', title: 'flower', type: 'link' },
-				{ path: '/home/beauty', title: 'beauty', type: 'link' },
-				{ path: '/home/electronics', title: 'electronics', type: 'link' },
-				{ path: '/home/pets', title: 'pets', type: 'link' },
-				{ path: '/home/gym', title: 'gym', type: 'link' },
-				{ path: '/home/tools', title: 'tools', type: 'link' },
-				{ path: '/home/shoes', title: 'shoes', type: 'link' },
-				{ path: '/home/bags', title: 'bags', type: 'link' },
-				{ path: '/home/marijuana', title: 'marijuana', type: 'link' }
-			]
+		// {
+		// 	title: 'home', type: 'sub', active: false, children: [
+		// 		{
+		// 			title: 'clothing', type: 'sub', active: false, children: [
+		// 				{ path: '/home/fashion', title: 'fashion-01', type: 'link' },
+		// 				{ path: '/home/fashion-2', title: 'fashion-02', type: 'link' },
+		// 				{ path: '/home/fashion-3', title: 'fashion-03', type: 'link' }
+		// 			]
+		// 		},
+		// 		{ path: '/home/vegetable', title: 'vegetable', type: 'link' },
+		// 		{ path: '/home/watch', title: 'watch', type: 'link' },
+		// 		{ path: '/home/furniture', title: 'furniture', type: 'link' },
+		// 		{ path: '/home/flower', title: 'flower', type: 'link' },
+		// 		{ path: '/home/beauty', title: 'beauty', type: 'link' },
+		// 		{ path: '/home/electronics', title: 'electronics', type: 'link' },
+		// 		{ path: '/home/pets', title: 'pets', type: 'link' },
+		// 		{ path: '/home/gym', title: 'gym', type: 'link' },
+		// 		{ path: '/home/tools', title: 'tools', type: 'link' },
+		// 		{ path: '/home/shoes', title: 'shoes', type: 'link' },
+		// 		{ path: '/home/bags', title: 'bags', type: 'link' },
+		// 		{ path: '/home/marijuana', title: 'marijuana', type: 'link' }
+		// 	]
+		// },
+		{			
+			path: 'home', title: 'Home', type: 'link' 			
 		},
 		{
-			title: 'Shop', type: 'sub', active: false, children: [
-				{ path: '/shop/collection/left/sidebar', title: 'left-sidebar', type: 'link' },
-				{ path: '/shop/collection/right/sidebar', title: 'right-sidebar', type: 'link' },
-				{ path: '/shop/collection/no/sidebar', title: 'no-sidebar', type: 'link' },
-				{ path: '/shop/collection/infinitescroll', title: 'Infinite Scroll', type: 'link' }
-			]
+			//TODO: aggiungere le categorie
+			path: '/shop/list', title: 'Shop', type: 'link' 
 		},
 		{
 			title: 'Products', type: 'sub', active: false, children: [
@@ -129,38 +128,41 @@ export class NavService {
 			]
 		},
 		{
-			title: 'pages', type: 'sub', active: false, children: [
-				{
-					title: 'account', type: 'sub', active: false, children: [
-						{ path: '/pages/wishlist', title: 'wishlist', type: 'link' },
-						{ path: '/pages/cart', title: 'cart', type: 'link' },
-						{ path: '/pages/dashboard', title: 'dashboard', type: 'link' },
-						{ path: '/pages/login', title: 'login', type: 'link' },
-						{ path: '/pages/register', title: 'register', type: 'link' },
-						{ path: '/pages/contact', title: 'contact', type: 'link' },
-						{ path: '/pages/forget/password', title: 'forget-password', type: 'link' },
-						{ path: '/pages/profile', title: 'profile', type: 'link' },
-						{ path: '/pages/checkout', title: 'checkout', type: 'link' },
-					]
-				},
-				{ path: '/pages/aboutus', title: 'about-us', type: 'link' },
-				{ path: '/pages/search', title: 'search', type: 'link' },
-				{ path: '/pages/typography', title: 'typography', type: 'link', badge: true, badgeText: 'new' },
-				{ path: '/pages/review', title: 'review', type: 'link', badge: true, badgeText: 'new' },
-				{ path: '/pages/order/success', title: 'order-success', type: 'link' },
-					{ 
-						title: 'compare', type: 'sub', active: false, children: [
-							{ path: '/pages/compare/one', title: 'compare-1', type: 'link' },
-							{ path: '/pages/compare/two', title: 'compare-2', type: 'link', badge: true, badgeText: 'new' }
-						]
-					},
-				{ path: '/pages/collection', title: 'collection', type: 'link' },
-				{ path: '/pages/lookbook', title: 'lookbook', type: 'link' },
-				{ path: '/pages/404', title: '404', type: 'link' },
-				{ path: '/pages/comingsoon', title: 'coming-soon', type: 'link', badge: true, badgeText: 'new' },
-				{ path: '/pages/faq', title: 'faq', type: 'link' }
-			]
+			path: '/pages/contact', title: 'Contact', type: 'link'
 		},
+		// {
+		// 	title: 'pages', type: 'sub', active: false, children: [
+		// 		{
+		// 			title: 'account', type: 'sub', active: false, children: [
+		// 				{ path: '/pages/wishlist', title: 'wishlist', type: 'link' },
+		// 				{ path: '/pages/cart', title: 'cart', type: 'link' },
+		// 				{ path: '/pages/dashboard', title: 'dashboard', type: 'link' },
+		// 				{ path: '/pages/login', title: 'login', type: 'link' },
+		// 				{ path: '/pages/register', title: 'register', type: 'link' },
+		// 				{ path: '/pages/contact', title: 'contact', type: 'link' },
+		// 				{ path: '/pages/forget/password', title: 'forget-password', type: 'link' },
+		// 				{ path: '/pages/profile', title: 'profile', type: 'link' },
+		// 				{ path: '/pages/checkout', title: 'checkout', type: 'link' },
+		// 			]
+		// 		}
+		// 		// { path: '/pages/aboutus', title: 'about-us', type: 'link' },
+		// 		// { path: '/pages/search', title: 'search', type: 'link' },
+		// 		// { path: '/pages/typography', title: 'typography', type: 'link', badge: true, badgeText: 'new' },
+		// 		// { path: '/pages/review', title: 'review', type: 'link', badge: true, badgeText: 'new' },
+		// 		// { path: '/pages/order/success', title: 'order-success', type: 'link' },
+		// 		// 	{ 
+		// 		// 		title: 'compare', type: 'sub', active: false, children: [
+		// 		// 			{ path: '/pages/compare/one', title: 'compare-1', type: 'link' },
+		// 		// 			{ path: '/pages/compare/two', title: 'compare-2', type: 'link', badge: true, badgeText: 'new' }
+		// 		// 		]
+		// 		// 	},
+		// 		// { path: '/pages/collection', title: 'collection', type: 'link' },
+		// 		// { path: '/pages/lookbook', title: 'lookbook', type: 'link' },
+		// 		// { path: '/pages/404', title: '404', type: 'link' },
+		// 		// { path: '/pages/comingsoon', title: 'coming-soon', type: 'link', badge: true, badgeText: 'new' },
+		// 		// { path: '/pages/faq', title: 'faq', type: 'link' }
+		// 	]
+		// },
 		{
 			title: 'blogs', type: 'sub', active: false, children: [
 				{ path: '/pages/blog/left/sidebar', title: 'left-sidebar', type: 'link' },

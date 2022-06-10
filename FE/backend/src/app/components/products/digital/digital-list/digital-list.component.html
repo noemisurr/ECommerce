@@ -1,18 +1,178 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Product Lists</h5>
-                </div>
-                <div class="card-body">
-                    <div id="batchDelete" class="custom-datatable">
-                        <div class="table-responsive">
-                            <ng2-smart-table [settings]="settings" [source]="digital_list"></ng2-smart-table>
-                        </div>
-                    </div>
-                </div>
+    <form class="row product-adding" [formGroup]="productForm">
+      <div class="col-xl-6">
+        <div class="card">
+          <div class="card-header">
+            <h5>General</h5>
+          </div>
+          <div class="card-body">
+            <div class="digital-add needs-validation">
+              <div class="form-group">
+                <label for="validationCustom01" class="col-form-label pt-0"
+                  >Name</label
+                >
+                <input
+                  class="form-control"
+                  id="validationCustom01"
+                  type="text"
+                  required=""
+                  formControlName="name"
+                />
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Categories</label>
+                <select
+                  class="custom-select"
+                  required=""
+                  formControlName="id_category"
+                >
+                <!-- TODO: change default  -->
+                  <option value="">--Select--</option> 
+                  <option *ngFor="let data of categories" [value]="data.id">
+                    {{ data.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="validationCustomtitle" class="col-form-label pt-0"
+                  >Short Description</label
+                >
+                <input
+                  class="form-control"
+                  id="validationCustomtitle"
+                  type="text"
+                  required=""
+                  formControlName="short_description"
+                />
+              </div>
+              <div class="form-group">
+                <label for="validationCustomtitle" class="col-form-label pt-0"
+                  >Long Description</label
+                >
+                <textarea
+                  rows="4"
+                  cols="12"
+                  formControlName="long_description"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="validationCustom02" class="col-form-label"
+                  >Price</label
+                >
+                <input
+                  class="form-control"
+                  id="validationCustom02"
+                  type="number"
+                  required=""
+                  formControlName="price"
+                />
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      <nz-tabset
+        [(nzSelectedIndex)]="selectedIndex"
+        nzType="editable-card"
+        (nzAdd)="newTab()"
+        (nzClose)="closeTab($event)"
+        class="col-xl-6"
+        formArrayName="variations"
+      >
+        <nz-tab
+          *ngFor="let variation of variations; index as i"
+          [nzClosable]="i != 0"
+          [nzTitle]="'Variation ' + i"
+        >
+          <div class="card">
+            <div class="card-header">
+              <h5>Variation</h5>
+            </div>
+            <div class="card-body">
+              <div class="digital-add needs-validation" [formGroupName]="i">
+                <div class="form-group">
+                  <label class="col-form-label"><span>*</span> Color</label>
+                  <select
+                    class="custom-select"
+                    required=""
+                    formControlName="id_color"
+                  >
+                    <option value="">--Select--</option>
+                    <option *ngFor="let data of colors" [value]="data.id">
+                      {{ data.name }}
+                      {{ data.description }}
+                    </option>
+                  </select>
+                </div>
+                <br />
+                <h6>Media</h6>
+                <div class="form-group" formArrayName="media">
+                  <label for="validationCustom05" class="col-form-label pt-0">
+                    Image Url</label
+                  >
+                  <div
+                    class="flex-row margin"
+                    *ngFor="let data of variation.controls.media.controls; let url = index"
+                  >
+                    <input
+                      class="form-control"
+                      id="validationCustom05"
+                      type="text"
+                      [formControlName]="url"
+                    />
+                    <button *ngIf="url == 0" (click)="addUrl(i)">+</button>
+                    <button *ngIf="url != 0" (click)="deleteUrl(i, url)">-</button>
+                  </div>
+                </div>
+                <h6>Tag</h6>
+                <div class="digital-add needs-validation">
+                  <label for="validationCustom05" class="col-form-label pt-0">
+                    Tag name</label
+                  >
+                  <div class="form-group mb-0" formArrayName="tag">
+                    <div class="description-sm">
+                      <div
+                        class="flex-row margin"
+                        *ngFor="let data of variation.controls.tag.controls; let tag = index"
+                      >
+                        <input
+                          class="form-control"
+                          id="validationCustom05"
+                          type="text"
+                          [formControlName]="tag"
+                        />
+                        <button *ngIf="tag == 0" (click)="addTag(i)">+</button>
+                        <button *ngIf="tag != 0" (click)="deleteTag(i, tag)">-</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nz-tab>
+      </nz-tabset>
+    </form>
+    <div class="product-buttons text-center margin-20">
+      <button *ngIf="!edit"
+        type="button"
+        class="btn btn-primary mr-1"
+        [disabled]="!productForm.valid"
+        (click)="onEdit()"
+      >
+        Edit
+      </button>
+      <button *ngIf="edit"
+        type="button"
+        class="btn btn-primary mr-1"
+        [disabled]="!productForm.valid"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+      <button type="button" class="btn btn-light" (click)="onDelete()">
+        Delete
+      </button>
     </div>
-</div>
+  </div>
+  

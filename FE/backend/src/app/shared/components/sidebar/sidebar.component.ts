@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
   public menuItems: Menu[];
   public url: any;
   public fileurl: any;
-  name: string = 'Test Name';
+  name: string = '';
 
   constructor(
     private router: Router,

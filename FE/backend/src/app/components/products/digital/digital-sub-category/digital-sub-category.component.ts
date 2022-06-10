@@ -3,6 +3,7 @@ import { digitalSubCategoryDB } from 'src/app/shared/tables/digital-sub-category
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../../services/product.service';
 import { map } from 'rxjs/operators';
+import { ProductResponse } from 'src/app/shared/interfaces/interface';
 
 @Component({
   selector: 'app-digital-sub-category',
@@ -11,7 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class DigitalSubCategoryComponent implements OnInit {
   public closeResult: string;
-  public digital_sub_categories = []
+  public products: ProductResponse[] = []
 
   constructor(private modalService: NgbModal, private productService: ProductService) {}
 
@@ -33,29 +34,13 @@ export class DigitalSubCategoryComponent implements OnInit {
     }
   }
 
-  public settings = {
-    actions: {
-      position: 'right'
-    },
-    columns: {
-      name: {
-        title: 'Name'
-      },
-      price: {
-        title: 'Price'
-      },
-      id_category: {
-        title: 'Category',
-      }
-    },
-  };
-
   ngOnInit() {
     this.getAllProducts()
   }
 
   getAllProducts() {
-    this.productService.getAll().subscribe()
+    this.productService.getAll().subscribe((res) => {
+      this.products = res
+    })
   }
-
 }

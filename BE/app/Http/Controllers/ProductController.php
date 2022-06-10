@@ -3,48 +3,125 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Variation;
+use App\Models\VariationTag;
+use App\Models\Tag;
+use App\Models\Img;
 use Exception;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function getAll()
+    //TODO: permettere a long_description di avere più caratteri
+    public function getAll(Request $request)
     {
-        return response(Product::all(), 200);
+        $skip = $request->query('skip');
+        $take = $request->query('take');
+        $obj = $request->query('obj');
+        $sortBy = $request->query('sortBy');
+        $product = Product::where('deleted', '=', false);
+        if(!isset($skip) || !isset($take))  return response($product->get(), 200);
+
+        $someProduct = $product
+                        ->skip($skip)
+                        ->take($take)
+                        ->orderBy($obj ? $obj : 'name', $sortBy ? $sortBy : 'asc') // TODO: NON FUNZIONA CON PRICE PERCHè è UNA STRINGA
+                        ->get();
+        return response($someProduct, 200);
     }
 
     public function create(Request $request)
     {
-        $data = $request->all();
+        $product = $request->all();
+        $variation = $product['variations'];
         try {
             $createdProduct = Product::create([
-                'name' => $data['name'],
-                'short_description' => $data['short_description'],
-                'long_description' => $data['long_description'],
-                'price' => $data['price'],
-                'id_category' => $data['id_category'],
+                'name' => $product['name'],
+                'short_description' => $product['short_description'],
+                'long_description' => $product['long_description'],
+                'price' => $product['price'],
+                'deleted' => false,
+                'id_category' => $product['id_category'],
             ]);
-            return response($createdProduct, 201);
+            
+            foreach($variation as $var) {
+
+                $createdVariation = Variation::create([
+                    'id_color' => $var['id_color'],
+                    'id_product' => $createdProduct['id']
+                ]);
+
+                foreach($var['media'] as $img){
+                    $createdImg = Img::create([
+                        'url' => $img,
+                        'id_variation' => $createdVariation['id']
+                    ]);
+                };
+
+                foreach($var['tag'] as $tag){
+                    $createdTag = Tag::create([
+                        'name' => $tag
+                    ]);
+                    $createdVariationTag = VariationTag::create([
+                        'id_tag' => $createdTag['id'],
+                        'id_variation' => $createdVariation['id']
+                    ]);
+                };
+            };
+            return response(["product" => Product::with('variations')->where('id', $createdProduct['id'])->first()->toArray()], 201);
         } catch (Exception $exc) {
+            throw $exc;
             return response(['message' => 'product not created'], 500);
         }
     }
 
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $newProduct = $request->all();
         $product = Product::find($id);
+
         if (!isset($product)) return response(['message' => 'product not found'], 404);
-        if (isset($data['name'])) $product->name = $data['name'];
-        if (isset($data['short_description'])) $product->short_description = $data['short_description'];
-        if (isset($data['long_description'])) $product->long_description = $data['long_description'];
-        if (isset($data['price'])) $product->price = $data['price'];
-        if (isset($data['created_at'])) $product->created_at = $data['created_at'];
-        if (isset($data['id_category'])) $product->id_category = $data['id_category'];
+        if (isset($newProduct['name'])) $product->name = $newProduct['name'];
+        if (isset($newProduct['short_description'])) $product->short_description = $newProduct['short_description'];
+        if (isset($newProduct['long_description'])) $product->long_description = $newProduct['long_description'];
+        if (isset($newProduct['price'])) $product->price = $newProduct['price'];
+        if (isset($newProduct['deleted'])) $product->deleted = $newProduct['deleted'];
+        if (isset($newProduct['created_at'])) $product->created_at = $newProduct['created_at'];
+        if (isset($newProduct['id_category'])) $product->id_category = $newProduct['id_category'];
+
+        $product->variations()->delete();
+
+        //Varianti
+        $variation = $newProduct['variations'];
+
+        foreach($variation as $var) {
+
+            $createdVariation = Variation::create([
+                'id_color' => $var['id_color'],
+                'id_product' => $product['id']
+            ]);
+
+            foreach($var['media'] as $img){
+                $createdImg = Img::create([
+                    'url' => $img,
+                    'id_variation' => $createdVariation['id']
+                ]);
+            };
+
+            foreach($var['tag'] as $tag){
+                $createdTag = Tag::create([
+                    'name' => $tag
+                ]);
+                $createdVariationTag = VariationTag::create([
+                    'id_tag' => $createdTag['id'],
+                    'id_variation' => $createdVariation['id']
+                ]);
+            };
+        };
 
         try {
             $product->save();
-            return response($product, 200);
+            return response(Product::with('variations')->where('id', $product['id'])->first()->toArray(), 200);
         } catch (Exception $exc) {
             return response(['message' => 'product not updated'], 500);
         }
@@ -54,6 +131,13 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if (!isset($product) || empty($product)) return response(['message' => 'product not found'], 404);
+        return response(Product::with('variations')->where('id', $product['id'])->first()->toArray(), 200);
+    }
+
+    public function delete(Request $request, $id) {
+        $product = Product::find($id);
+        if (!isset($product)) return response(['message' => 'product not found'], 404);
+        $product->deleted = true;
         return response($product, 200);
     }
 }

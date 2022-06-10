@@ -10,8 +10,7 @@
             <div class="col-xl-2 col-md-4 col-sm-6" *ngFor="let product of products | slice:0:6">
                 <div class="product-box">
                    <app-product-box-one 
-	                  [product]="product" 
-	                  [currency]="productService?.Currency"
+	                  [product]="product" 	                  
 	                  [cartModal]="true">
 	                </app-product-box-one>
                 </div>

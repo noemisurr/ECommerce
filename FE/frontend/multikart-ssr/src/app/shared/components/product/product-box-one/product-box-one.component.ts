@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { QuickViewComponent } from "../../modal/quick-view/quick-view.component";
 import { CartModalComponent } from "../../modal/cart-modal/cart-modal.component";
-import { Product } from "../../../classes/product";
-import { ProductService } from "../../../services/product.service";
+import { IProduct } from 'src/app/shop/interfaces/interface';
+import { ProductService } from 'src/app/shop/collection/services/product.service';
 
 @Component({
   selector: 'app-product-box-one',
@@ -11,8 +11,7 @@ import { ProductService } from "../../../services/product.service";
 })
 export class ProductBoxOneComponent implements OnInit {
 
-  @Input() product: Product;
-  @Input() currency: any = this.productService.Currency; // Default Currency 
+  @Input() product: IProduct;
   @Input() thumbnail: boolean = false; // Default False 
   @Input() onHowerChangeImage: boolean = false; // Default False
   @Input() cartModal: boolean = false; // Default False
@@ -21,14 +20,25 @@ export class ProductBoxOneComponent implements OnInit {
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
 
-  public ImageSrc : string
+  public ImageSrc :string;
+  isNew: boolean = false;
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     if(this.loader) {
-      setTimeout(() => { this.loader = false; }, 2000); // Skeleton Loader
+      this.productService.getById(this.product.id).subscribe((res) => {
+        this.ImageSrc = res.variations[0]?.media[0]?.url;
+        const now = new Date()
+        const date = new Date(res.created_at)
+        now.setDate(now.getDate() - 7);
+        this.isNew = date > now
+      })
+      setTimeout(() => { 
+        this.loader = false; 
+      }, 2000); // Skeleton Loader
     }
+    
   }
 
   // Get Product Color
@@ -61,15 +71,15 @@ export class ProductBoxOneComponent implements OnInit {
   }
 
   addToCart(product: any) {
-    this.productService.addToCart(product);
+    // this.productService.addToCart(product);
   }
 
   addToWishlist(product: any) {
-    this.productService.addToWishlist(product);
+    // this.productService.addToWishlist(product);
   }
 
   addToCompare(product: any) {
-    this.productService.addToCompare(product);
+    // this.productService.addToCompare(product);
   }
 
 }

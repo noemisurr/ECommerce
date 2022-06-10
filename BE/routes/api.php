@@ -4,6 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\VariationController;
+use App\Http\Controllers\ImgController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,13 +46,13 @@ Route::prefix('/backoffice')->group((function () {
     Route::post('/settings_home', [SettingsController::class, 'createMedia']);
     Route::put('/settings_home/{setting_id}', [SettingsController::class, 'updateMedia'])->whereNumber('setting_id');
     Route::delete('/settings_home/{setting_id}', [SettingsController::class, 'deleteMedia'])->whereNumber('setting_id');
-    //TODO: aggiungere nell'header l'authorization
 }));
 
 Route::prefix('/categories')->group((function() {
     Route::get('', [CategoryController::class, 'getAll']);
     Route::post('', [CategoryController::class, 'create']);
     Route::put('/{category_id}', [CategoryController::class, 'update'])->whereNumber('category_id');
+    //TODO: delete?
 }));
 
 Route::prefix('/products')->group((function() {
@@ -57,6 +60,22 @@ Route::prefix('/products')->group((function() {
     Route::post('', [ProductController::class, 'create']);
     Route::put('/{product_id}', [ProductController::class, 'update'])->whereNumber('product_id');
     Route::get('/{product_id}', [ProductController::class, 'getById'])->whereNumber('product_id');
-    
+    Route::delete('/{product_id}', [ProductController::class, 'delete'])->whereNumber('product_id');
+
+    //Variation
+    Route::post('/{product_id}', [VariationController::class, 'create'])->whereNumber('product_id');
+    Route::get('/{product_id}/variations', [VariationController::class, 'getAll'])->whereNumber('product_id');
+    Route::put('/variations/{variation_id}', [VariationController::class, 'update'])->whereNumber('variation_id');
+    Route::delete('/variations/{variation_id}', [VariationController::class, 'delete'])->whereNumber('variation_id');
+
 }));
 
+Route::prefix('/colors')->group((function() {
+    Route::get('', [ColorController::class, 'getAll']);
+    Route::post('', [ColorController::class, 'create']);
+    Route::put('/{color_id}', [ColorController::class, 'update'])->whereNumber('color_id');
+}));
+
+Route::prefix('/img')->group((function() {
+    Route::post('', [ImgController::class, 'create']);
+}));

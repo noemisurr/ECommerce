@@ -67,17 +67,17 @@ export class CheckoutComponent implements OnInit {
   // Paypal Payment Gateway
   private initConfig(): void {
     this.payPalConfig = {
-        currency: this.productService.Currency.currency,
+        currency: '.productService.Currency.currency',
         clientId: environment.paypal_token,
         createOrderOnClient: (data) => < ICreateOrderRequest > {
           intent: 'CAPTURE',
           purchase_units: [{
               amount: {
-                currency_code: this.productService.Currency.currency,
+                currency_code: 'this.productService.Currency.currency',
                 value: this.amount,
                 breakdown: {
                     item_total: {
-                        currency_code: this.productService.Currency.currency,
+                        currency_code: 'this.productService.Currency.currency',
                         value: this.amount
                     }
                 }

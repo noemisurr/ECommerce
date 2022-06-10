@@ -4,7 +4,7 @@
     <div class="card-header">
       <h5>Dropzone Media</h5>
     </div>
-    <div class="card-body">
+    <!-- <div class="card-body">
       <div class="dropzone-custom">
         <div class="dropzone dropzone-primary" [dropzone]="config1">
           <div class="dz-message needsclick">
@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div class="card">
@@ -26,14 +26,110 @@
         class="category-table custom-datatable media-datatable"
       >
         <div class="table-responsive">
-          <ng2-smart-table
-            [settings]="settings"
-            [source]="media"
-            (editConfirm)="editConfirm($event)"
-            (createConfirm)="create($event)"
-            (deleteConfirm)="delete($event)"
-            (create)="create($event)"
-          ></ng2-smart-table>
+          <nz-table #table [nzData]="settings" nzTableLayout="fixed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Url</th>
+                <th>Alt</th>
+                <th>Size</th>
+                <th>Position</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <td>
+                <input type="text" nz-input [(ngModel)]="newMedia.name" />
+              </td>
+              <td>
+                <input type="text" nz-input [(ngModel)]="newMedia.url" />
+              </td>
+              <td>
+                <input type="text" nz-input [(ngModel)]="newMedia.alt" />
+              </td>
+              <td>
+                <input type="text" nz-input [(ngModel)]="newMedia.size" />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  nz-input
+                  [(ngModel)]="newMedia.id_position"
+                />
+              </td>
+              <td>
+                <!-- TODO: cambiare stile -->
+                <a (click)="createMedia()" class="save">Create</a>
+              </td>
+              <tr *ngFor="let data of table.data">
+                <ng-container
+                  *ngIf="!edit.get(data.id)?.edit; else editTemplate"
+                >
+                  <td nzWidth="25%">{{ data.name }}</td>
+                  <td nzWidth="50%">{{ data.url }}</td>
+                  <td nzWidth="25%">{{ data.alt }}</td>
+                  <td nzWidth="25%">{{ data.size }}</td>
+                  <td nzWidth="25%">{{ data.id_position }}</td>
+                  <td>
+                    <a (click)="startEdit(data.id)">Edit</a>
+                    <a
+                      nz-popconfirm
+                      nzPopconfirmTitle="Sure to delete?"
+                      (nzOnConfirm)="delete(data.id)"
+                      >  Delete</a
+                    >
+                  </td>
+                </ng-container>
+                <ng-template #editTemplate>
+                  <td>
+                    <input
+                      type="text"
+                      nz-input
+                      [(ngModel)]="edit.get(data.id).data.name"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      nz-input
+                      [(ngModel)]="edit.get(data.id).data.url"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      nz-input
+                      [(ngModel)]="edit.get(data.id).data.alt"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      nz-input
+                      [(ngModel)]="edit.get(data.id).data.size"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      nz-input
+                      [(ngModel)]="edit.get(data.id).data.id_position"
+                    />
+                  </td>
+                  <td>
+                    <a (click)="saveEdit(data.id)" class="save">Save</a>
+                    <a
+                      nz-popconfirm
+                      nzPopconfirmTitle="Sure to cancel?"
+                      (nzOnConfirm)="cancelEdit(data.id)"
+                    >
+                      Cancel</a
+                    >
+                  </td>
+                </ng-template>
+              </tr>
+            </tbody>
+          </nz-table>
         </div>
       </div>
     </div>

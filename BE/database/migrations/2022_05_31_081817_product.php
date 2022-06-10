@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('short_description');
             $table->string('long_description');
             $table->string('price');
+            $table->boolean('deleted');
             $table->timestamp('created_at')->nullable();
             $table->string('id_category')->references('id')->on('category');
         });

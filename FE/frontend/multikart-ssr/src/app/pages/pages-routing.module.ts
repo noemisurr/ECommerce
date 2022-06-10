@@ -64,7 +64,7 @@ const routes: Routes = [
     component: ProfileComponent 
   },
   { 
-    path: 'contact', 
+    path: 'contact',
     component: ContactComponent 
   },
   { 

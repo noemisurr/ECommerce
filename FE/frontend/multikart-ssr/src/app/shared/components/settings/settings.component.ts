@@ -69,7 +69,7 @@ export class SettingsComponent implements OnInit {
   }
 
   changeCurrency(currency: any) {
-    this.productService.Currency = currency
+     
   }
 
 }

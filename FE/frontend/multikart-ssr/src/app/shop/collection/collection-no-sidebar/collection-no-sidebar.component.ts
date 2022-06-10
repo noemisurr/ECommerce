@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { ProductService } from "../../../shared/services/product.service";
-import { Product } from '../../../shared/classes/product';
+import { ProductService } from '../services/product.service';
+import { IProduct } from '../../interfaces/interface';
 
 @Component({
   selector: 'app-collection-no-sidebar',
@@ -13,31 +13,31 @@ export class CollectionNoSidebarComponent implements OnInit {
 
   public grid: string = 'col-xl-3 col-md-6';
   public layoutView: string = 'grid-view';
-  public products: Product[] = [];
+  public products: IProduct[] = [];
   public pageNo: number = 1;
   public paginate: any = {}; // Pagination use only
   public sortBy: string; // Sorting Order
+  take: number = 12
 
-  constructor(private route: ActivatedRoute, private router: Router,
-    private viewScroller: ViewportScroller, public productService: ProductService) {   
+  constructor(private route: ActivatedRoute, private router: Router, private viewScroller: ViewportScroller, public productService: ProductService) {   
       // Get Query params..
       this.route.queryParams.subscribe(params => {
-
-        this.sortBy = params.sortBy ? params.sortBy : 'ascending';
+        console.log(params)
+        if( params.sortBy === 'a-z' || params.sortBy === 'z-a' ) this.sortBy = params.sortBy == 'a-z' ? 'asc' : 'desc';
+        if( params.sortBy === 'low' || params.sortBy === 'high' ) this.sortBy = params.sortBy == 'low' ? 'asc' : 'desc';
+        
         this.pageNo = params.page ? params.page : this.pageNo;
-
-        // Get Filtered Products..
-        this.productService.getProducts.subscribe(response => {         
-          // Sorting Filter
-          this.products = this.productService.sortProducts(response, this.sortBy);
-          // Paginate Products
-          this.paginate = this.productService.getPager(this.products.length, +this.pageNo);     // get paginate object from service
-          this.products = this.products.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
-        })
+        this.getProducts((this.pageNo - 1)* this.take, this.take, this.sortBy)
       })
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  getProducts(skip: number, take: number, sortBy: string) {
+    this.productService.getAll(skip, take, sortBy).subscribe((res) => {
+      this.products = res
+    })
+    this.paginate = this.productService.getPager(33, +this.pageNo); 
   }
 
   // SortBy Filter

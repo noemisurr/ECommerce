@@ -17,7 +17,7 @@ const state = {
 })
 export class ProductService {
 
-  public Currency = { name: 'Dollar', currency: 'USD', price: 1 } // Default Currency
+  // public Currency = { name: 'Dollar', currency: 'USD', price: 1 } // Default Currency
   public OpenCart: boolean = false;
   public Products
 
@@ -197,14 +197,14 @@ export class ProductService {
   }
 
   // Total amount 
-  public cartTotalAmount(): Observable<number> {
+  public cartTotalAmount() {
     return this.cartItems.pipe(map((product: Product[]) => {
       return product.reduce((prev, curr: Product) => {
         let price = curr.price;
         if(curr.discount) {
           price = curr.price - (curr.price * curr.discount / 100)
         }
-        return (prev + price * curr.quantity) * this.Currency.price;
+        return (prev + price * curr.quantity);
       }, 0);
     }));
   }
@@ -283,7 +283,7 @@ export class ProductService {
     } 
   }
 
-  /*
+  /* TODO: PAGINATION
     ---------------------------------------------
     ------------- Product Pagination  -----------
     ---------------------------------------------

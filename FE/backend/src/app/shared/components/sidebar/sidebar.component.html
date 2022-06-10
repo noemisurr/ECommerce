@@ -28,7 +28,6 @@
     >
       <!-- Sub -->
       <a
-        href="javascript:void(0)"
         class="sidebar-header"
         *ngIf="menuItem.type === 'sub'"
         (click)="toggletNavActive(menuItem)"
@@ -112,7 +111,6 @@
         >
           <!-- Sub -->
           <a
-            href="javascript:void(0)"
             *ngIf="childrenItem.type === 'sub'"
             (click)="toggletNavActive(childrenItem)"
           >
@@ -127,6 +125,7 @@
             </span>
             <i
               class="fa fa-angle-down pull-right"
+              aria-hidden="true"
               *ngIf="childrenItem.children"
             ></i>
           </a>
@@ -148,6 +147,7 @@
             >
             <i
               class="fa fa-angle-down pull-right"
+              aria-hidden="true"
               *ngIf="childrenItem.children"
             ></i>
           </a>
@@ -189,6 +189,7 @@
             >
             <i
               class="fa fa-angle-down pull-right"
+              aria-hidden="true"
               *ngIf="childrenItem.children"
             ></i>
           </a>

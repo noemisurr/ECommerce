@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
-import { mediaDB } from 'src/app/shared/tables/media';
+import { BehaviorSubject } from 'rxjs';
+import { SettingsHome } from 'src/app/shared/interfaces/interface';
 import { MediaHomeService } from '../services/media-home.service';
 
 @Component({
@@ -9,83 +11,72 @@ import { MediaHomeService } from '../services/media-home.service';
   styleUrls: ['./media.component.scss'],
 })
 export class MediaComponent implements OnInit {
-  public media = [];
-
-  constructor(private mediaService: MediaHomeService) {}
-
-  public settings = {
-    // hideSubHeader: true,
-    add: {
-      confirmCreate: true,
-    },
-    edit: {
-      confirmSave: true,
-    },
-    delete: {
-      confirmDelete: true,
-    },
-    columns: {
-      img: {
-        title: 'Image',
-        type: 'html',
-        filter: false,
-      },
-      name: {
-        title: 'File Name',
-      },
-      url: {
-        title: 'Url',
-        filter: false,
-      },
-      alt: {
-        title: 'Alt',
-        filter: false,
-      },
-      size: {
-        title: 'Size',
-        filter: false,
-      },
-    },
-  };
-
-  public config1: DropzoneConfigInterface = {
+  config1: DropzoneConfigInterface = {
     clickable: true,
     maxFiles: 1,
     autoReset: null,
     errorReset: null,
     cancelReset: null,
   };
+  newMedia = {
+    name: "",
+    url: "",
+    alt: "",
+    size: "",
+    id_position: ""
+  }
+
+  settings: SettingsHome[] = [];
+  edit = new Map<string, { edit: boolean; data: SettingsHome }>();
+
+  constructor(private mediaService: MediaHomeService, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.mediaService.getHomeMedia().subscribe((res) => {
-      this.media = res;
+      this.settings = res;
+      this.updateEditCache();
     });
   }
 
-  editConfirm(event) {
-    this.mediaService.updateHomeMedia(event.newData).subscribe((res) => {
-      this.media = this.media.map((obj) => {
-        return obj.id === res.id ? res : obj;
-      });
+  startEdit(id: string): void {
+    this.edit.get(id).edit = true;
+  }
+
+  cancelEdit(id: string): void {
+    const index = this.settings.findIndex(item => item.id === id);
+    this.edit.set(id, {
+      data: { ...this.settings[index] },
+      edit: false
+    })
+  }
+
+  saveEdit(id): void {
+    this.mediaService.updateHomeMedia(this.edit.get(id).data).subscribe((res) => {
+      const index = this.settings.findIndex(item => item.id === id);
+      Object.assign(this.settings[index], res);
+      this.edit.get(id).edit = false
+    })
+  }
+
+  updateEditCache(): void {
+    this.settings.forEach(item => {
+      this.edit.set(item.id, {
+        edit: false,
+        data: {...item}
+      })
     });
   }
 
-  delete(event) {
-    console.log('delete', event.data);
-    if (window.confirm('Are you sure you want to delete?')) {
-      //event.confirm.resolve();
-      //this.mediaService.deleteHomeMedia(event.data.id).subscribe((res) => {
-      //   this.media = this.media.filter((obj) => {
-      //     return obj.id !== res.id
-      //   })
-      // })
-    } else {
-      event.confirm.reject();
-    }
+  createMedia() {
+    this.mediaService.createHomeMedia(this.newMedia).subscribe((res) => {
+      this.settings = [res, ...this.settings];
+    })
   }
 
-  create(event) {
-    //TODO: capire come si fa
-    console.log('create', event);
+  delete(id: string) {
+    this.mediaService.deleteHomeMedia(id).subscribe((res) => {
+      this.settings = this.settings.filter((setting) => setting.id !== id)
+    })
   }
+  
 }

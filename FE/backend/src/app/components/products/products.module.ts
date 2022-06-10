@@ -17,12 +17,17 @@ import { DigitalListComponent } from './digital/digital-list/digital-list.compon
 import { DigitalAddComponent } from './digital/digital-add/digital-add.component';
 import { ProductDetailComponent } from './physical/product-detail/product-detail.component';
 import { GalleryModule } from '@ks89/angular-modal-gallery';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import 'hammerjs';
 import 'mousetrap';
 
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -42,7 +47,12 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     Ng2SmartTableModule,
     NgbModule,
     DropzoneModule,
-    GalleryModule.forRoot()
+    GalleryModule.forRoot(),
+    NzTableModule,
+    NzPopconfirmModule,
+    NzTabsModule,
+    NzIconModule,
+    NzModalModule
   ],
   providers: [
     {

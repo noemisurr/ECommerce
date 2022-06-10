@@ -63,23 +63,23 @@ const routes: Routes = [
         }
       },
       {
-        path: 'digital/digital-sub-category',
+        path: 'list',
         component: DigitalSubCategoryComponent,
         data: {
-          title: "Products",
-          breadcrumb: "Products"
+          title: "Product List",
+          breadcrumb: "List"
         }
       },
       {
-        path: 'digital/digital-product-list',
+        path: 'detail',
         component: DigitalListComponent,
         data: {
-          title: "Product List",
-          breadcrumb: "Product List"
+          title: "Product Detail",
+          breadcrumb: "Detail"
         }
       },
       {
-        path: 'digital/digital-add-product',
+        path: 'new',
         component: DigitalAddComponent,
         data: {
           title: "Add Products",

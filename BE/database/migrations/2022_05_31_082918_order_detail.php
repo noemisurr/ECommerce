@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('order_detail', function (Blueprint $table) {
             $table->id();
-            $table->string('total');
+            $table->string('total'); //price
             $table->date('delivery_date'); // data consegna prevista
             $table->date('shipping_date')->nullable(); // data effettiva di spedizione
             $table->string('shipping_code')->nullable(); // codice di spedizione
