@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('value');
+            $table->integer('value');
             $table->boolean('active');
             $table->string('time_out')->nullable();
         });

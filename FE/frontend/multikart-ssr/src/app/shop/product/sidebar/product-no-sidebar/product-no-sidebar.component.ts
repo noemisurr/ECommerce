@@ -6,7 +6,12 @@ import {
 } from "../../../../shared/data/slider";
 import { SizeModalComponent } from "../../../../shared/components/modal/size-modal/size-modal.component";
 import { ProductService } from "src/app/shop/collection/services/product.service";
-import { IColor, IProduct } from "src/app/shop/interfaces/interface";
+import { IProduct, IReview } from "src/app/shop/interfaces/interface";
+import { WishListService } from "src/app/shop/wishlist/services/wishlist.service";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ReviewService } from "src/app/pages/account/services/review.service";
+import { AuthService } from "src/app/pages/account/services/auth.service";
+import { NzModalService } from "ng-zorro-antd/modal";
 
 @Component({
   selector: "app-product-no-sidebar",
@@ -14,11 +19,18 @@ import { IColor, IProduct } from "src/app/shop/interfaces/interface";
   styleUrls: ["./product-no-sidebar.component.scss"],
 })
 export class ProductNoSidebarComponent implements OnInit {
-  public product: IProduct
+  public product: IProduct;
   public counter: number = 1;
   public selectedSize: any;
-  currentVariationIndex: number = 0
-  colors: IColor[] = []
+  currentVariationIndex: number = 0;
+  isWish: boolean = false;
+  isLogged: boolean = false;
+
+  reviewForm = this.fb.group({
+    title: ["", Validators.required],
+    text: ["", Validators.required],
+    star: ['', Validators.required],
+  });
 
   @ViewChild("sizeChart") SizeChart: SizeModalComponent;
 
@@ -27,39 +39,52 @@ export class ProductNoSidebarComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    public productService: ProductService,
+    private wishListService: WishListService,
+    private fb: FormBuilder,
+    private reviewService: ReviewService,
+    private authService: AuthService,
     private router: Router,
-    public productService: ProductService
+    private modal: NzModalService
   ) {}
 
   ngOnInit(): void {
-    this.productService.getById(this.route.snapshot.queryParams.id).subscribe((res) => {
-      this.product = res
-    })
-    this.productService.getAllColors().subscribe((res) => {
-      this.colors = res
-    })
-  }
+    this.authService.isLogged$.subscribe((is) => {
+      this.isLogged = is
+    });
+    
+    this.productService
+    .getById(this.route.snapshot.queryParams.id)
+    .subscribe((res) => {
+      this.product = res;
+      this.reviewForm.patchValue({'star': res.star})
+      
+      const prodId = this.route.snapshot.queryParams.prodId;
+      if (prodId == this.product.id) {
+        this.addToWishlist(this.route.snapshot.queryParams.varId);
+      }
+    });
 
-  colorHex(id) {
-    id = parseInt(id)
-    const result = this.colors.find((color) => color.id === id )
-    return result.hex
+    if (this.isLogged) this.isWishVariation();
+
+    this.wishListService.wishlist$.subscribe((newWish) => {
+      console.log('new wish ::', newWish.id_variation)
+      console.log('new wish::', this.product.variations[this.currentVariationIndex].id)
+      if (
+        newWish?.id_variation ===
+        this.product.variations[this.currentVariationIndex].id && newWish
+      ) {
+        this.isWish = true;
+      }else {
+        this.isWish = false;
+      }
+    });
   }
 
   changeVariations(current: number) {
-    this.currentVariationIndex = current
+    this.currentVariationIndex = current;
+    if (this.isLogged) this.isWishVariation();
   }
-
-  // Get Product Color
-  // Color(variants) {
-  //   const uniqColor = [];
-  //   for (let i = 0; i < Object.keys(variants).length; i++) {
-  //     if (uniqColor.indexOf(variants[i].color) === -1 && variants[i].color) {
-  //       uniqColor.push(variants[i].color);
-  //     }
-  //   }
-  //   return uniqColor;
-  // }
 
   // Get Product Size
   Size(variants) {
@@ -100,8 +125,65 @@ export class ProductNoSidebarComponent implements OnInit {
     // if (status) this.router.navigate(["/shop/checkout"]);
   }
 
+  onWishlist() {
+    return this.isWish ? this.removeToWishlist() : this.addToWishlist(this.product.variations[this.currentVariationIndex].id);
+  }
+
   // Add to Wishlist
-  addToWishlist(product: any) {
-    // this.productService.addToWishlist(product);
+  addToWishlist(id: number) {
+    const callback = encodeURIComponent(
+      `${this.router.url}?prodId=${this.product.id}&varId=${id}`
+    );
+
+    const payload = id
+      ? id
+      : this.product.variations[this.currentVariationIndex].id;
+
+      console.log('PAYLOAD id::', payload)
+
+    this.wishListService.addToWishList(payload, callback).subscribe((res) => {
+      const modal = this.modal.success({
+        nzTitle: 'Product Added to Your Wishlist',
+      });
+  
+      setTimeout(() => modal.destroy(), 1000);
+    });
+  }
+
+  removeToWishlist() {
+    this.wishListService
+      .removeByWishList(this.product.variations[this.currentVariationIndex].id)
+      .subscribe((res) => {
+        this.isWish = false;
+      });
+  }
+
+  isWishVariation() {
+    this.wishListService.getByWishList().subscribe((res) => {
+      res.forEach((wish) => {
+        if (
+          this.product.variations[this.currentVariationIndex].id ==
+          wish.id_variation
+        ){
+
+          this.isWish = true;
+        }else {
+          this.isWish = false;
+        }
+      });
+    });
+  }
+
+  onAddReview() {
+    const payload: IReview = {
+      title: this.reviewForm.get("title").value,
+      text: this.reviewForm.get("text").value,
+      star: this.reviewForm.get("star").value,
+      id_product: this.route.snapshot.queryParams.id,
+    };
+
+    this.reviewService.add(payload).subscribe(() => {
+      console.log("TTTAPPOOOO");
+    });
   }
 }

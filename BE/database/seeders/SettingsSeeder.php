@@ -17,10 +17,10 @@ class SettingsSeeder extends Seeder
     {
         Settings::create([
             'email' => 'fakeikea@ikea.com', 
-            'address' => 'via Regolizie', 
+            'address' => 'via cortea dei gigli 88',
             'city' => 'Chieti', 
-            'postal_code' => '66020', 
-            'telephone' => '555-555-050'
+            'postal_code' => '80920', 
+            'telephone' => '0538 92 73 092'
         ]);
     }
 }

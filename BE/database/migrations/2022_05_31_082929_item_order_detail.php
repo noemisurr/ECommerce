@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('item_order_detail', function (Blueprint $table) {
             $table->id();
-            $table->string('quantity');
-            $table->string('id_variation')->references('id')->on('variation');
-            $table->string('id_order_detail')->references('id')->on('order_detail');
+            $table->integer('quantity');
+            $table->integer('id_variation')->references('id')->on('variation');
+            $table->integer('id_order_detail')->references('id')->on('order_detail');
         });
     }
 

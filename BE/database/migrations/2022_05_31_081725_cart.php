@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->id();
-            $table->string('total');
-            $table->string('id_user')->references('id')->on('user');
+            $table->integer('total');
+            $table->integer('id_user')->references('id')->on('user');
         });
     }
 

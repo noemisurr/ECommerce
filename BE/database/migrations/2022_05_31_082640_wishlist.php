@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('wishlist', function (Blueprint $table) {
             $table->id();
-            $table->string('id_user')->references('id')->on('user');
-            $table->string('id_variation')->references('id')->on('variation');
+            $table->integer('id_user')->references('id')->on('user');
+            $table->integer('id_variation')->references('id')->on('variation');
         });
     }
 

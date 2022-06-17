@@ -2,8 +2,10 @@ import { Component, OnInit, Injectable, PLATFORM_ID, Inject } from '@angular/cor
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { ProductService } from "../../services/product.service";
 import { Product } from "../../classes/product";
+import { ProductService } from 'src/app/shop/collection/services/product.service';
+import { ICart, ICartItems } from 'src/app/shop/interfaces/interface';
+import { CartService } from 'src/app/shop/collection/services/cart.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,61 +14,31 @@ import { Product } from "../../classes/product";
 })
 export class SettingsComponent implements OnInit {
 
-  public products: Product[] = [];
+  public cartItem: ICartItems[] = [];
   public search: boolean = false;
-  
-  public languages = [{ 
-    name: 'English',
-    code: 'en'
-  }, {
-    name: 'French',
-    code: 'fr'
-  }];
 
-  public currencies = [{
-    name: 'Euro',
-    currency: 'EUR',
-    price: 0.90 // price of euro
-  }, {
-    name: 'Rupees',
-    currency: 'INR',
-    price: 70.93 // price of inr
-  }, {
-    name: 'Pound',
-    currency: 'GBP',
-    price: 0.78 // price of euro
-  }, {
-    name: 'Dollar',
-    currency: 'USD',
-    price: 1 // price of usd
-  }]
-
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-    private translate: TranslateService,
-    public productService: ProductService) {
-    this.productService.cartItems.subscribe(response => this.products = response);
-  }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
+    this.cartService.getCartItem().subscribe((res) => {
+      // this.cartItem = res.items
+    })
   }
 
   searchToggle(){
     this.search = !this.search;
   }
 
-  changeLanguage(code){
-    if (isPlatformBrowser(this.platformId)) {
-      this.translate.use(code)
-    }
-  }
+  // get getTotal(): Observable<number> {
+  //   return this.productService.cartTotalAmount();
+  // }
 
-  get getTotal(): Observable<number> {
-    return this.productService.cartTotalAmount();
-  }
-
-  removeItem(product: any) {
-    this.productService.removeCartItem(product);
-  }
+  // removeItem(product: any) {
+  //   this.productService.removeCartItem(product);
+  // }
 
   changeCurrency(currency: any) {
      

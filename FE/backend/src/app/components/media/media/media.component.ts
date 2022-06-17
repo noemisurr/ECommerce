@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
-import { BehaviorSubject } from 'rxjs';
 import { SettingsHome } from 'src/app/shared/interfaces/interface';
 import { MediaHomeService } from '../services/media-home.service';
 

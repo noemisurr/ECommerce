@@ -1,35 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ProductService } from "../../shared/services/product.service";
-import { Product } from "../../shared/classes/product";
+import { Component, OnInit } from "@angular/core";
+import { ProductService } from "../collection/services/product.service";
+import { IWishList } from "../interfaces/interface";
+import { WishListService } from "./services/wishlist.service";
 
 @Component({
-  selector: 'app-wishlist',
-  templateUrl: './wishlist.component.html',
-  styleUrls: ['./wishlist.component.scss']
+  selector: "app-wishlist",
+  templateUrl: "./wishlist.component.html",
+  styleUrls: ["./wishlist.component.scss"],
 })
 export class WishlistComponent implements OnInit {
+  public variations: IWishList[] = [];
 
-  public products: Product[] = [];
-
-  constructor(private router: Router, 
-    public productService: ProductService) {
-    this.productService.wishlistItems.subscribe(response => this.products = response);
-  }
+  constructor(
+    public productService: ProductService,
+    private wishListService: WishListService
+  ) {}
 
   ngOnInit(): void {
+    this.wishListService.getByWishList().subscribe((res) => {
+      this.variations = res;
+    });
   }
 
-  async addToCart(product: any) {
-    const status = await this.productService.addToCart(product);
-    if(status) {
-      this.router.navigate(['/shop/cart']);
-      this.removeItem(product);
-    }
-  }
+  async addToCart(product?: any) {}
 
-  removeItem(product: any) {
-    this.productService.removeWishlistItem(product);
+  removeItem(variationId: number) {
+    this.wishListService.removeByWishList(variationId).subscribe((res) => {
+      this.variations = this.variations.filter((variation) => variation.id !== res.id);
+    });
   }
-
 }

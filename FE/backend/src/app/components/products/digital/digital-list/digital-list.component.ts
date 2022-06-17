@@ -50,6 +50,7 @@ export class DigitalListComponent implements OnInit {
       this.categories = res;
     });
     this.productService.getAllColors().subscribe((res) => {
+      console.log(res)
       this.colors = res;
     });
     this.productService

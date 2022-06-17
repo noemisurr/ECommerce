@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('short_description');
-            $table->string('long_description');
-            $table->string('price');
+            $table->longText('long_description');
+            $table->integer('price');
             $table->boolean('deleted');
             $table->timestamp('created_at')->nullable();
-            $table->string('id_category')->references('id')->on('category');
+            $table->integer('id_category')->references('id')->on('category');
         });
     }
 

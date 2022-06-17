@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Settings;
 use App\Models\SettingsHome;
+use App\Models\User;
 use Database\Seeders\SettingsSeeder;
 use Exception;
 use Illuminate\Http\Request;
@@ -83,6 +84,12 @@ class SettingsController extends Controller
         } catch ( Exception $exc ) {
             return response(['message' => 'media not deleted'], 500);
         }
+    }
+
+    public function getAllUsers() {
+        $users = User::where('id_user_type', '=', '2')->get();
+        // return response(User::with('address')->where('id', $user['id'])->first()->toArray(), 200);
+        return response($users, 200);
     }
 
 }

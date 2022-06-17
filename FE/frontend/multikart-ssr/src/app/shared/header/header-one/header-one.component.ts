@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ComponentFactoryResolver } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/pages/account/services/auth.service';
+import { ContactService } from 'src/app/pages/account/services/contact.service';
 
 @Component({
   selector: 'app-header-one',
@@ -13,10 +16,18 @@ export class HeaderOneComponent implements OnInit {
   @Input() sticky: boolean = false; // Default false
   
   public stick: boolean = false;
+  number?: string
+  isLogged: boolean = false
 
-  constructor() { }
+  constructor(private contactService: ContactService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.number = this.contactService.contact.telephone
+    this.authService.me().subscribe((res) => {
+      this.isLogged = true
+    }, (err) => {
+      this.isLogged = false
+    })
   }
 
   // @HostListener Decorator
@@ -28,6 +39,13 @@ export class HeaderOneComponent implements OnInit {
   	} else {
   	  this.stick = false;
   	}
+  }
+
+  onLogout() {
+    this.authService.logout().subscribe(() => {
+      this.isLogged = false
+      this.router.navigateByUrl('/home')
+    })
   }
 
 }

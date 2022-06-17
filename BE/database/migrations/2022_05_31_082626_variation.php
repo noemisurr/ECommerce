@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('variation', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamp('created_at');
-            $table->string('id_color')->references('id')->on('color');
-            $table->string('id_product')->references('id')->on('product');
-            $table->string('id_discount')->references('id')->on('discount')->nullable();
+            $table->integer('id_color')->references('id')->on('color');
+            $table->integer('id_product')->references('id')->on('product');
+            $table->integer('id_discount')->references('id')->on('discount')->nullable();
         });
     }
 

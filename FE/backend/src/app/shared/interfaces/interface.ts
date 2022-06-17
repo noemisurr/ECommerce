@@ -55,6 +55,8 @@ export interface Img {
 }
 
 export interface VariationRequest {
+  //TODO: cambiare in number
+  name?: string,
   id_color: string,
   id_discount?: string,
   id_product?: string,

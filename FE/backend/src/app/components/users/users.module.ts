@@ -7,8 +7,10 @@ import { UsersRoutingModule } from './users-routing.module';
 import { ListUserComponent } from './list-user/list-user.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ListUserComponent, CreateUserComponent],
@@ -17,7 +19,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     Ng2SmartTableModule,
     ReactiveFormsModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    NzTableModule,
+    NzPopconfirmModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class UsersModule { }

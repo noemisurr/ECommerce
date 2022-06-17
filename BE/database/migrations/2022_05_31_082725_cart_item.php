@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('cart_item', function (Blueprint $table) {
             $table->id();
-            $table->string('quantity');
-            $table->string('id_cart')->references('id')->on('cart');
-            $table->string('id_variation')->references('id')->on('variation');
+            $table->integer('quantity');
+            $table->integer('id_cart')->references('id')->on('cart');
+            $table->integer('id_variation')->references('id')->on('variation');
         });
     }
 

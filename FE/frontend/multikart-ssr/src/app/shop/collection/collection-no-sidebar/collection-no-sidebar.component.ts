@@ -22,7 +22,6 @@ export class CollectionNoSidebarComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private viewScroller: ViewportScroller, public productService: ProductService) {   
       // Get Query params..
       this.route.queryParams.subscribe(params => {
-        console.log(params)
         if( params.sortBy === 'a-z' || params.sortBy === 'z-a' ) this.sortBy = params.sortBy == 'a-z' ? 'asc' : 'desc';
         if( params.sortBy === 'low' || params.sortBy === 'high' ) this.sortBy = params.sortBy == 'low' ? 'asc' : 'desc';
         

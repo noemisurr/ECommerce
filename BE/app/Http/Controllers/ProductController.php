@@ -7,19 +7,23 @@ use App\Models\Variation;
 use App\Models\VariationTag;
 use App\Models\Tag;
 use App\Models\Img;
+use App\Models\Review;
 use Exception;
 use Illuminate\Http\Request;
+use DateTime;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
+use Illuminate\Database\Eloquent\Model;
 
 class ProductController extends Controller
 {
-    //TODO: permettere a long_description di avere più caratteri
     public function getAll(Request $request)
     {
         $skip = $request->query('skip');
         $take = $request->query('take');
         $obj = $request->query('obj');
         $sortBy = $request->query('sortBy');
-        $product = Product::where('deleted', '=', false);
+        $product = Product::with('variations')->where('deleted', '=', false);
         if(!isset($skip) || !isset($take))  return response($product->get(), 200);
 
         $someProduct = $product
@@ -28,6 +32,36 @@ class ProductController extends Controller
                         ->orderBy($obj ? $obj : 'name', $sortBy ? $sortBy : 'asc') // TODO: NON FUNZIONA CON PRICE PERCHè è UNA STRINGA
                         ->get();
         return response($someProduct, 200);
+    }
+
+    public function getAllSpecial() {
+        $all = Product::with('variations')->where('deleted', '=', false)->get();
+
+        $onSale = array();
+        $newArrivals = array();
+        $bestSellers = array(); 
+        foreach($all as $i=>$product){
+            foreach($product->variations as $i=>$var) {
+                if($var->id_discount){
+                    array_push($onSale, $product);
+                    break;
+                }
+            }
+
+            if($this->getDifference($product->created_at)) {
+                array_push($newArrivals, $product);
+            }
+
+            if($product->star > 4) {
+                
+                array_push($bestSellers, $product);
+            }
+        }
+        // return response($onSale, 200);
+
+        return response(["sale" => $onSale, "new" => $newArrivals, "best" => $bestSellers], 200);
+
+
     }
 
     public function create(Request $request)
@@ -70,7 +104,6 @@ class ProductController extends Controller
             };
             return response(["product" => Product::with('variations')->where('id', $createdProduct['id'])->first()->toArray()], 201);
         } catch (Exception $exc) {
-            throw $exc;
             return response(['message' => 'product not created'], 500);
         }
     }
@@ -139,5 +172,12 @@ class ProductController extends Controller
         if (!isset($product)) return response(['message' => 'product not found'], 404);
         $product->deleted = true;
         return response($product, 200);
+    }
+
+    private function getDifference($created_at) {
+        $hours = $created_at->diffInHours();
+
+        if($hours > 168) return false;
+        return true;
     }
 }

@@ -1,48 +1,55 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { ShopComponent } from './shop/shop.component';
-import { PagesComponent } from './pages/pages.component';
-import { ElementsComponent } from './elements/elements.component';
+import { ShopComponent } from "./shop/shop.component";
+import { PagesComponent } from "./pages/pages.component";
+import { ElementsComponent } from "./elements/elements.component";
+import { LoginComponent } from "./pages/account/login/login.component";
+import { RegisterComponent } from "./pages/account/register/register.component";
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: "",
+    redirectTo: "home",
+    pathMatch: "full",
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    path: "home",
+    loadChildren: () => import("./home/home.module").then((m) => m.HomeModule),
   },
   {
-    path: 'shop',
+    path: "shop",
     component: ShopComponent,
-    loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule)
+    loadChildren: () => import("./shop/shop.module").then((m) => m.ShopModule),
   },
-  { 
-    path: 'pages',
-    component: PagesComponent,
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) 
-  },
-  { 
-    path: 'elements', 
-    component: ElementsComponent,
-    loadChildren: () => import('./elements/elements.module').then(m => m.ElementsModule) },
   {
-    path: '**', // Navigate to Home Page if not found any page
-    redirectTo: 'home',
+    path: "pages",
+    component: PagesComponent,
+    loadChildren: () =>
+      import("./pages/pages.module").then((m) => m.PagesModule),
+  },
+  {
+    path: "elements",
+    component: ElementsComponent,
+    loadChildren: () =>
+      import("./elements/elements.module").then((m) => m.ElementsModule),
+  },
+  {
+    path: "**", // Navigate to Home Page if not found any page
+    redirectTo: "home",
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled',
-    useHash: false,
-    anchorScrolling: 'enabled',
-    scrollPositionRestoration: 'enabled',
-    relativeLinkResolution: 'legacy'
-})],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: "enabled",
+      useHash: false,
+      anchorScrolling: "enabled",
+      scrollPositionRestoration: "enabled",
+      relativeLinkResolution: "legacy",
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

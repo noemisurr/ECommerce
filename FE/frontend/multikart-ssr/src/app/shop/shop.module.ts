@@ -41,6 +41,7 @@ import { CompareComponent } from './compare/compare.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { SuccessComponent } from './checkout/success/success.component';
 import { ProductNoSidebarComponent } from './product/sidebar/product-no-sidebar/product-no-sidebar.component';
+import { ReviewComponent } from '../pages/review/review.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { ProductNoSidebarComponent } from './product/sidebar/product-no-sidebar/
     WishlistComponent,
     CompareComponent,
     CheckoutComponent,
-    SuccessComponent
+    SuccessComponent,
+    ReviewComponent
   ],
   imports: [
     CommonModule,
@@ -80,6 +82,7 @@ import { ProductNoSidebarComponent } from './product/sidebar/product-no-sidebar/
     InfiniteScrollModule,
     SharedModule,
     ShopRoutingModule
-  ]
+  ],
+  exports: [WishlistComponent]
 })
 export class ShopModule { }

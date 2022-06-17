@@ -5,7 +5,6 @@ import { SharedModule } from '../shared/shared.module';
 import { PagesRoutingModule } from './pages-routing.module';
 
 // Pages Components
-import { WishlistComponent } from './account/wishlist/wishlist.component';
 import { CartComponent } from './account/cart/cart.component';
 import { DashboardComponent } from './account/dashboard/dashboard.component';
 import { LoginComponent } from './account/login/login.component';
@@ -17,7 +16,6 @@ import { CheckoutComponent } from './account/checkout/checkout.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { SearchComponent } from './search/search.component';
 import { TypographyComponent } from './typography/typography.component';
-import { ReviewComponent } from './review/review.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { CompareOneComponent } from './compare/compare-one/compare-one.component';
 import { CompareTwoComponent } from './compare/compare-two/compare-two.component';
@@ -39,10 +37,15 @@ import { MasonryGridTwoComponent } from './portfolio/masonry-grid-two/masonry-gr
 import { MasonryGridThreeComponent } from './portfolio/masonry-grid-three/masonry-grid-three.component';
 import { MasonryGridFourComponent } from './portfolio/masonry-grid-four/masonry-grid-four.component';
 import { MasonryFullWidthComponent } from './portfolio/masonry-full-width/masonry-full-width.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { ShopModule } from '../shop/shop.module';
 
 @NgModule({
   declarations: [
-    WishlistComponent,
     CartComponent,
     DashboardComponent,
     LoginComponent,
@@ -54,7 +57,6 @@ import { MasonryFullWidthComponent } from './portfolio/masonry-full-width/masonr
     AboutUsComponent,
     SearchComponent,
     TypographyComponent,
-    ReviewComponent,
     OrderSuccessComponent,
     CompareOneComponent,
     CompareTwoComponent,
@@ -79,7 +81,13 @@ import { MasonryFullWidthComponent } from './portfolio/masonry-full-width/masonr
     CommonModule,
     GalleryModule.forRoot(),
     SharedModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    NzModalModule,
+    NzTableModule,
+    NzPopconfirmModule,
+    NzTabsModule,
+    NzIconModule,
+    ShopModule
   ]
 })
 export class PagesModule { }

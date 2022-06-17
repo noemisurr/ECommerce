@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Address;
 
 class User extends Authenticatable
 {
@@ -28,6 +29,11 @@ class User extends Authenticatable
         'id_user_type',
         'jwt'
     ];
+
+    public function address() {
+        return $this->hasMany(Address::class, 'id_user', 'id');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

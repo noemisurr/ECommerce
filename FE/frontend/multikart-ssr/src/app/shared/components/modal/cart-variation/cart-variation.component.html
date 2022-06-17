@@ -13,11 +13,11 @@
             <ul class="cart_product">
                 <li *ngFor="let product of products">
                     <div class="media">
-                        <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                            <img class="mr-3" [src]="product.images[0].src" [alt]="product.images[0].alt">
+                        <a [routerLink]="['/shop/product/left/sidebar/']">
+                            <!-- <img class="mr-3" [src]="product.images[0].src" [alt]="product.images[0].alt"> -->
                         </a>
                         <div class="media-body">
-                            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+                            <a [routerLink]="['/shop/product/left/sidebar/']">
                                 <h4>{{ product?.title | titlecase }}</h4>
                             </a>
                             <h4>

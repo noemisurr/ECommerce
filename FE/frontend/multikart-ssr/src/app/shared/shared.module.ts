@@ -8,6 +8,7 @@ import { BarRatingModule } from "ngx-bar-rating";
 import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TranslateModule } from '@ngx-translate/core';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 
 // Header and Footer Components
 import { HeaderOneComponent } from './header/header-one/header-one.component';
@@ -53,6 +54,8 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 
 // Pipes
 import { DiscountPipe } from './pipes/discount.pipe';
+import { ColorPipe } from '../pipes/color.pipe';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [
@@ -86,7 +89,8 @@ import { DiscountPipe } from './pipes/discount.pipe';
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
-    DiscountPipe
+    DiscountPipe,
+    ColorPipe
   ],
   imports: [
     CommonModule,
@@ -100,7 +104,9 @@ import { DiscountPipe } from './pipes/discount.pipe';
       // preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     }),
     NgxSkeletonLoaderModule,
-    TranslateModule
+    TranslateModule,
+    NzRateModule,
+    NzModalModule
   ],
   exports: [
     CommonModule,
@@ -139,7 +145,10 @@ import { DiscountPipe } from './pipes/discount.pipe';
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
-    DiscountPipe
+    DiscountPipe,
+    ColorPipe,
+    NzRateModule,
+    NzModalModule
   ]
 })
 export class SharedModule { }

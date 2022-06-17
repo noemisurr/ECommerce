@@ -5,8 +5,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\VariationController;
 use App\Http\Controllers\ImgController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +37,7 @@ Route::prefix('/auth')->group((function () {
     Route::post('/registration', [AuthController::class, 'registration']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/me', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
 }));
 
@@ -46,6 +50,7 @@ Route::prefix('/backoffice')->group((function () {
     Route::post('/settings_home', [SettingsController::class, 'createMedia']);
     Route::put('/settings_home/{setting_id}', [SettingsController::class, 'updateMedia'])->whereNumber('setting_id');
     Route::delete('/settings_home/{setting_id}', [SettingsController::class, 'deleteMedia'])->whereNumber('setting_id');
+    Route::get('/users', [SettingsController::class, 'getAllUsers']);
 }));
 
 Route::prefix('/categories')->group((function() {
@@ -57,6 +62,7 @@ Route::prefix('/categories')->group((function() {
 
 Route::prefix('/products')->group((function() {
     Route::get('', [ProductController::class, 'getAll']);
+    Route::get('/special', [ProductController::class, 'getAllSpecial']);
     Route::post('', [ProductController::class, 'create']);
     Route::put('/{product_id}', [ProductController::class, 'update'])->whereNumber('product_id');
     Route::get('/{product_id}', [ProductController::class, 'getById'])->whereNumber('product_id');
@@ -68,6 +74,10 @@ Route::prefix('/products')->group((function() {
     Route::put('/variations/{variation_id}', [VariationController::class, 'update'])->whereNumber('variation_id');
     Route::delete('/variations/{variation_id}', [VariationController::class, 'delete'])->whereNumber('variation_id');
 
+    //Review
+    Route::get('/{product_id}/reviews', [ReviewController::class, 'getById'])->whereNumber('product_id');
+    Route::post('/{product_id}/reviews', [ReviewController::class, 'create'])->whereNumber('product_id');
+
 }));
 
 Route::prefix('/colors')->group((function() {
@@ -78,4 +88,15 @@ Route::prefix('/colors')->group((function() {
 
 Route::prefix('/img')->group((function() {
     Route::post('', [ImgController::class, 'create']);
+}));
+
+Route::prefix('wishlist')->group((function() {
+    Route::get('', [WishlistController::class, 'getById']);
+    Route::post('', [WishlistController::class, 'newWish']);
+    Route::delete('/{variation_id}', [WishlistController::class, 'delete'])->whereNumber('variation_id');
+}));
+
+Route::prefix('cart_item')->group((function() {
+    Route::get('', [CartController::class, 'getAll']);
+    Route::post('', [CartController::class, 'add']);
 }));

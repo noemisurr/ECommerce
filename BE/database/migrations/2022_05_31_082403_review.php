@@ -17,11 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('text');
-            $table->string('star');
+            $table->integer('star');
             $table->timestamp('created_at');
-            $table->string('id_user')->references('id')->on('user');
-            $table->string('id_product')->references('id')->on('product');
-            $table->string('id_discount')->references('id')->on('discount');
+            $table->integer('id_user')->references('id')->on('user');
+            $table->integer('id_product')->references('id')->on('product');
         });
     }
 

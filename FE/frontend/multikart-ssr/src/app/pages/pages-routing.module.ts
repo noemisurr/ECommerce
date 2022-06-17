@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { WishlistComponent } from './account/wishlist/wishlist.component';
 import { CartComponent } from './account/cart/cart.component';
 import { DashboardComponent } from './account/dashboard/dashboard.component';
 import { LoginComponent } from './account/login/login.component';
@@ -13,7 +12,6 @@ import { CheckoutComponent } from './account/checkout/checkout.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { SearchComponent } from './search/search.component';
 import { TypographyComponent } from './typography/typography.component';
-import { ReviewComponent } from './review/review.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { CompareOneComponent } from './compare/compare-one/compare-one.component';
 import { CompareTwoComponent } from './compare/compare-two/compare-two.component';
@@ -33,11 +31,15 @@ import { MasonryGridTwoComponent } from './portfolio/masonry-grid-two/masonry-gr
 import { MasonryGridThreeComponent } from './portfolio/masonry-grid-three/masonry-grid-three.component';
 import { MasonryGridFourComponent } from './portfolio/masonry-grid-four/masonry-grid-four.component';
 import { MasonryFullWidthComponent } from './portfolio/masonry-full-width/masonry-full-width.component';
+import { AuthGuard } from '../auth.guard';
+import { WishlistComponent } from '../shop/wishlist/wishlist.component';
 
 const routes: Routes = [
   { 
     path: 'wishlist', 
-    component: WishlistComponent 
+    component: WishlistComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
   },
   { 
     path: 'cart', 
@@ -61,7 +63,9 @@ const routes: Routes = [
   },
   { 
     path: 'profile', 
-    component: ProfileComponent 
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard], 
   },
   { 
     path: 'contact',
@@ -82,10 +86,6 @@ const routes: Routes = [
   { 
     path: 'typography', 
     component: TypographyComponent 
-  },
-  { 
-    path: 'review', 
-    component: ReviewComponent 
   },
   { 
     path: 'order/success', 

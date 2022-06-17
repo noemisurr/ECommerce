@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('number');
             $table->string('expiry');
             $table->string('cvc');
+            $table->boolean('default');
+            $table->string('id_user')->references('id')->on('user');
         });
     }
 

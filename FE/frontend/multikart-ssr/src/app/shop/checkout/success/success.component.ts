@@ -12,11 +12,10 @@ export class SuccessComponent implements OnInit, AfterViewInit{
 
   public orderDetails : Order = {};
 
-  constructor(public productService: ProductService,
-    private orderService: OrderService) { }
+  constructor(public productService: ProductService) { }
 
   ngOnInit(): void {	
-    this.orderService.checkoutItems.subscribe(response => this.orderDetails = response);
+    
   }
 
   ngAfterViewInit() {

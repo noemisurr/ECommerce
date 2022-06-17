@@ -16,7 +16,6 @@ export class MenuComponent implements OnInit {
     this.router.events.subscribe((event) => {
       this.navServices.mainMenuToggle = false;
     });
-    console.log(this.menuItems)
   }
 
   ngOnInit(): void {

@@ -56,9 +56,9 @@ export class NavService {
 				// {
 					// title: 'digital', type: 'sub', children: [
 						// { path: '/products/digital/digital-category', title: 'Categories', type: 'link' },
-						{ path: '/products/digital/digital-sub-category', title: 'Products', type: 'link' },
+						{ path: '/products/list', title: 'Products', type: 'link' },
 						// { path: '/products/digital/digital-product-list', title: 'Product List', type: 'link' },
-						{ path: '/products/digital/digital-add-product', title: 'Add Product', type: 'link' },
+						{ path: '/products/new', title: 'Add Product', type: 'link' },
 					// ]
 				// },
 			]
@@ -90,12 +90,9 @@ export class NavService {
 		// 		{ path: '/menus/create-menu', title: 'Create Menu', type: 'link' },
 		// 	]
 		// },
-		// {
-		// 	title: 'Users', icon: 'user-plus', type: 'sub', active: false, children: [
-		// 		{ path: '/users/list-user', title: 'User List', type: 'link' },
-		// 		{ path: '/users/create-user', title: 'Create User', type: 'link' },
-		// 	]
-		// },
+		{
+			title: 'Users', path: '/users/list-user', icon: 'user-plus', type: 'link', active: false
+		},
 		// {
 		// 	title: 'Vendors', icon: 'users', type: 'sub', active: false, children: [
 		// 		{ path: '/vendors/list-vendors', title: 'Vendor List', type: 'link' },

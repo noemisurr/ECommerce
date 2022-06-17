@@ -18,8 +18,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->firstName(),
-            'short_description' => $this->faker->text(50),
-            'long_description' => $this->faker->text(150),
+            'short_description' => $this->faker->text(100),
+            'long_description' => $this->faker->paragraph(),
             'price' => $this->faker->numberBetween(10, 500),
             'deleted' => false,
             'id_category' =>  $this->faker->numberBetween(1, 5),

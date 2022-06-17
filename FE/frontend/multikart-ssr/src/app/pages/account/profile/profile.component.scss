@@ -1,0 +1,39 @@
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    align-items: center;
+    margin-bottom: 10px;
+    input {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin: 0 10px 0 10px;
+        align-content: center;
+    }
+}
+
+.theme-form {
+    border-bottom: 1px solid gray;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.edit{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    i {
+        margin-right: 5px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    span {
+        font-size: 15px;
+        &:hover {
+            font-size: 16px;
+        }
+    }
+}

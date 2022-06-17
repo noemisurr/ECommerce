@@ -15,7 +15,7 @@ class ColorSeeder extends Seeder
      */
     public function run()
     {
-        Color::create(['name' => 'White', 'hex' => '#FFFFFF']);
+        Color::create(['name' => 'White', 'hex' => '#F2F2F2']);
         Color::create(['name' => 'Black', 'hex' => '#000000']);
         Color::create(['name' => 'Brown', 'hex' => '#A52A2A']);
         Color::create(['name' => 'Green', 'hex' => '#008000']);

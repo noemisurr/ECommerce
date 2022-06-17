@@ -4,6 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from "../../../services/product.service";
 import { Product } from "../../../classes/product";
+import { IVariation } from 'src/app/shop/interfaces/interface';
 
 @Component({
   selector: 'app-cart-modal',
@@ -12,7 +13,7 @@ import { Product } from "../../../classes/product";
 })
 export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Input() product: Product;
+  @Input() variation: IVariation;
   @Input() currency : any;
   
   @ViewChild("cartModal", { static: false }) CartModal: TemplateRef<any>;
@@ -21,10 +22,11 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
   public modalOpen: boolean = false;
   public products: any[] = [];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private modalService: NgbModal,
-    private productService: ProductService) {
-  }
+    private productService: ProductService
+  ) {}
 
   ngOnInit(): void {
   }

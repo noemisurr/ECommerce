@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Address;
 use DateInterval;
 use DateTime;
 use DateTimeZone;
@@ -47,13 +48,11 @@ class AuthController extends Controller
         // controllo che l'utente esista e che la password sia corretta
         if ( !isset($user) || md5($data['password']) !== $user->password ) return response(['message' => 'wrong credentials'], 401);
         // generiamo un token
-        try {
+        
             $jwt = JWT::encode($this->_generateTokenPayload($user->id), $_ENV['JWT_SECRET'], 'HS256');
             $user->jwt = $jwt;
             $user->save();
-        }catch( Exception $exc ) {
-            return response(['message' => 'user not created', 'eccezione'=> $exc], 500);
-        }
+        
         return response($user, 200);
     }
 
@@ -75,11 +74,14 @@ class AuthController extends Controller
     }
 
     public function me( Request $request ) {
-        $token = $request->bearerToken();
-        $payload = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
-        $user = User::find($payload->user_id);
-        if( !isset($user) ) return response(['message' => 'user not found'], 401);
-        return response($user, 200);
+        try {
+            $token = $request->bearerToken();
+            $payload = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
+            $user = User::find($payload->user_id);
+        }catch( Exception $exc ) {
+           return response(['message' => 'user not found'], 401);
+        }
+        return response(User::with('address')->where('id', $user['id'])->first()->toArray(), 200);
     }
 
     public function logout( Request $request ) {
@@ -88,5 +90,44 @@ class AuthController extends Controller
         $loggedUser->jwt = '/';
         
         return response(['message' => 'user logging out'], 200);
+    }
+
+    public function update( Request $request ) {
+        $newData = $request->all();
+        $token = $request->bearerToken();
+        $payload = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
+        $user = User::find($payload->user_id);
+
+        if (!isset($user)) return response(['message' => 'user not found'], 404);
+
+        if (isset($newData['name'])) $user->name = $newData['name'];
+        if (isset($newData['surname'])) $user->surname = $newData['surname'];
+        if (isset($newData['email'])) $user->email = $newData['email'];
+        if (isset($newData['telephone'])) $user->telephone = $newData['telephone'];
+        if (isset($newData['birth'])) $user->birth = $newData['birth'];
+
+        Address::where('id_user', '=', $user['id'])->delete();
+
+        $addresses = $newData['addresses'];
+
+        foreach($addresses as $address) {
+            Address::create([
+                'flat' => $address['flat'],
+                'address' => $address['address'],
+                'city' => $address['city'],
+                'cap' => $address['cap'],
+                'region' => $address['region'],
+                'other' => $address['other'],
+                'default' => $address['default'],
+                'id_user' => $user['id']
+            ]);
+        };
+
+        try {
+            $user->save();
+            return response(User::with('address')->where('id', $user['id'])->first()->toArray(), 200);
+        } catch (Exception $exc) {
+            return response(['message' => 'user not updated'], 500);
+        }
     }
 }

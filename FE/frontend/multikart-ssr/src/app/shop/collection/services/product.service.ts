@@ -1,22 +1,42 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { AuthService } from "src/app/pages/account/services/auth.service";
 import { environment } from "src/environments/environment";
-import { IColor, IProduct } from "../../interfaces/interface";
+import {
+  ICart,
+  ICartItems,
+  IColor,
+  IProduct,
+  IProductSpecial,
+} from "../../interfaces/interface";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProductService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  /*
+  ---------------------------------------------
+  ----------------- Product -------------------
+  ---------------------------------------------
+  */
 
   getAll(skip: number, take: number, sortBy: string) {
-    if(sortBy) {
+    if (sortBy) {
       return this.http.get<IProduct[]>(
         `${environment.apiUrl}/products?skip=${skip}&take=${take}&sortBy=${sortBy}`
       );
     }
     return this.http.get<IProduct[]>(
       `${environment.apiUrl}/products?skip=${skip}&take=${take}`
+    );
+  }
+
+  getAllSpecial() {
+    return this.http.get<IProductSpecial>(
+      `${environment.apiUrl}/products/special`
     );
   }
 
@@ -80,9 +100,5 @@ export class ProductService {
       endIndex: endIndex,
       pages: pages,
     };
-  }
-
-  getAllColors() {
-    return this.http.get<IColor[]>(`${environment.apiUrl}/colors`);
   }
 }

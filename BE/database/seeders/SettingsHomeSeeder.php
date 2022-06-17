@@ -18,13 +18,13 @@ class SettingsHomeSeeder extends Seeder
         SettingsHome::create(['name' => 'A', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/parallax/5.jpg', 'id_position' => 1]);
 
         // img slides 
-        SettingsHome::create(['name' => 'B', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/slider/12.jpg', 'id_position' => 2]);
-        SettingsHome::create(['name' => 'C', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/slider/13.jpg', 'id_position' => 2]);
+        SettingsHome::create(['name' => 'Harmony Sofa', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/slider/12.jpg', 'id_position' => 2]);
+        SettingsHome::create(['name' => 'Harmony Sofa', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/slider/13.jpg', 'id_position' => 2]);
 
         // img sconti
-        SettingsHome::create(['name' => 'D', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/collection/furniture/1.jpg', 'id_position' => 3]);
-        SettingsHome::create(['name' => 'E', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/collection/furniture/2.jpg', 'id_position' => 3]);
-        SettingsHome::create(['name' => 'F', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/collection/furniture/3.jpg', 'id_position' => 3]);
+        SettingsHome::create(['name' => 'Sofa', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/collection/furniture/1.jpg', 'id_position' => 3]);
+        SettingsHome::create(['name' => 'Bean Bag', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/collection/furniture/2.jpg', 'id_position' => 3]);
+        SettingsHome::create(['name' => 'Chair', 'url' => 'https://angular.pixelstrap.com/multikart/assets/images/collection/furniture/3.jpg', 'id_position' => 3]);
 
     }
 }

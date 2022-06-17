@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { userListDB } from 'src/app/shared/tables/list-users';
+import { UserService } from '../services/user.service';
+import { User } from '../../../shared/interfaces/interface';
 
 @Component({
   selector: 'app-list-user',
@@ -7,11 +8,9 @@ import { userListDB } from 'src/app/shared/tables/list-users';
   styleUrls: ['./list-user.component.scss']
 })
 export class ListUserComponent implements OnInit {
-  public user_list = []
+  public users: User[]
 
-  constructor() {
-    this.user_list = userListDB.list_user;
-  }
+  constructor(private userService: UserService) {}
 
   public settings = {
     columns: {
@@ -38,6 +37,9 @@ export class ListUserComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.userService.getAll().subscribe((res) => {
+      this.users = res
+    }) 
   }
 
 }

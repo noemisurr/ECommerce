@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('url');
             $table->string('description')->nullable();
-            $table->string('id_variation')->references('id')->on('variation');
+            $table->integer('id_variation')->references('id')->on('variation');
         });
     }
 

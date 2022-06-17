@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('variation_tag', function (Blueprint $table) {
             $table->id();
-            $table->string('id_tag')->references('id')->on('tag');
-            $table->string('id_variation')->references('id')->on('variation');
+            $table->integer('id_tag')->references('id')->on('tag');
+            $table->integer('id_variation')->references('id')->on('variation');
         });
     }
 

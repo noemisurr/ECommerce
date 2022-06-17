@@ -158,7 +158,7 @@ export class ProductService {
     }
 
     this.OpenCart = true; // If we use cart variation modal
-    localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    // localStorage.setItem("cartItems", JSON.stringify(state.cart));
     return true;
   }
 
@@ -171,7 +171,7 @@ export class ProductService {
         if (qty !== 0 && stock) {
           state.cart[index].quantity = qty
         }
-        localStorage.setItem("cartItems", JSON.stringify(state.cart));
+        // localStorage.setItem("cartItems", JSON.stringify(state.cart));
         return true
       }
     })
@@ -192,7 +192,7 @@ export class ProductService {
   public removeCartItem(product: Product): any {
     const index = state.cart.indexOf(product);
     state.cart.splice(index, 1);
-    localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    // localStorage.setItem("cartItems", JSON.stringify(state.cart));
     return true
   }
 
@@ -283,7 +283,7 @@ export class ProductService {
     } 
   }
 
-  /* TODO: PAGINATION
+  /*
     ---------------------------------------------
     ------------- Product Pagination  -----------
     ---------------------------------------------

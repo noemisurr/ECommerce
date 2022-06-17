@@ -15,9 +15,13 @@ return new class extends Migration
     {
         Schema::create('address', function (Blueprint $table) {
             $table->id();
+            $table->string('flat')->nullable();
             $table->string('address');
             $table->string('city');
             $table->string('cap');
+            $table->string('region');
+            $table->string('other')->nullable();
+            $table->boolean('default');
             $table->string('id_user')->references('id')->on('user');
         });
     }

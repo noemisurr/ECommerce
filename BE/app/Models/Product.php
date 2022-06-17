@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Variation;
+use App\Models\Review;
 
 class Product extends Model
 {
@@ -23,8 +25,26 @@ class Product extends Model
         'created_at',
         'id_category'
     ];
+    protected $appends = ['star'];
 
     public function variations() {
         return $this->hasMany(Variation::class, 'id_product', 'id');
+    }
+
+    public function stars() {
+        return $this->hasMany(Review::class, 'id_product', 'id');
+    }
+
+    protected function star(): Attribute
+    {
+        return new Attribute(
+            get: function() {
+                $star = $this->stars()->get()->pluck('star')->transform(function($res) {
+                    return (int)$res;
+                })->avg();
+                //TODO: append the number of comment ??
+                return $star;
+            }
+        );
     }
 }

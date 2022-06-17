@@ -5,6 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { Product } from "../../../classes/product";
 import { ProductService } from '../../../../shared/services/product.service';
+import { IProduct } from 'src/app/shop/interfaces/interface';
 
 @Component({
   selector: 'app-quick-view',
@@ -13,7 +14,7 @@ import { ProductService } from '../../../../shared/services/product.service';
 })
 export class QuickViewComponent implements OnInit, OnDestroy  {
 
-  @Input() product: Product;
+  @Input() product: IProduct;
   @Input() currency: any;  
   @ViewChild("quickView", { static: false }) QuickView: TemplateRef<any>;
 
