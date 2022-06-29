@@ -4,8 +4,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { ShopComponent } from "./shop/shop.component";
 import { PagesComponent } from "./pages/pages.component";
 import { ElementsComponent } from "./elements/elements.component";
-import { LoginComponent } from "./pages/account/login/login.component";
-import { RegisterComponent } from "./pages/account/register/register.component";
 
 const routes: Routes = [
   {

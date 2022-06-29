@@ -25,7 +25,7 @@ export class HomeService {
             this.sliders.push({
               title: "furniture sofa",
               subTitle: media.name,
-              image: media.url,
+              image: media.url
             });
           }
           if (parseInt(media.id_position) == 3) {

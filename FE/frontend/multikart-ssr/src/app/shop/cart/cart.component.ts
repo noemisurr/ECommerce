@@ -1,40 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ProductService } from "../../shared/services/product.service";
-import { Product } from "../../shared/classes/product";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "src/app/pages/account/services/auth.service";
+import { CartService } from "../collection/services/cart.service";
+import { ICartItem } from "../interfaces/interface";
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  selector: "app-cart",
+  templateUrl: "./cart.component.html",
+  styleUrls: ["./cart.component.scss"],
 })
 export class CartComponent implements OnInit {
+  cart: ICartItem[];
+  total: number;
 
-  public products: Product[] = [];
-
-  constructor(public productService: ProductService) {
-    this.productService.cartItems.subscribe(response => this.products = response);
-  }
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-  }
-
-  public get getTotal(): Observable<number> {
-    return this.productService.cartTotalAmount();
+    this.cartService.cartItem$.subscribe((res) => {
+      this.cart = res.cartItems;
+      this.total = res.total
+    });
   }
 
   // Increament
-  increment(product, qty = 1) {
-    this.productService.updateCartQuantity(product, qty);
+  increment(cartItem: ICartItem) {
+    cartItem.quantity += 1;
+    this.cartService.updateItems(cartItem).subscribe();
   }
 
   // Decrement
-  decrement(product, qty = -1) {
-    this.productService.updateCartQuantity(product, qty);
+  decrement(cartItem: ICartItem) {
+    if (cartItem.quantity === 1) return;
+    cartItem.quantity -= 1;
+    this.cartService.updateItems(cartItem).subscribe();
   }
 
-  public removeItem(product: any) {
-    this.productService.removeCartItem(product);
+  removeItem(cartItem: ICartItem) {
+    this.cartService.removeCartItem(cartItem).subscribe();
   }
 
+  onCheckOut() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigateByUrl("/shop/checkout");
+    } else {
+      const callback = encodeURIComponent("/shop/checkout");
+      this.router.navigateByUrl(`/pages/login?callback=${callback}`);
+    }
+  }
 }

@@ -26,7 +26,7 @@ export class MediaComponent implements OnInit {
   }
 
   settings: SettingsHome[] = [];
-  edit = new Map<string, { edit: boolean; data: SettingsHome }>();
+  edit = new Map<number, { edit: boolean; data: SettingsHome }>();
 
   constructor(private mediaService: MediaHomeService, private fb: FormBuilder) {}
 
@@ -37,11 +37,11 @@ export class MediaComponent implements OnInit {
     });
   }
 
-  startEdit(id: string): void {
+  startEdit(id: number): void {
     this.edit.get(id).edit = true;
   }
 
-  cancelEdit(id: string): void {
+  cancelEdit(id: number): void {
     const index = this.settings.findIndex(item => item.id === id);
     this.edit.set(id, {
       data: { ...this.settings[index] },
@@ -72,7 +72,7 @@ export class MediaComponent implements OnInit {
     })
   }
 
-  delete(id: string) {
+  delete(id: number) {
     this.mediaService.deleteHomeMedia(id).subscribe((res) => {
       this.settings = this.settings.filter((setting) => setting.id !== id)
     })

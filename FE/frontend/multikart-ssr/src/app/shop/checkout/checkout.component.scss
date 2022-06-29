@@ -1,0 +1,29 @@
+.accordion {
+    width: 100%;
+    padding: 20px;
+    &_panel {
+        margin-bottom: 10px;
+    }
+}
+
+.content {
+    input {
+        background-color: transparent;
+        border: 0;
+        border-bottom: grey dotted 1px;
+    }
+}
+
+.cards-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.checkbox{
+    display: inherit;
+    font-size: inherit;
+    > * {
+        margin-bottom: 10px;
+    }
+}

@@ -5,3 +5,18 @@ input {
 input:disabled {
   background-color: white;
 }
+
+.custom-img {
+  box-shadow: 0 0 15px rgb(68 102 242 / 30%);
+  width: 90px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(0, 0%, 90%);
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}

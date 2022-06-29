@@ -50,7 +50,6 @@ export class DigitalListComponent implements OnInit {
       this.categories = res;
     });
     this.productService.getAllColors().subscribe((res) => {
-      console.log(res)
       this.colors = res;
     });
     this.productService
@@ -70,24 +69,35 @@ export class DigitalListComponent implements OnInit {
           const variationGroup = this.productForm.get('variations') as FormArray;
           variationGroup.push(this.fb.group({
             id: variation.id,
+            name: variation.name,
             id_discount: variation.id_discount,
             id_color: variation.id_color,
             media: this.fb.array([]),
-            tag: this.fb.array([]),
+            tag_names: this.fb.array([]),
           }));
-          // variationGroup.disable()
+          variationGroup.disable()
+
+          const media = (this.productForm.get('variations') as FormArray).at(i).get('media') as FormArray
 
           variation.media.forEach((img) => {
-            const media = (this.productForm.get('variations') as FormArray).at(i).get('media') as FormArray
             media.push(new FormControl(img.url))
-            // media.disable()
+            media.disable()
           })
 
-          variation.tag.forEach((res) => {
-            const tag = (this.productForm.get('variations') as FormArray).at(i).get('tag') as FormArray
-            tag.push(new FormControl(res.id_tag))
-            // tag.disable()
+          if(variation.media.length == 0){
+            media.push(new FormControl())
+          }
+
+          const tag_name = (this.productForm.get('variations') as FormArray).at(i).get('tag_names') as FormArray
+          
+          variation.tag_names.forEach((res) => {
+            tag_name.push(new FormControl(res))
+            tag_name.disable()
           })
+
+          if(variation.tag_names.length == 0){
+            tag_name.push(new FormControl())
+          }
         });
       });
   }
@@ -130,7 +140,7 @@ export class DigitalListComponent implements OnInit {
     (
       (this.productForm.get('variations') as FormArray)
         .at(index)
-        .get('tag') as FormArray
+        .get('tag_names') as FormArray
     ).insert(0, new FormControl(''));
   }
 
@@ -138,7 +148,7 @@ export class DigitalListComponent implements OnInit {
     (
       (this.productForm.get('variations') as FormArray)
         .at(variationIndex)
-        .get('tag') as FormArray
+        .get('tag_names') as FormArray
     ).removeAt(index);
   }
 
@@ -153,9 +163,10 @@ export class DigitalListComponent implements OnInit {
   newTab(): void {
     (this.productForm.get('variations') as FormArray).push(
       this.fb.group({
+        name: [this.productForm.get('name').value + ' ...', Validators.required],
         id_color: ['', [Validators.required]],
         media: this.fb.array([new FormControl()]),
-        tag: this.fb.array([new FormControl()]),
+        tag_names: this.fb.array([new FormControl()]),
       })
     );
 

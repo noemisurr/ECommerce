@@ -118,6 +118,11 @@
                             <span class="new-tag" *ngIf="childrenSubItem.badge">{{ childrenSubItem.badgeText | translate }}</span>
                           </a>
                           <!-- Link -->
+                          <a [routerLink]="childrenSubItem.path" [queryParams]="{search: childrenSubItem.queryParams}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" 
+                            *ngIf="childrenSubItem.type === 'category' ">
+                            {{ childrenSubItem.title | translate }}
+                            <span class="new-tag" *ngIf="childrenSubItem.badge">{{ childrenSubItem.badgeText | translate }}</span>
+                          </a>
                           <a [routerLink]="childrenSubItem.path" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" 
                             *ngIf="childrenSubItem.type === 'link' ">
                             {{ childrenSubItem.title | translate }}

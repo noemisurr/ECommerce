@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostListener, ComponentFactoryResolver } from '@angular/core';
 import { Router } from '@angular/router';
+import { fromEvent } from 'rxjs';
 import { AuthService } from 'src/app/pages/account/services/auth.service';
 import { ContactService } from 'src/app/pages/account/services/contact.service';
 
@@ -11,9 +12,9 @@ import { ContactService } from 'src/app/pages/account/services/contact.service';
 export class HeaderOneComponent implements OnInit {
   
   @Input() class: string;
-  @Input() themeLogo: string = 'assets/images/icon/logo.png'; // Default Logo
+  @Input() themeLogo: string = 'assets/images/icon/logo-12.png'; // Default Logo
   @Input() topbar: boolean = true; // Default True
-  @Input() sticky: boolean = false; // Default false
+  @Input() sticky: boolean = true; // Default false
   
   public stick: boolean = false;
   number?: string
@@ -31,7 +32,7 @@ export class HeaderOneComponent implements OnInit {
   }
 
   // @HostListener Decorator
-  @HostListener("window:scroll", [])
+  @HostListener("body:scroll", [])
   onWindowScroll() {
     let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
   	if (number >= 150 && window.innerWidth > 400) { 

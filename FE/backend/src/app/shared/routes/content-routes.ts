@@ -13,6 +13,10 @@ export const content: Routes = [
     }
   },
   {
+    path: 'orders',
+    loadChildren: () => import('../../components/vendors/vendors.module').then(m => m.VendorsModule),
+  },
+  {
     path: 'sales',
     loadChildren: () => import('../../components/sales/sales.module').then(m => m.SalesModule),
     data: {
@@ -49,13 +53,6 @@ export const content: Routes = [
     loadChildren: () => import('../../components/users/users.module').then(m => m.UsersModule),
     data: {
       breadcrumb: "Users"
-    }
-  },
-  {
-    path: 'vendors',
-    loadChildren: () => import('../../components/vendors/vendors.module').then(m => m.VendorsModule),
-    data: {
-      breadcrumb: "Vendors"
     }
   },
   {

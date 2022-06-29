@@ -21,22 +21,9 @@ import { SuccessComponent } from "./checkout/success/success.component";
 
 import { Resolver } from "../shared/services/resolver.service";
 import { ReviewComponent } from "../pages/review/review.component";
+import { AuthGuard } from "../auth.guard";
 
 const routes: Routes = [
-  {
-    path: "product/left/sidebar/:slug",
-    component: ProductLeftSidebarComponent,
-    resolve: {
-      data: Resolver,
-    },
-  },
-  {
-    path: "product/right/sidebar/:slug",
-    component: ProductRightSidebarComponent,
-    resolve: {
-      data: Resolver,
-    },
-  },
   {
     path: "product/detail",
     component: ProductNoSidebarComponent
@@ -100,9 +87,11 @@ const routes: Routes = [
   {
     path: "checkout",
     component: CheckoutComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
   },
   {
-    path: "checkout/success/:id",
+    path: "checkout/success",
     component: SuccessComponent,
   },
 ];

@@ -1,12 +1,12 @@
 export interface User {
-  id: string,
+  id: number,
   name: string,
   surname: string,
   email: string,
   password: string,
   telephone: string
   birth: Date,
-  id_user_type: string,
+  id_user_type: number,
   jwt: string,
 }
 
@@ -19,27 +19,27 @@ export interface Contact {
 }
 
 export interface SettingsHome {
-  id: string,
+  id: number,
   name: string,
   url: string,
   alt: string,
   size: string,
-  id_position: string
+  id_position: number
 }
 
 export interface ProductRequest {
-  id?: string,
+  id?: number,
   name: string,
   short_description: string,
   long_description: string,
-  price: string,
+  price: number,
   created_at?: Date,
-  id_category: string,
+  id_category: number,
   variations: VariationRequest[]
 }
 
 export interface Category {
-  id: string,
+  id: number,
   name: string
 }
 
@@ -51,48 +51,82 @@ export interface Color {
 export interface Img {
   url: string,
   description?: string,
-  id_variation: string
+  id_variation: number
 }
 
 export interface VariationRequest {
-  //TODO: cambiare in number
   name?: string,
-  id_color: string,
-  id_discount?: string,
-  id_product?: string,
+  id_color: number,
+  id_discount?: number,
+  id_product?: number,
   imgs: string[],
   tags: string[]
 }
 
 export interface ProductResponse {
-  id: string,
+  id: number,
   name: string,
   short_description: string,
   long_description: string,
   price: string,
   created_at?: Date,
-  id_category: string,
+  id_category: number,
   deleted: boolean,
   variations?: VariationResponse[]
 }
 
 export interface VariationResponse {
-  id: string,
-  id_product: string,
-  id_color: string,
-  id_discount?: string,
+  id: number,
+  name: string,
+  id_product: number,
+  id_color: number,
+  id_discount?: number,
   media: Media[],
-  tag: Tag[]
+  tag_names: string[],
+  price: number[],
+  discount?: number
 }
 
 export interface Media {
-  id: string,
+  id: number,
   url: string,
   description?: string,
-  id_variation: string
+  id_variation: number
 }
-export interface Tag {
-  id: string,
-  id_tag: string,
-  id_variation: string
+
+export interface IOrder {
+  id: number,
+  total: number,
+  delivery_date: Date, // consegna prevista
+  shipping_date: Date, // spedizione 
+  shipping_code: string,
+  variations: IVariationOrder[],
+  address: IAddress,
+  user: User
+}
+
+export interface IVariationOrder{
+  id: number,
+  quantity: number,
+  variation: VariationResponse
+}
+
+export interface IAddress {
+  id?: number,
+  flat?: string,
+  address: string,
+  city: string,
+  cap: string,
+  region: string,
+  other?: string,
+  default: boolean,
+  id_user: number
+}
+
+export interface IDiscount {
+  id?: number,
+  name: string, 
+  description: string,
+  value: number,
+  active: boolean
 }

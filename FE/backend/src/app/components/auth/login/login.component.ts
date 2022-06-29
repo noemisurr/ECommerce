@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required]]
   });
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private message: NzMessageService) {}
 
   get email() {
     return this.loginForm.get('email')
@@ -53,10 +54,14 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     this.authService.login(this.email.value, this.password.value).subscribe((res) => {
-      localStorage.setItem('jwt', res.jwt)
-      this.router.navigateByUrl('/dashboard/default')
+      if(res.id_user_type == 1){
+        localStorage.setItem('jwt', res.jwt)
+        this.router.navigateByUrl('/dashboard/default')
+      }else{
+        this.message.create('error', 'Sorry, permission denied')
+      }
     }, (err) => {
-      console.log(err) // TODO: gestire
+      this.message.create('error', 'Ops, Something goes wrong, try again')
     })
   }
 

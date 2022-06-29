@@ -8,6 +8,7 @@ use App\Models\VariationTag;
 use App\Models\Tag;
 use App\Models\Img;
 use App\Models\Review;
+use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
 use DateTime;
@@ -23,15 +24,50 @@ class ProductController extends Controller
         $take = $request->query('take');
         $obj = $request->query('obj');
         $sortBy = $request->query('sortBy');
-        $product = Product::with('variations')->where('deleted', '=', false);
+        $search = $request->query('search');
+
+        if (isset($search)) {
+            $search_terms = preg_split("/[^\p{L}]+/u", urldecode($search), null, PREG_SPLIT_NO_EMPTY);
+        }
+
+        $product = Product::with(['variations' => function ($q) use($search) {
+            if (isset($search_terms)) {
+                $q->whereHas('tags', function($q) use($search_terms) {
+                    $q->whereHas('tag', function($q) use($search_terms) {
+                        $q->whereIn('name', $search_terms);
+                    });
+                });   
+            }
+        }])->where('deleted', '=', false);
+
         if(!isset($skip) || !isset($take))  return response($product->get(), 200);
 
+        if (isset($search_terms)) {
+            $product->whereHas('variations', function($q) use($search_terms) {
+                $q->whereHas('tags', function($q) use($search_terms) {
+                    $q->whereHas('tag', function($q) use($search_terms) {
+                        $q->whereIn('name', $search_terms);
+                    });
+                });
+            });
+        }
+
+        $count = $product->count();
+        
         $someProduct = $product
-                        ->skip($skip)
-                        ->take($take)
-                        ->orderBy($obj ? $obj : 'name', $sortBy ? $sortBy : 'asc') // TODO: NON FUNZIONA CON PRICE PERCHè è UNA STRINGA
-                        ->get();
-        return response($someProduct, 200);
+        ->skip($skip)
+        ->take($take)->get();
+        
+        if(isset($sortBy) && $sortBy == 'asc'){
+            $someProduct = $someProduct->sortBy(function($prod) use($obj) {
+                return $prod['variations'][0][$obj];
+            });
+        }else if(isset($sortBy) && $sortBy == 'desc'){
+            $someProduct = $someProduct->sortByDesc(function($prod) use($obj) {
+                return $prod['variations'][0][$obj];
+            });
+        }
+        return response(["products" => $someProduct->values(), "numberItems" => $count], 200);
     }
 
     public function getAllSpecial() {
@@ -81,26 +117,48 @@ class ProductController extends Controller
             foreach($variation as $var) {
 
                 $createdVariation = Variation::create([
+                    'name' => $var['name'],
                     'id_color' => $var['id_color'],
                     'id_product' => $createdProduct['id']
                 ]);
 
                 foreach($var['media'] as $img){
                     $createdImg = Img::create([
-                        'url' => $img,
+                        'url' => $img ? $img : 'https://angular.pixelstrap.com/multikart/assets/images/product/furniture/2.jpg',
                         'id_variation' => $createdVariation['id']
                     ]);
                 };
 
-                foreach($var['tag'] as $tag){
-                    $createdTag = Tag::create([
+                if(count($var['tag_names']) != 0){
+                    foreach($var['tag_names'] as $tag){
+                        $isTag = Tag::where('name', '=', $tag)->first();
+                        if(!isset($isTag)) {
+                            $isTag = Tag::create([
+                                'name' => $tag ? $tag : 'Default'
+                            ]);
+                        }
+                        $createdVariationTag = VariationTag::create([
+                            'id_tag' => $isTag['id'],
+                            'id_variation' => $createdVariation['id']
+                        ]);
+                    };
+                }else{
+                    $category = Category::find($product['id_category']);
+                    $tagName = Tag::create([
                         'name' => $tag
                     ]);
-                    $createdVariationTag = VariationTag::create([
-                        'id_tag' => $createdTag['id'],
+                    $tagCategory = Tag::create([
+                        'name' => $category['name']
+                    ]);
+                    VariationTag::create([
+                        'id_tag' => $tagName['id'],
                         'id_variation' => $createdVariation['id']
                     ]);
-                };
+                    VariationTag::create([
+                        'id_tag' => $tagCategory['id'],
+                        'id_variation' => $createdVariation['id']
+                    ]);
+                }
             };
             return response(["product" => Product::with('variations')->where('id', $createdProduct['id'])->first()->toArray()], 201);
         } catch (Exception $exc) {
@@ -130,23 +188,28 @@ class ProductController extends Controller
         foreach($variation as $var) {
 
             $createdVariation = Variation::create([
+                'name' => $var['name'],
                 'id_color' => $var['id_color'],
                 'id_product' => $product['id']
             ]);
 
             foreach($var['media'] as $img){
                 $createdImg = Img::create([
-                    'url' => $img,
+                    'url' => $img ? $img : 'https://angular.pixelstrap.com/multikart/assets/images/product/furniture/2.jpg',
                     'id_variation' => $createdVariation['id']
                 ]);
             };
 
-            foreach($var['tag'] as $tag){
-                $createdTag = Tag::create([
-                    'name' => $tag
-                ]);
+
+            foreach($var['tag_names'] as $tag){
+                $isTag = Tag::where('name', '=', $tag)->first();
+                if(!isset($isTag)) {
+                    $isTag = Tag::create([
+                        'name' => $tag ? $tag : 'Deafult'
+                    ]);
+                }
                 $createdVariationTag = VariationTag::create([
-                    'id_tag' => $createdTag['id'],
+                    'id_tag' => $isTag['id'],
                     'id_variation' => $createdVariation['id']
                 ]);
             };

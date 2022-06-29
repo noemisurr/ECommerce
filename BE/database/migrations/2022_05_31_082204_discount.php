@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->integer('value');
             $table->boolean('active');
-            $table->string('time_out')->nullable();
         });
     }
 

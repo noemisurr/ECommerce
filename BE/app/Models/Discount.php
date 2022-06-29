@@ -16,7 +16,6 @@ class Discount extends Model
         'name',
         'description',
         'value',
-        'active',
-        'time_out',
+        'active'
     ];
 }

@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   public url: any;
   public fileurl: any;
   name: string = '';
+  initials: string
 
   constructor(
     private router: Router,
@@ -46,6 +47,7 @@ export class SidebarComponent implements OnInit {
     this.authService.me().subscribe(
       (res: User) => {
         this.name = res.name + ' ' + res.surname
+        this.initials = res.name.charAt(0) + res.surname.charAt(0)
       }
     );
   }

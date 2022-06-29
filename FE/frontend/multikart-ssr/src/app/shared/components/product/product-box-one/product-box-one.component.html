@@ -1,11 +1,12 @@
 <div *ngIf="!loader">
   <div class="img-wrapper">
     <div class="lable-block">
-      <span class="lable3" *ngIf="product.created_at">new</span>
+      <span class="lable3" *ngIf="isNew">new</span>
       <!-- <span class="lable4" *ngIf="product.variations[0]?.id_discount">on sale</span> -->
     </div>
     <div class="front">
-      <a routerLink="/shop/product/detail" [queryParams]="{id: product.id}">
+      
+      <a routerLink="/shop/product/detail" [queryParams]="{id: product.id}" >
         <img 
           [defaultImage]="product.variations[this.currentVariationIndex]?.media[0]?.url ? product.variations[this.currentVariationIndex]?.media[0]?.url : 'assets/images/product/placeholder.jpg'" 
           [lazyLoad]="product.variations[this.currentVariationIndex]?.media[0]?.url" 
@@ -13,7 +14,7 @@
       </a>
     </div>
     <div class="back" *ngIf="onHowerChangeImage">
-      <a routerLink="/shop/product/detail" [queryParams]="{id: product.id}">
+      <a routerLink="/shop/product/detail" [queryParams]="{id: product.id}" >
         <img [src]="product.variations[this.currentVariationIndex]?.media[0]?.url" class="img-fluid lazy-loading">
         <!-- <img [src]="ImageSrc ? ImageSrc : product.images[1].src" class="img-fluid lazy-loading" alt="{{ product.images[1].alt }}"> -->
       </a>
@@ -51,16 +52,16 @@
     </div>
   </div>
   <div class="product-detail">
-    <nz-rate [(ngModel)]="product.star" nzDisabled></nz-rate>
+    <nz-rate *ngIf="product.star" [(ngModel)]="product.star" nzDisabled></nz-rate>
     <div class="m-20">
-      <a routerLink="/shop/product/detail" [queryParams]="{id: product.id}">
+      <a routerLink="/shop/product/detail" [queryParams]="{id: product.id}" >
         <h6>{{ product.name | titlecase }}</h6>
       </a>
-      <p>{{ product.short_description }}</p>
       <h4>
-        <!-- TODO: gestire lo sconto -->
-        {{product.price}} €
+        {{(product.price | discount:product.variations[currentVariationIndex].discount) | number : '1.2-2'}} €
+        <del *ngIf="product.variations[currentVariationIndex].discount">{{product.price}} €</del>
       </h4>
+      
       <ul class="color-variant">
         <li *ngFor="let variation of product.variations; index as i"  [class.active]="currentVariationIndex === i" 
             [ngStyle]="{'background-color': (variation.id_color | color )}"

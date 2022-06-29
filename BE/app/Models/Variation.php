@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\Img;
 use App\Models\VariationTag;
+use App\Models\Product;
+use App\Models\Discount;
+use DB;
 
 class Variation extends Model
 {
@@ -16,6 +19,7 @@ class Variation extends Model
     protected $table = 'variation';
     protected $fillable = [
         'id',
+        'name',
         'created_at',
         'id_color',
         'id_product',
@@ -23,7 +27,10 @@ class Variation extends Model
     ];
     protected $appends = [
         'media',
-        'tag'
+        'tag_names',
+        'price',
+        'discount',
+        'discounted_price'
     ];
 
     public function imgs() {
@@ -34,6 +41,14 @@ class Variation extends Model
         return $this->hasMany(VariationTag::class, 'id_variation', 'id');
     }
 
+    public function totalPrice() {
+        return $this->hasOne(Product::class, 'id', 'id_product');
+    }
+
+    public function discountInfo() {
+        return $this->hasOne(Discount::class, 'id', 'id_discount');
+    }
+
     protected function media(): Attribute
     {
         return new Attribute(
@@ -41,12 +56,30 @@ class Variation extends Model
         );
     }
 
-    protected function tag(): Attribute
+    protected function tagNames(): Attribute
     {
         return new Attribute(
-            get: fn () =>  $this->tags()->get(),
+            get: fn () =>  $this->tags()->get()->pluck('tag_names'),
         );
     }
 
+    protected function price(): Attribute
+    {
+        return new Attribute(
+            get: fn () =>  $this->totalPrice()->get()->pluck('price')->pop(),
+        );
+    }
 
+    protected function discount(): Attribute
+    {
+        return new Attribute(
+            get: fn () =>  $this->discountInfo()->select(DB::raw('MAX(value) as value'))->where('active', false)->groupBy('active')->get()->pluck('value')->pop(),
+        );
+    }
+
+    protected function discountedPrice(): Attribute {
+        return new Attribute(
+            get: fn () => $this->price - ($this->price * $this->discount / 100),
+        );
+    }
 }

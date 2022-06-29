@@ -2889,7 +2889,7 @@ ul.notification-dropdown.onhover-show-div{
                 > .fa-angle-right {
                   &:before{
                     content: $sidebar-open-icon;
-                    font-family: $sidebar-icon-font-family;
+                    // font-family: $sidebar-icon-font-family;
                     transition: $sidebar-transition;
                   }
                 }

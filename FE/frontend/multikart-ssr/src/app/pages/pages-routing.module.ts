@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CartComponent } from './account/cart/cart.component';
 import { DashboardComponent } from './account/dashboard/dashboard.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
@@ -40,10 +39,6 @@ const routes: Routes = [
     component: WishlistComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
-  },
-  { 
-    path: 'cart', 
-    component: CartComponent 
   },
   { 
     path: 'dashboard', 

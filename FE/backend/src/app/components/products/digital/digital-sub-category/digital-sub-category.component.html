@@ -91,7 +91,7 @@
                       <td nzWidth="25%">{{ data.price }}€</td>
                       <td nzWidth="25%">{{ data.id_category }}</td>
                       <td>
-                        <a [routerLink]="'/products/detail'" [queryParams]="{id: data.id}">View</a>
+                        <a [routerLink]="'/products/detail'" [queryParams]="{id: data.id}"><i nz-icon nzType="eye" style="color: black; font-size: large;" nzTheme="outline"></i></a>
                         <!-- <a
                           nz-popconfirm
                           nzPopconfirmTitle="Sure to delete?"

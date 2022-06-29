@@ -55,7 +55,21 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 // Pipes
 import { DiscountPipe } from './pipes/discount.pipe';
 import { ColorPipe } from '../pipes/color.pipe';
+
+// Ng Zorro
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import {
+  NzSkeletonAvatarShape,
+  NzSkeletonAvatarSize,
+  NzSkeletonButtonShape,
+  NzSkeletonButtonSize,
+  NzSkeletonInputSize
+} from 'ng-zorro-antd/skeleton';
 
 @NgModule({
   declarations: [
@@ -106,7 +120,12 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NgxSkeletonLoaderModule,
     TranslateModule,
     NzRateModule,
-    NzModalModule
+    NzModalModule,
+    NzCollapseModule,
+    NzInputModule,
+    NzRadioModule,
+    NzTagModule,
+    NzSkeletonModule
   ],
   exports: [
     CommonModule,
@@ -148,7 +167,12 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     DiscountPipe,
     ColorPipe,
     NzRateModule,
-    NzModalModule
+    NzModalModule,
+    NzCollapseModule,
+    NzInputModule,
+    NzRadioModule,
+    NzTagModule,
+    NzSkeletonModule
   ]
 })
 export class SharedModule { }

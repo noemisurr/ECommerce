@@ -11,7 +11,6 @@ import { IProductSpecial } from "src/app/shop/interfaces/interface";
 })
 export class FurnitureComponent implements OnInit {
   public themeLogo: string = "assets/images/icon/logo-12.png"; // Change Logo
-
   public products: IProductSpecial;
   public productCollections = [{label: 'ON SALE', value: 'sale'}, {label: 'NEW ARRIVAL', value: 'new'}, {label: 'BEST SELLERS', value: 'best'}]
   public sliders = [];
@@ -23,33 +22,6 @@ export class FurnitureComponent implements OnInit {
     public productService: ProductService,
     private homeService: HomeService,
   ) {}
-
-  // public blogs = [
-  //   {
-  //     image: "assets/images/blog/14.jpg",
-  //     date: "25 January 2018",
-  //     title: "Lorem ipsum dolor sit consectetur adipiscing elit,",
-  //     by: "John Dio",
-  //   },
-  //   {
-  //     image: "assets/images/blog/15.jpg",
-  //     date: "26 January 2018",
-  //     title: "Lorem ipsum dolor sit consectetur adipiscing elit,",
-  //     by: "John Dio",
-  //   },
-  //   {
-  //     image: "assets/images/blog/16.jpg",
-  //     date: "27 January 2018",
-  //     title: "Lorem ipsum dolor sit consectetur adipiscing elit,",
-  //     by: "John Dio",
-  //   },
-  //   {
-  //     image: "assets/images/blog/14.jpg",
-  //     date: "28 January 2018",
-  //     title: "Lorem ipsum dolor sit consectetur adipiscing elit,",
-  //     by: "John Dio",
-  //   },
-  // ];
 
   ngOnInit(): void {
     this.background = this.homeService.background

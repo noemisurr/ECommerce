@@ -12,10 +12,7 @@ export class LeftMenuComponent implements OnInit {
   public menuItems: Menu[];
 
   constructor(private router: Router, public navServices: NavService) {
-    this.navServices.leftMenuItems.subscribe(menuItems => this.menuItems = menuItems );
-    this.router.events.subscribe((event) => {
-      this.navServices.mainMenuToggle = false;
-    });
+    
   }
 
   ngOnInit(): void {

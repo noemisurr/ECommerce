@@ -5,7 +5,6 @@ import { SharedModule } from '../shared/shared.module';
 import { PagesRoutingModule } from './pages-routing.module';
 
 // Pages Components
-import { CartComponent } from './account/cart/cart.component';
 import { DashboardComponent } from './account/dashboard/dashboard.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
@@ -42,11 +41,11 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { ShopModule } from '../shop/shop.module';
 
 @NgModule({
   declarations: [
-    CartComponent,
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
@@ -87,6 +86,7 @@ import { ShopModule } from '../shop/shop.module';
     NzPopconfirmModule,
     NzTabsModule,
     NzIconModule,
+    NzCollapseModule,
     ShopModule
   ]
 })

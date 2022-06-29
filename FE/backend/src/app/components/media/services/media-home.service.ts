@@ -24,7 +24,7 @@ export class MediaHomeService {
     return this.http.post<SettingsHome>(`${environment.apiUrl}/backoffice/settings_home`, settings)
   }
 
-  deleteHomeMedia(id: string) {
+  deleteHomeMedia(id: number) {
     return this.http.delete<SettingsHome>(`${environment.apiUrl}/backoffice/settings_home/${id}`)
   }
 

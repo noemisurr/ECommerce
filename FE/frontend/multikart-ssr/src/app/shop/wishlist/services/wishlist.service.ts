@@ -11,23 +11,25 @@ import { IWishList } from "../../interfaces/interface";
   providedIn: "root",
 })
 export class WishListService {
-  private wishlists = new BehaviorSubject<IWishList>(null)
+  private wishlists = new BehaviorSubject<IWishList[]>(null)
   public wishlist$ = this.wishlists.asObservable()
 
   constructor(
     private http: HttpClient,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this.getByWishList()
+    //TODO: mettere nell'app init
+  }
 
-  addToWishList(id: number, callback?: string): Observable<IWishList> {
+  addToWishList(id: number, callback?: string): Observable<IWishList[]> {
     if(!this.authService.isLoggedIn()){
-      console.log(this.authService.isLoggedIn())
       this.router.navigateByUrl(`/pages/login?callback=${callback}`);
     }
     return this.http.post(`${environment.apiUrl}/wishlist`, {
       id_variation: id,
-    }).pipe(map((res: IWishList) => {
+    }).pipe(map((res: IWishList[]) => {
       this.wishlists.next(res)
       return res
     }));
@@ -35,9 +37,14 @@ export class WishListService {
 
   getByWishList(): Observable<IWishList[]> {
     if(!this.authService.isLoggedIn()){
+      console.log('no wishlist')
       return of(null)
     }
-    return this.http.get<IWishList[]>(`${environment.apiUrl}/wishlist`);
+    return this.http.get<IWishList[]>(`${environment.apiUrl}/wishlist`).pipe(map((res) => {
+      console.log('wishlist', res)
+      this.wishlists.next(res)
+      return res
+    }));
   }
 
   removeByWishList(id: number) {

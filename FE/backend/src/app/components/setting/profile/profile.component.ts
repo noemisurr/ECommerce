@@ -12,6 +12,7 @@ import { SettingsService } from '../services/settings.service';
 export class ProfileComponent implements OnInit {
 
   user: User
+  initials: string
   buttonLabel: string = 'Modify'
   contactForm = this.fb.group({
     email: ['', [Validators.required]],
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() { 
     this.authService.me().subscribe((res: User) => {
       this.user = res
+      this.initials = res.name.charAt(0) + res.surname.charAt(0)
     })
 
     this.settingsService.getSettings().subscribe((res: Contact[]) => {

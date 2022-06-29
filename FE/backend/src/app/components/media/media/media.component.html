@@ -71,12 +71,13 @@
                   <td nzWidth="25%">{{ data.size }}</td>
                   <td nzWidth="25%">{{ data.id_position }}</td>
                   <td>
-                    <a (click)="startEdit(data.id)">Edit</a>
+                    <a (click)="startEdit(data.id)"><i nz-icon nzType="edit" style="color: black; font-size: large;" nzTheme="outline"></i></a>
+                    <i style="color: white;">OK</i>
                     <a
                       nz-popconfirm
                       nzPopconfirmTitle="Sure to delete?"
                       (nzOnConfirm)="delete(data.id)"
-                      >  Delete</a
+                      >  <i nz-icon nzType="delete" style="color: black; font-size: large;" nzTheme="outline"></i></a
                     >
                   </td>
                 </ng-container>
@@ -118,6 +119,7 @@
                   </td>
                   <td>
                     <a (click)="saveEdit(data.id)" class="save">Save</a>
+                    <i style="color: white;">OK</i>
                     <a
                       nz-popconfirm
                       nzPopconfirmTitle="Sure to cancel?"

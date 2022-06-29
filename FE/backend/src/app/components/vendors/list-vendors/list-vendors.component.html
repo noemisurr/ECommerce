@@ -1,13 +1,35 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
         <div class="card">
-            <div class="card-header">
-                <h5>Vendor Details</h5>
-            </div>
             <div class="card-body vendor-table">
                 <div id="batchDelete" class="custom-datatable vendor-list">
                     <div class="table-responsive ">
-                            <ng2-smart-table  [settings]="settings" [source]="vendors"></ng2-smart-table>
+                        <nz-table #table [nzData]="orders" nzTableLayout="fixed">
+                            <thead>
+                                <tr>
+                                  <th>Order ID</th>
+                                  <th>Total</th>
+                                  <th>Delivery Date</th>
+                                  <th>Shipping Date</th>
+                                  <th>Shipping Code</th>
+                                  <th>User</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let data of orders">
+                                    <td nzWidth="25%">{{ data.id }}</td>
+                                    <td nzWidth="25%">{{ data.total }}</td>
+                                    <td nzWidth="25%">{{ data.delivery_date | date }}</td>
+                                    <td nzWidth="25%">{{ data.shipping_date | date }}</td>
+                                    <td nzWidth="25%">{{ data.shipping_code }}</td>
+                                    <td nzWidth="25%">{{ data.user.name }} {{ data.user.surname }}</td>
+                                    <td>
+                                        <a [routerLink]="'/orders/detail'" [queryParams]="{id: data.id}"><i nz-icon nzType="eye" style="color: black; font-size: large;" nzTheme="outline"></i></a>
+                                    </td>
+                                </tr>
+                              </tbody>
+                        </nz-table>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,11 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CouponsRoutingModule } from './coupons-routing.module';
 import { ListCouponComponent } from './list-coupon/list-coupon.component';
 import { CreateCouponComponent } from './create-coupon/create-coupon.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 
 @NgModule({
   declarations: [ListCouponComponent, CreateCouponComponent],
@@ -16,7 +21,10 @@ import { CreateCouponComponent } from './create-coupon/create-coupon.component';
     CouponsRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    NgxDatatableModule
+    NzTableModule,
+    NzPopconfirmModule,
+    NzMessageModule,
+    NzIconModule
   ]
 })
 export class CouponsModule { }

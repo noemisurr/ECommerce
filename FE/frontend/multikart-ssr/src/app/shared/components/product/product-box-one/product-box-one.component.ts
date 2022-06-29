@@ -1,7 +1,11 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, HostListener } from "@angular/core";
 import { QuickViewComponent } from "../../modal/quick-view/quick-view.component";
 import { CartModalComponent } from "../../modal/cart-modal/cart-modal.component";
-import { ICartItems, IProduct } from "src/app/shop/interfaces/interface";
+import {
+  ICartItem,
+  IProduct,
+  IWishList,
+} from "src/app/shop/interfaces/interface";
 import { WishListService } from "src/app/shop/wishlist/services/wishlist.service";
 import { AuthService } from "src/app/pages/account/services/auth.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -28,19 +32,20 @@ export class ProductBoxOneComponent implements OnInit {
   isWish: boolean = false;
   currentVariationIndex: number = 0;
   isLogged: boolean;
+  wishes: IWishList[];
 
   constructor(
     private wishListService: WishListService,
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private modal: NzModalService, // TODO: gestire le modal con un servizio ?
+    private modal: NzModalService,
     private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     if (this.loader) {
-      this.isLogged = this.authService.isLoggedIn()
+      this.isLogged = this.authService.isLoggedIn();
 
       const prodId = this.route.snapshot.queryParams.prodId;
       if (prodId == this.product.id) {
@@ -55,17 +60,26 @@ export class ProductBoxOneComponent implements OnInit {
       setTimeout(() => {
         this.isWishVariation();
         this.loader = false;
-      }, 2000); // Skeleton Loader
+      }, 1000); // Skeleton Loader
     }
-    this.wishListService.wishlist$.subscribe((newWish) => {
-      if (
-        newWish?.id_variation ==
-        this.product.variations[this.currentVariationIndex].id
-      ) {
-        this.isWish = true;
-      }
+    this.wishListService.wishlist$.subscribe((wishes) => {
+      this.wishes = wishes;
+      this.isWishVariation();
     });
   }
+
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    console.log('scroll')
+    let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  	if (number >= 150 && window.innerWidth > 400) { 
+  	  
+  	} else {
+  	  
+  	}
+  }
+
+ 
 
   // Change Variants
   changeVariations(current: number) {
@@ -79,17 +93,25 @@ export class ProductBoxOneComponent implements OnInit {
   }
 
   addToCart() {
-    const cartItem: ICartItems = {
-      quantity: 1,
-      variations: this.product.variations[this.currentVariationIndex]
-    }
-    this.cartService.setCartItem(cartItem).subscribe((res) => {
-      this.CartModal.openModal(this.product.variations[this.currentVariationIndex])
-    })
+    const cartItem: ICartItem[] = [
+      {
+        quantity: 1,
+        variation: this.product.variations[this.currentVariationIndex],
+      },
+    ];
+    this.cartService.addCartItem(cartItem).subscribe((res) => {
+      this.CartModal.openModal(
+        this.product.variations[this.currentVariationIndex]
+      );
+    });
   }
 
   onWishlist() {
-    return this.isWish ? this.removeToWishList() : this.addToWishlist(this.product.variations[this.currentVariationIndex].id);
+    return this.isWish
+      ? this.removeToWishList()
+      : this.addToWishlist(
+          this.product.variations[this.currentVariationIndex].id
+        );
   }
 
   addToWishlist(id: number) {
@@ -104,9 +126,9 @@ export class ProductBoxOneComponent implements OnInit {
     this.wishListService.addToWishList(payload, callback).subscribe((res) => {
       // far uscire una modale con scritto 'variante aggiunta con successo'
       const modal = this.modal.success({
-        nzTitle: 'Product Added to Your Wishlist',
+        nzTitle: "Product Added to Your Wishlist",
       });
-  
+
       setTimeout(() => modal.destroy(), 1000);
     });
   }
@@ -120,14 +142,16 @@ export class ProductBoxOneComponent implements OnInit {
   }
 
   isWishVariation() {
-    this.wishListService.getByWishList().subscribe((res) => {
-      res?.forEach((wish) => {
-        if (
-          this.product.variations[this.currentVariationIndex].id ==
-          wish.id_variation
-        )
-          this.isWish = true;
-      });
+    this.wishes?.forEach((wish) => {
+      if (
+        this.product.variations[this.currentVariationIndex].id ==
+        wish.id_variation
+      ) {
+        this.isWish = true;
+      } else {
+        this.isWish = false;
+      }
     });
   }
+
 }

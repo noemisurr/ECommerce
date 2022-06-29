@@ -1,6 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import jwt_decode from "jwt-decode";
+
+interface JWT {
+  aud: string,
+  exp: number,
+  iat: number,
+  iss: string,
+  nbf: number,
+  user_id: number
+}
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +28,11 @@ export class AuthGuard implements CanActivate {
   }
 
   private authenticate(): boolean | UrlTree {
-    //TODO: controllare se il token è scaduto
+    const jwt = localStorage.getItem('jwt')
+    var decoded: JWT = jwt_decode(jwt);
+    if (Date.now() >= decoded.exp * 1000) {
+      return this.router.parseUrl('/auth/login');
+    }
     return localStorage.getItem('jwt') ? true : this.router.parseUrl('/auth/login')
   }
   

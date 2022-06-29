@@ -1,36 +1,47 @@
 <app-breadcrumb [title]="'Collection'" [breadcrumb]="'Collection'"></app-breadcrumb>
 <!-- section start -->
 <section class="section-b-space">
+    <div *ngIf="search" class="tags-container">
+        <nz-tag *ngFor="let tag of search" nzMode="closeable" (nzOnClose)="onTagClose(tag)">
+            {{ tag }}
+        </nz-tag>
+    </div>
+    
     <div class="collection-wrapper">
         <div class="container">
-            <div class="row">
-                <div class="collection-content col">
-                    <div class="page-main-content">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="collection-product-wrapper" id="products">
-                                    <app-grid 
-                                        [products]="products"
-                                        [paginate]="paginate"
-                                        [layoutView]="layoutView"
-                                        [sortBy]="sortBy"
-                                        (setGrid)="updateGridLayout($event)"
-                                        (setLayout)="updateLayoutView($event)"
-                                        (sortedBy)="sortByFilter($event)">
-                                    </app-grid>
-                                    <div class="product-wrapper-grid" [ngClass]="layoutView">
-                                        <div class="row">
-                                            <div class="col-grid-box"
-                                                [ngClass]="grid"
-                                                *ngFor="let product of products">
-                                                <div class="product-box">
+            <div class="collection-content col">
+                <div class="page-main-content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="collection-product-wrapper" id="products">
+                                <app-grid 
+                                [products]="products"
+                                [paginate]="paginate"
+                                [layoutView]="layoutView"
+                                [sortBy]="sortBy"
+                                (setGrid)="updateGridLayout($event)"
+                                (setLayout)="updateLayoutView($event)"
+                                (sortedBy)="sortByFilter($event)">
+                            </app-grid>
+                            <div class="product-wrapper-grid" [ngClass]="layoutView">
+                                <div class="col-sm-12 text-center" *ngIf="search && (products.length == 0)">
+                                    <img src="assets/images/empty-search.jpg" class="img-fluid mb-4">
+                                    <h3>Sorry! Couldn't find the product you were looking For!!!    </h3>
+                                    <p>Please check if you have misspelt something or try searching with other words.</p>
+                                    <a [routerLink]="['/shop/list']"  class="btn btn-solid">continue shopping</a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-grid-box"
+                                    [ngClass]="grid"
+                                    *ngFor="let product of products">
+                                    <div class="product-box">
                                                     <app-product-box-one 
                                                         [product]="product" 
                                                         [thumbnail]="false"
                                                         [cartModal]="true"
                                                         [loader]="true">
                                                     </app-product-box-one>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>

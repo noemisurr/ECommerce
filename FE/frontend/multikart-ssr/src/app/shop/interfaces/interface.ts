@@ -1,4 +1,4 @@
-import { User } from "src/app/pages/account/interfaces/auth.interface";
+import { IAddress, User } from "src/app/pages/account/interfaces/auth.interface";
 
 export interface IProduct {
   id: number;
@@ -11,6 +11,11 @@ export interface IProduct {
   deleted: boolean;
   star?: number,
   variations?: IVariation[];
+}
+
+export interface IProductResponse {
+  products: IProduct[],
+  numberItems: number
 }
 
 export interface IProductSpecial {
@@ -27,6 +32,8 @@ export interface IVariation {
   id_discount?: number;
   media?: IMedia[];
   tag?: ITag[];
+  price: number,
+  discount?: number
 }
 
 export interface IMedia {
@@ -60,7 +67,7 @@ export interface IWishList {
   id?: number,
   id_user: number,
   id_variation: number,
-  variations?: IVariation,
+  variation?: IVariation,
   product?: IProduct
 }
 
@@ -75,16 +82,35 @@ export interface IReview {
   user?: User
 }
 
-export interface ICart {
-  id?: number,
-  total: number,
-  id_user: number,
-  items: ICartItems[]
-}
-
-export interface ICartItems {
+export interface ICartItem {
   id?: number,
   quantity: number,
   id_user?: number,
-  variations: IVariation
+  variation: IVariation
+}
+
+export interface IOrder {
+  id: number,
+  total: number,
+  delivery_date: Date, // consegna prevista
+  shipping_date: Date,// spedizione 
+  shipping_code: string,
+  variations: IVariationOrder[],
+  address: IAddress
+}
+
+export interface IVariationOrder{
+  id: number,
+  quantity: number,
+  variation: IVariation
+}
+
+export interface ICart {
+  total: number,
+  cartItems: ICartItem[]
+}
+
+export interface ICategory{
+  id: number,
+  name: string
 }

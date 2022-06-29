@@ -4,10 +4,8 @@ import { Observable, of } from "rxjs";
 import { AuthService } from "src/app/pages/account/services/auth.service";
 import { environment } from "src/environments/environment";
 import {
-  ICart,
-  ICartItems,
-  IColor,
   IProduct,
+  IProductResponse,
   IProductSpecial,
 } from "../../interfaces/interface";
 
@@ -23,14 +21,19 @@ export class ProductService {
   ---------------------------------------------
   */
 
-  getAll(skip: number, take: number, sortBy: string) {
+  getAll(skip: number, take: number, sortBy: string, obj: string, search: string) {
+    let queryString: string = `?skip=${skip}&take=${take}`
     if (sortBy) {
-      return this.http.get<IProduct[]>(
-        `${environment.apiUrl}/products?skip=${skip}&take=${take}&sortBy=${sortBy}`
-      );
+      queryString += `&sortBy=${sortBy}`
     }
-    return this.http.get<IProduct[]>(
-      `${environment.apiUrl}/products?skip=${skip}&take=${take}`
+    if (obj) {
+      queryString += `&obj=${obj}`
+    }
+    if(search) {
+      queryString += `&search=${search}`
+    }
+    return this.http.get<IProductResponse>(
+      `${environment.apiUrl}/products${queryString}`
     );
   }
 

@@ -25,7 +25,7 @@ import { ContactService } from "./pages/account/services/contact.service";
 import { AppInitService } from "./app-init.service";
 import { HomeService } from "./home/services/home.service";
 import { ColorService } from "./pages/account/services/color.service";
-import { ColorPipe } from './pipes/color.pipe';
+import { CategoryService } from "./pages/account/services/category.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -72,7 +72,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     },
     ContactService,
     ColorService,
-    HomeService
+    HomeService,
+    CategoryService
   ],
   bootstrap: [AppComponent],
 })

@@ -18,8 +18,8 @@ class Wishlist extends Model
         'id_variation'
     ];
 
-    public function variations() {
-        return $this->hasMany(Variation::class, 'id', 'id_variation');
+    public function variation() {
+        return $this->hasOne(Variation::class, 'id', 'id_variation');
     }
 
 }

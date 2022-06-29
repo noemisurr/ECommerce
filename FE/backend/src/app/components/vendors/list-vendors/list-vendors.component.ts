@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IOrder } from 'src/app/shared/interfaces/interface';
 import { vendorsDB } from '../../../shared/tables/vendor-list';
+import { OrderService } from '../service/order.service';
 
 @Component({
   selector: 'app-list-vendors',
@@ -7,40 +9,15 @@ import { vendorsDB } from '../../../shared/tables/vendor-list';
   styleUrls: ['./list-vendors.component.scss']
 })
 export class ListVendorsComponent implements OnInit {
-  public vendors = [];
 
-  constructor() {
-    this.vendors = vendorsDB.data;
-  }
+  orders: IOrder[]
 
-  public settings = {
-    actions: {
-      position: 'right'
-    },
-    columns: {
-      vendor: {
-        title: 'Vendor',
-        type: 'html',
-      },
-      products: {
-        title: 'Products'
-      },
-      store_name: {
-        title: 'Store Name'
-      },
-      date: {
-        title: 'Date'
-      },
-      balance: {
-        title: 'Wallet Balance',
-      },
-      revenue: {
-        title: 'Revenue',
-      }
-    },
-  };
+  constructor(private orderService: OrderService) {}
 
   ngOnInit() {
+    this.orderService.getAll().subscribe((res) => {
+      this.orders = res
+    })
   }
 
 }

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->date('shipping_date')->nullable(); // data effettiva di spedizione
             $table->string('shipping_code')->nullable(); // codice di spedizione
             $table->integer('id_user')->references('id')->on('user');
-            $table->integer('id_payment')->references('id')->on('payment');
             $table->integer('id_address')->references('id')->on('address');
         });
     }

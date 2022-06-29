@@ -8,15 +8,12 @@
     /></a>
   </div>
 </div>
+<!--         "assets/images/icon/logo-12.png" -->
 <div class="sidebar custom-scrollbar">
-  <div class="sidebar-user text-center">
-    <div>
-      <!-- TODO: mettere nell'immagine le iniziali del nome e del cognome -->
-      <img
-        class="img-60 rounded-circle"
-        src="assets/images/dashboard/man.png" 
-        alt="#"
-      />
+  <div class="sidebar-user text-center flex">
+    <div class="align-self-center pull-right img-60 rounded-circle custom-img">
+      <div>{{initials | uppercase }}</div>
+      
     </div>
     <h6 class="mt-3 f-14">{{name}}</h6>
     <p>admin.</p>

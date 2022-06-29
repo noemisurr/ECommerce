@@ -19,7 +19,6 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrls: ['./digital-add.component.scss'],
 })
 export class DigitalAddComponent implements OnInit {
-  //TODO:cambiare icona frecciolina giu nel sidemenu
   categories: Category[] = [];
   colors: Color[] = [];
   selectedIndex = 0;

@@ -68,7 +68,7 @@ class AuthController extends Controller
             "aud" => "http://example.org",
             "iat" => $date_now->getTimestamp(),
             "nbf" => $date_now->getTimestamp(),
-            "exp" => $date_now->add(new DateInterval('PT60M'))->getTimestamp(),
+            "exp" => $date_now->add(new DateInterval('PT90M'))->getTimestamp(),
             "user_id" => $user_id
         );
     }
@@ -81,7 +81,7 @@ class AuthController extends Controller
         }catch( Exception $exc ) {
            return response(['message' => 'user not found'], 401);
         }
-        return response(User::with('address')->where('id', $user['id'])->first()->toArray(), 200);
+        return response(User::where('id', $user['id'])->first()->toArray(), 200);
     }
 
     public function logout( Request $request ) {
@@ -108,7 +108,7 @@ class AuthController extends Controller
 
         Address::where('id_user', '=', $user['id'])->delete();
 
-        $addresses = $newData['addresses'];
+        $addresses = $newData['address'];
 
         foreach($addresses as $address) {
             Address::create([
@@ -125,7 +125,7 @@ class AuthController extends Controller
 
         try {
             $user->save();
-            return response(User::with('address')->where('id', $user['id'])->first()->toArray(), 200);
+            return response(User::where('id', $user['id'])->first()->toArray(), 200);
         } catch (Exception $exc) {
             return response(['message' => 'user not updated'], 500);
         }

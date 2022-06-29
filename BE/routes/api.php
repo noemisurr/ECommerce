@@ -10,6 +10,10 @@ use App\Http\Controllers\VariationController;
 use App\Http\Controllers\ImgController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DiscountController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,8 +45,6 @@ Route::prefix('/auth')->group((function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 }));
 
-//TODO: gestire la sessione in modo che ognuna di queste chiamate abbia bisogno dell'authorization
-
 Route::prefix('/backoffice')->group((function () {
     Route::get('/settings', [SettingsController::class, 'getContact']);
     Route::put('/settings/{setting_id}', [SettingsController::class, 'updateContact'])->whereNumber('setting_id');
@@ -51,6 +53,10 @@ Route::prefix('/backoffice')->group((function () {
     Route::put('/settings_home/{setting_id}', [SettingsController::class, 'updateMedia'])->whereNumber('setting_id');
     Route::delete('/settings_home/{setting_id}', [SettingsController::class, 'deleteMedia'])->whereNumber('setting_id');
     Route::get('/users', [SettingsController::class, 'getAllUsers']);
+    Route::get('/discount', [DiscountController::class, 'getAll']);
+    Route::post('/discount', [DiscountController::class, 'new']);
+    Route::put('/discount/{id_discount}', [DiscountController::class, 'update'])->whereNumber('id_discount');
+    Route::delete('/discount/{id_discount}', [DiscountController::class, 'delete'])->whereNumber('id_discount');
 }));
 
 Route::prefix('/categories')->group((function() {
@@ -96,7 +102,27 @@ Route::prefix('wishlist')->group((function() {
     Route::delete('/{variation_id}', [WishlistController::class, 'delete'])->whereNumber('variation_id');
 }));
 
-Route::prefix('cart_item')->group((function() {
+Route::prefix('cart')->group((function() {  
     Route::get('', [CartController::class, 'getAll']);
-    Route::post('', [CartController::class, 'add']);
+    Route::post('', [CartController::class, 'addItem']);
+    Route::delete('', [CartController::class, 'empty']); 
+
+    Route::put('/{cart_item_id}', [CartController::class, 'update'])->whereNumber('cart_item_id');
+    Route::delete('/{cart_item_id}', [CartController::class, 'delete'])->whereNumber('cart_item_id');
 }));
+
+Route::prefix('address')->group((function () {
+    Route::post('', [AddressController::class, 'new']);
+    Route::put('', [AddressController::class, 'update']);
+}));
+
+Route::prefix('cards')->group((function () {
+    Route::post('', [CardController::class, 'new']);
+}));
+
+Route::prefix('order')->group((function() {
+    Route::post('', [OrderController::class, 'new']);
+    Route::get('', [OrderController::class, 'getAll']);
+    Route::get('/{order_id}', [OrderController::class, 'getById'])->whereNumber('order_id');
+}));
+

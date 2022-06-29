@@ -49,7 +49,7 @@
               <div class="no-slider row">
                 <ng-container *ngFor="let product of getCollectionProducts(collection.value) | slice:0:8">
                   <div class="product-box">
-                    <app-product-box-one 
+                    <app-product-box-one loader="true"
                       [product]="product" [isInHome]="true">    
                     </app-product-box-one>
                   </div>

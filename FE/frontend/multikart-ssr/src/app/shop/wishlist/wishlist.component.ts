@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { CartModalComponent } from "src/app/shared/components/modal/cart-modal/cart-modal.component";
+import { CartService } from "../collection/services/cart.service";
 import { ProductService } from "../collection/services/product.service";
-import { IWishList } from "../interfaces/interface";
+import { IWishList, ICartItem, IVariation } from "../interfaces/interface";
 import { WishListService } from "./services/wishlist.service";
 
 @Component({
@@ -9,24 +11,35 @@ import { WishListService } from "./services/wishlist.service";
   styleUrls: ["./wishlist.component.scss"],
 })
 export class WishlistComponent implements OnInit {
-  public variations: IWishList[] = [];
+  public wishList: IWishList[] = [];
+
+  @ViewChild("cartModal") CartModal: CartModalComponent;
 
   constructor(
     public productService: ProductService,
-    private wishListService: WishListService
+    private wishListService: WishListService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     this.wishListService.getByWishList().subscribe((res) => {
-      this.variations = res;
+      this.wishList = res;
     });
   }
 
-  async addToCart(product?: any) {}
+  addToCart(variation: IVariation) {
+    const payload: ICartItem[] = [{
+      quantity: 1,
+      variation: variation
+    }]
+    this.cartService.addCartItem(payload).subscribe(() => {
+      this.CartModal.openModal(variation)
+    })
+  }
 
   removeItem(variationId: number) {
     this.wishListService.removeByWishList(variationId).subscribe((res) => {
-      this.variations = this.variations.filter((variation) => variation.id !== res.id);
+      this.wishList = this.wishList.filter((variation) => variation.id !== res.id);
     });
   }
 }

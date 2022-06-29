@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('id_variation')->references('id')->on('variation');
             $table->integer('id_order_detail')->references('id')->on('order_detail');
+            $table->integer('id_discount')->references('id')->on('discount')->nullable();
         });
     }
 

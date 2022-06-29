@@ -31,8 +31,8 @@
                 <div class="product-page-filter">
                     <select (change)="sorting($event)">
                         <option value="">Sorting Items</option>
-                        <option value="a-z"  [selected]="sortBy == 'a-z'">Alphabetically A-Z</option>
-                        <option value="z-a"  [selected]="sortBy == 'z-a'">Alphabetically Z-A</option>
+                        <option value="asc"  [selected]="sortBy == 'a-z'">Alphabetically A-Z</option>
+                        <option value="desc"  [selected]="sortBy == 'z-a'">Alphabetically Z-A</option>
                         <option value="low"  [selected]="sortBy == 'low'">Price Low to High</option>
                         <option value="high" [selected]="sortBy == 'high'">Price High to Low</option>
                     </select>

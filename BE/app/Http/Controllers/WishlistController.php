@@ -15,10 +15,10 @@ class WishlistController extends Controller
         $token = $request->bearerToken();
         $payload = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
 
-        $wishItems = Wishlist::with('variations')->where('id_user', '=', $payload->user_id)->get();
+        $wishItems = Wishlist::with('variation')->where('id_user', '=', $payload->user_id)->get();
         foreach($wishItems as $i=>$wish){  
-            // return response($wish->variations['0']->id, 201); 
-            $product = Product::find($wish->variations['0']->id_product);  
+            //TODO: mi serve?
+            $product = Product::find($wish->variation->id_product);  
             $wishItems[$i]->product = $product;
         };
 
@@ -34,10 +34,10 @@ class WishlistController extends Controller
                 'id_user' => $payload->user_id,
                 'id_variation' => $wish['id_variation']
             ]);
-            return response($createdWish, 201);
         } catch( Exception $exc ) {
             return response(['message' => 'wish not created'], 500);
         }
+        return response(Wishlist::with('variation')->where('id_user', '=', $payload->user_id)->get(), 201);
     }
 
     public function delete(Request $request, $id) {

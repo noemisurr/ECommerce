@@ -16,19 +16,20 @@ class CartItem extends Model
     protected $fillable = [
         'id',
         'quantity',
-        'id_cart',
-        'id_variation'
+        'id_variation',
+        'id_user'
     ];
-    protected $appends = ['variations'];
+    protected $appends = ['variation'];
 
-    public function variation() {
-        return $this->hasMany(Variation::class, 'id', 'id_variation');
+    public function variations() {
+        return $this->hasOne(Variation::class, 'id', 'id_variation');
     }
 
-    protected function variations(): Attribute
+    protected function variation(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->variation()->get(),
+            get: fn () => $this->variations()->get()->pop(),
         );
     }
+
 }

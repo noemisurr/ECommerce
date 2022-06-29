@@ -42,7 +42,6 @@ class Product extends Model
                 $star = $this->stars()->get()->pluck('star')->transform(function($res) {
                     return (int)$res;
                 })->avg();
-                //TODO: append the number of comment ??
                 return $star;
             }
         );

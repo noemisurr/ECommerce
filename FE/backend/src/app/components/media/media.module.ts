@@ -10,6 +10,8 @@ import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -26,7 +28,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     NzTableModule,
     NzPopconfirmModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzIconModule
   ],
   providers: [
     {

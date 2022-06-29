@@ -1,33 +1,100 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Products Category</h5>
-                </div>
-                <div class="card-body">
-                    <div class="custom-datatable">
-                        <button class="btn btn-primary mr-1 mb-3" style="float: right;">Delete</button>
-                        <div class="clearfix"></div>
-                        <ngx-datatable class="bootstrap" [rows]="digital_categories" [columnMode]="'force'"
-                            [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [limit]="5"
-                            [selected]="selected" [selectionType]="'checkbox'" [selectAllRowsOnPage]="false"
-                            (select)='onSelect($event)'>
-                            <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false"
-                                [draggable]="false" [resizeable]="false" [headerCheckboxable]="true"
-                                [checkboxable]="true">
-                                <button type="button" class="btn btn-primery">Delete</button>
-                            </ngx-datatable-column>
-                            <ngx-datatable-column name="Title"></ngx-datatable-column>
-                            <ngx-datatable-column name="Code"></ngx-datatable-column>
-                            <ngx-datatable-column name="Discount"></ngx-datatable-column>
-                            <ngx-datatable-column name="Status"></ngx-datatable-column>
-                        </ngx-datatable>
-                    </div>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Products Category</h5>
         </div>
+        <div class="card-body">
+          <div class="custom-datatable">
+            <button class="btn btn-primary mr-1 mb-3" style="float: right" (click)="open(content)">
+              Create
+            </button>
+            <ng-template #content let-modal>
+                <div class="modal-header">
+                    <h5 class="modal-title f-w-600" id="exampleModalLabel">Add Discount</h5>
+                    <button type="button" class="close" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" [formGroup]="discountForm">
+                        <div class="form">
+                            <div class="form-group">
+                                <label for="validationCustom01" class="mb-1">Name :</label>
+                                <input class="form-control" id="validationCustom01" type="text" formControlName="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="validationCustom02" class="mb-1">Description :</label>
+                                <input class="form-control" id="validationCustom02" type="text" formControlName="description">
+                            </div>
+                            <div class="form-group">
+                                <label for="validationCustom01" class="mb-1">Value :</label>
+                                <input class="form-control" id="validationCustom01" type="text" formControlName="value">
+                            </div>
+                            <div class="form-group">
+                                <label for="validationCustom01" class="mb-1 margin-10" >Active :</label>
+                                <input id="validationCustom01" type="checkbox" formControlName="active">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button *ngIf="!isEdit" type="button" class="btn btn-primary" (click)="onSave()">Save</button>
+                    <button *ngIf="isEdit" type="button" class="btn btn-primary" (click)="onUpdate()">Save</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal"
+                        (click)="modal.dismiss('Cross click')">Close</button>
+                </div>
+            </ng-template>
+            <div class="clearfix"></div>
+            <nz-table #table [nzData]="discounts">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Value</th>
+                  <th>Active</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of table.data">
+                  <td nzWidth="25%">{{ data.name }}</td>
+                  <td nzWidth="50%">{{ data.description }}</td>
+                  <td nzWidth="25%">{{ data.value }} %</td>
+                  <td nzWidth="25%">
+                    <span class="ng-star-inserted"
+                      ><i
+                        *ngIf="data.active != 0; else notActive"
+                        class="fa fa-circle font-success f-12"
+                      ></i>
+                      <ng-template #notActive
+                        ><i
+                          class="fa fa-circle font-danger f-12"
+                        ></i></ng-template
+                    ></span>
+                  </td>
+                  <td>
+                   <a (click)="onEdit(content, data.id)"><i nz-icon nzType="edit" style="color: black; font-size: large;" nzTheme="outline"></i></a>
+                   <i style="color: white;">OK</i>
+                    <a
+                      nz-popconfirm
+                      nzPopconfirmTitle="Sure to delete?"
+                      (nzOnConfirm)="onDelete(data.id)"
+                    >
+                    <i nz-icon nzType="delete" style="color: black; font-size: large;" nzTheme="outline"></i></a
+                    >
+                    
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <!-- Container-fluid Ends-->

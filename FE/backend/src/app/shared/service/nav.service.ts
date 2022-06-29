@@ -1,5 +1,5 @@
 import { Injectable, HostListener, Inject } from '@angular/core';
-import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { WINDOW } from "./windows.service";
 // Menu
 export interface Menu {
@@ -35,8 +35,6 @@ export class NavService {
 	onResize(event?) {
 		this.screenWidth = window.innerWidth;
 	}
-
-	//TODO:
 	
 	MENUITEMS: Menu[] = [
 		{
@@ -64,16 +62,16 @@ export class NavService {
 			]
 		},
 		{
-			title: 'Sales', icon: 'dollar-sign', type: 'sub', active: false, children: [
-				{ path: '/sales/orders', title: 'Orders', type: 'link' },
-				{ path: '/sales/transactions', title: 'Transactions', type: 'link' },
-			]
+			title: 'Orders', icon: 'dollar-sign', type: 'link', active: false, path: 'orders/list'
 		},
+		// {
+		// 	title: 'Sales', icon: 'dollar-sign', type: 'sub', active: false, children: [
+		// 		{ path: '/sales/orders',  type: 'link' },
+		// 		{ path: '/sales/transactions', title: 'Transactions', type: 'link' },
+		// 	]
+		// },
 		{
-			title: 'Coupons', icon: 'tag', type: 'sub', active: false, children: [
-				{ path: '/coupons/list-coupons', title: 'List Coupons', type: 'link' },
-				{ path: '/coupons/create-coupons', title: 'Create Coupons', type: 'link' },
-			]
+			title: 'Discounts', icon: 'tag', type: 'link', path: '/coupons/list-coupons', active: false
 		},
 		// {
 		// 	title: 'Pages', icon: 'clipboard', type: 'sub', active: false, children: [
@@ -106,9 +104,9 @@ export class NavService {
 		// 		{ path: '/localization/taxes', title: 'Taxes', type: 'link' },
 		// 	]
 		// },
-		{
-			title: 'Reports', path: '/reports', icon: 'bar-chart', type: 'link', active: false
-		},
+		// {
+		// 	title: 'Reports', path: '/reports', icon: 'bar-chart', type: 'link', active: false
+		// },
 		{
 			title: 'Settings', icon: 'settings', type: 'sub', children: [
 				{ path: '/settings/profile', title: 'Profile', type: 'link' },
