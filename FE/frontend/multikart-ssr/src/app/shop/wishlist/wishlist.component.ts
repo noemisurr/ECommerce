@@ -12,6 +12,7 @@ import { WishListService } from "./services/wishlist.service";
 })
 export class WishlistComponent implements OnInit {
   public wishList: IWishList[] = [];
+  loader: boolean = true;
 
   @ViewChild("cartModal") CartModal: CartModalComponent;
 
@@ -22,18 +23,25 @@ export class WishlistComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.wishListService.getByWishList().subscribe((res) => {
-      this.wishList = res;
-    });
+    if(this.loader){
+      this.wishListService.getByWishList().subscribe((res) => {
+        this.wishList = res;
+        this.loader = false
+      }, (err) => {
+        this.loader = false
+      });
+
+    }
   }
 
-  addToCart(variation: IVariation) {
+  addToCart(wish: IWishList) {
+    console.log(wish)
     const payload: ICartItem[] = [{
       quantity: 1,
-      variation: variation
+      variation: wish.variation
     }]
     this.cartService.addCartItem(payload).subscribe(() => {
-      this.CartModal.openModal(variation)
+      this.CartModal.openModal(wish.variation)
     })
   }
 

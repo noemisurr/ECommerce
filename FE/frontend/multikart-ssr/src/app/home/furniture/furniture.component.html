@@ -12,7 +12,7 @@
 <!-- Home slider End -->
 
 <!-- collection banner -->
-<section class="banner-padding banner-furniture">
+<!-- <section class="banner-padding banner-furniture">
     <div class="container-fluid">
         <div class="row partition3">
             <div class="col-md-4" *ngFor="let collection of collections">
@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- collection banner end -->
 
 <!-- Tab product start-->
@@ -47,7 +47,7 @@
             <ng-template ngbTabTitle>{{collection.label}}</ng-template>
             <ng-template ngbTabContent>
               <div class="no-slider row">
-                <ng-container *ngFor="let product of getCollectionProducts(collection.value) | slice:0:8">
+                <ng-container *ngFor="let product of getCollectionProducts(collection.value) | slice:0:4">
                   <div class="product-box">
                     <app-product-box-one loader="true"
                       [product]="product" [isInHome]="true">    

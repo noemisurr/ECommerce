@@ -13,14 +13,14 @@ import { ICart, ICartItem } from "../../interfaces/interface";
 export class CartService {
   private cart: ICart = {
     total: 0,
-    cartItems: []
+    cartItems: [],
   };
   private cartItem = new BehaviorSubject<ICart>(this.cart);
   public cartItem$ = this.cartItem.asObservable();
-  public discountPipe = new DiscountPipe()
+  public discountPipe = new DiscountPipe();
 
   constructor(private authService: AuthService, private http: HttpClient) {
-    this.getCartItem().subscribe()
+    this.getCartItem().subscribe();
     this.authService.isLogged$.subscribe((isLogged) => {
       if (isLogged) {
         this.getCartItem().subscribe(
@@ -28,11 +28,11 @@ export class CartService {
             console.log("added", res);
           },
           (err) => {
-            const items = JSON.parse(localStorage.getItem("cart"))
+            const items = JSON.parse(localStorage.getItem("cart"));
             this.addCartItem(items.cartItems).subscribe(() => {
-              console.log('new')
+              console.log("new");
               localStorage.removeItem("cart");
-            })
+            });
           }
         );
       }
@@ -46,14 +46,21 @@ export class CartService {
         : this.cart;
 
       const existIndex = this.cart.cartItems.findIndex((item) => {
-        return item.variation.id === cartItem[0].variation.id
-      })
-      if(existIndex >= 0) {
-        this.cart.cartItems[existIndex].quantity += 1
-        this.cart.total += this.discountPipe.transform(cartItem[0].variation.price, cartItem[0].variation.discount)
-      }else{
+        return item.variation.id === cartItem[0].variation.id;
+      });
+      if (existIndex >= 0) {
+        this.cart.cartItems[existIndex].quantity += 1;
+        this.cart.total += this.discountPipe.transform(
+          cartItem[0].variation.price,
+          cartItem[0].variation.discount
+        );
+      } else {
         this.cart.cartItems.push(cartItem[0]);
-        this.cart.total += (this.discountPipe.transform(cartItem[0].variation.price, cartItem[0].variation.discount) * cartItem[0].quantity)
+        this.cart.total +=
+          this.discountPipe.transform(
+            cartItem[0].variation.price,
+            cartItem[0].variation.discount
+          ) * cartItem[0].quantity;
       }
 
       const item = JSON.stringify(this.cart);
@@ -66,10 +73,18 @@ export class CartService {
         .post<ICartItem[]>(`${environment.apiUrl}/cart`, cartItem)
         .pipe(
           map((res) => {
-            const total = res.reduce((acc, cartItem) => {
-              return acc + (this.discountPipe.transform(cartItem.variation.price, cartItem.variation.discount) * cartItem.quantity)
-            }, 0)
-            this.cartItem.next({total: total, cartItems: res});
+            console.log(res)
+            const total = res.reduce((acc, item) => {
+              return (
+                acc +
+                this.discountPipe.transform(
+                  item?.variation?.price,
+                  item?.variation?.discount
+                ) *
+                  item?.quantity
+              );
+            }, 0);
+            this.cartItem.next({ total: total, cartItems: res });
             return res;
           })
         );
@@ -89,12 +104,18 @@ export class CartService {
       return this.http.get<ICartItem[]>(`${environment.apiUrl}/cart`).pipe(
         map((res) => {
           const total = res.reduce((acc, cartItem) => {
-            return acc + (this.discountPipe.transform(cartItem.variation.price, cartItem.variation.discount) * cartItem.quantity)
-          }, 0)
-          this.cartItem.next({total: total, cartItems: res});
+            return (
+              acc +
+              this.discountPipe.transform(
+                cartItem?.variation?.price,
+                cartItem?.variation?.discount
+              ) *
+                cartItem?.quantity
+            );
+          }, 0);
+          this.cartItem.next({ total: total, cartItems: res });
           return res;
-        }),
-        catchError(() => EMPTY)
+        })
       );
     }
   }
@@ -102,7 +123,11 @@ export class CartService {
   updateItems(cartItem: ICartItem): Observable<ICartItem[]> {
     if (!this.authService.isLoggedIn()) {
       this.cart.cartItems = [...this.cart.cartItems];
-      this.cart.total += (this.discountPipe.transform(cartItem.variation.price, cartItem.variation.discount) * cartItem.quantity)
+      this.cart.total +=
+        this.discountPipe.transform(
+          cartItem.variation.price,
+          cartItem.variation.discount
+        ) * cartItem.quantity;
 
       this.cartItem.next(this.cart);
       localStorage.setItem("cart", JSON.stringify(this.cart));
@@ -113,9 +138,16 @@ export class CartService {
         .pipe(
           map((res: ICartItem[]) => {
             const total = res.reduce((acc, cartItem) => {
-              return acc + (this.discountPipe.transform(cartItem.variation.price, cartItem.variation.discount) * cartItem.quantity)
-            }, 0)
-            this.cartItem.next({total: total, cartItems: res});
+              return (
+                acc +
+                this.discountPipe.transform(
+                  cartItem.variation.price,
+                  cartItem.variation.discount
+                ) *
+                  cartItem.quantity
+              );
+            }, 0);
+            this.cartItem.next({ total: total, cartItems: res });
             return res;
           })
         );
@@ -127,35 +159,44 @@ export class CartService {
       // elimino il cart item dal cart
       const index = this.cart.cartItems.indexOf(item);
       this.cart.cartItems.splice(index, 1);
-      this.cart.total -= (this.discountPipe.transform(item.variation.price, item.variation.discount) * item.quantity)
-      
+      this.cart.total -=
+        this.discountPipe.transform(
+          item.variation.price,
+          item.variation.discount
+        ) * item.quantity;
+
       this.cartItem.next(this.cart);
       localStorage.setItem("cart", JSON.stringify(this.cart));
       return of(this.cart.cartItems);
     } else {
-      return this.http
-        .delete(`${environment.apiUrl}/cart/${item.id}`)
-        .pipe(
-          map((res: ICartItem[]) => {
-            const total = res.reduce((acc, cartItem) => {
-              return acc + (this.discountPipe.transform(cartItem.variation.price, cartItem.variation.discount) * cartItem.quantity)
-            }, 0)
-            this.cartItem.next( {total: total, cartItems: res});
-            return res;
-          })
-        );
+      return this.http.delete(`${environment.apiUrl}/cart/${item.id}`).pipe(
+        map((res: ICartItem[]) => {
+          const total = res.reduce((acc, cartItem) => {
+            return (
+              acc +
+              this.discountPipe.transform(
+                cartItem.variation.price,
+                cartItem.variation.discount
+              ) *
+                cartItem.quantity
+            );
+          }, 0);
+          this.cartItem.next({ total: total, cartItems: res });
+          return res;
+        })
+      );
     }
   }
 
   emptyCart() {
     if (!this.authService.isLoggedIn()) {
       localStorage.removeItem("cart");
-      this.cart = {total: 0, cartItems: []}
+      this.cart = { total: 0, cartItems: [] };
       this.cartItem.next(this.cart);
     } else {
       return this.http.delete(`${environment.apiUrl}/cart`).pipe(
         map(() => {
-          this.cart = {total: 0, cartItems: []}
+          this.cart = { total: 0, cartItems: [] };
           this.cartItem.next(this.cart);
         })
       );

@@ -73,12 +73,12 @@
               [(nzSelectedIndex)]="selectedIndex"
               (nzAdd)="newTab()"
               (nzClose)="closeTab($event)"
-              formArrayName="addresses"
+              formArrayName="address"
               nzType="editable-card"
               class="theme-form"
             >
               <nz-tab
-                *ngFor="let address of addresses; index as i"
+                *ngFor="let address of address; index as i"
                 [nzClosable]="i != 0"
                 [nzTitle]="'Address ' + i"
               >

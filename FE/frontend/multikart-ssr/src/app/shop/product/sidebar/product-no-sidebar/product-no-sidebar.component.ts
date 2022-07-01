@@ -59,10 +59,9 @@ export class ProductNoSidebarComponent implements OnInit {
     private modal: NzModalService,
     private cartService: CartService
   ) {}
-  
 
   ngOnInit(): void {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     if (this.loader) {
       this.authService.isLogged$.subscribe((is) => {
         this.isLogged = is;
@@ -86,7 +85,6 @@ export class ProductNoSidebarComponent implements OnInit {
       if (this.isLogged) this.isWishVariation();
     }
 
-    //TODO: sincronizzare questa subscribe con quella di sopra
     this.wishListService.wishlist$.subscribe((wishes) => {
       this.wishes = wishes;
       this.isWishVariation();
@@ -185,8 +183,15 @@ export class ProductNoSidebarComponent implements OnInit {
     };
 
     this.reviewService.add(payload).subscribe(() => {
-      //TODO: far uscire nz message o quello che stavo usando finora o fare un servizio che mostra gli nz message
-      console.log("TTTAPPOOOO");
+      this.reviewForm.reset();
+      const modal = this.modal.success({
+        nzTitle: "Review Added Successfully",
+      });
+
+      setTimeout(() => {
+        modal.destroy();
+        window.location.reload();
+      }, 1000);
     });
   }
   // Get Product Size

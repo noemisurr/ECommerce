@@ -1,4 +1,4 @@
-<header class="sticky" [ngClass]="class" [class.fixed]="stick && sticky">
+<header class="sticky" [ngClass]="class" >
   <div class="mobile-fix-option"></div>
   <div class="top-header" *ngIf="topbar">
     <div class="container">
@@ -28,6 +28,12 @@
                 <li *ngIf="isLogged" [routerLink]="'/pages/profile'">
                   <a data-lng="es">
                     Profile
+                  </a>
+                </li>
+                <!-- TODO: orders -->
+                <li *ngIf="isLogged" [routerLink]="'/pages/orders'"> 
+                  <a data-lng="es">
+                    Orders
                   </a>
                 </li>
                 <li *ngIf="isLogged" (click)="onLogout()">

@@ -58,7 +58,6 @@
                 />
               </td>
               <td>
-                <!-- TODO: cambiare stile -->
                 <a (click)="createMedia()" class="save">Create</a>
               </td>
               <tr *ngFor="let data of table.data">
@@ -69,7 +68,7 @@
                   <td nzWidth="50%">{{ data.url }}</td>
                   <td nzWidth="25%">{{ data.alt }}</td>
                   <td nzWidth="25%">{{ data.size }}</td>
-                  <td nzWidth="25%">{{ data.id_position }}</td>
+                  <td nzWidth="25%">{{ data.position_name | titlecase }}</td>
                   <td>
                     <a (click)="startEdit(data.id)"><i nz-icon nzType="edit" style="color: black; font-size: large;" nzTheme="outline"></i></a>
                     <i style="color: white;">OK</i>

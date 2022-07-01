@@ -25,10 +25,10 @@
                             </app-grid>
                             <div class="product-wrapper-grid" [ngClass]="layoutView">
                                 <div class="col-sm-12 text-center" *ngIf="search && (products.length == 0)">
-                                    <img src="assets/images/empty-search.jpg" class="img-fluid mb-4">
-                                    <h3>Sorry! Couldn't find the product you were looking For!!!    </h3>
-                                    <p>Please check if you have misspelt something or try searching with other words.</p>
-                                    <a [routerLink]="['/shop/list']"  class="btn btn-solid">continue shopping</a>
+                                    <img *ngIf="!loader" src="assets/images/empty-search.jpg" class="img-fluid mb-4">
+                                    <h3 *ngIf="!loader">Sorry! Couldn't find the product you were looking For!!!</h3>
+                                    <p *ngIf="!loader">Please check if you have misspelt something or try searching with other words.</p>
+                                    <a *ngIf="!loader" [routerLink]="['/shop/list']"  class="btn btn-solid">continue shopping</a>
                                 </div>
                                 <div class="row">
                                     <div class="col-grid-box"
@@ -41,7 +41,6 @@
                                                         [cartModal]="true"
                                                         [loader]="true">
                                                     </app-product-box-one>
-                                                
                                             </div>
                                         </div>
                                     </div>

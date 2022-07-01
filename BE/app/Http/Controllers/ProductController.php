@@ -9,6 +9,8 @@ use App\Models\Tag;
 use App\Models\Img;
 use App\Models\Review;
 use App\Models\Category;
+use App\Models\CartItem;
+use App\Models\Wishlist;
 use Exception;
 use Illuminate\Http\Request;
 use DateTime;
@@ -77,10 +79,12 @@ class ProductController extends Controller
         $newArrivals = array();
         $bestSellers = array(); 
         foreach($all as $i=>$product){
+            $isProduct = true;
             foreach($product->variations as $i=>$var) {
-                if($var->id_discount){
+                if($isProduct && $var->id_discount){
+                    
+                    $isProduct = false;
                     array_push($onSale, $product);
-                    break;
                 }
             }
 
@@ -93,11 +97,8 @@ class ProductController extends Controller
                 array_push($bestSellers, $product);
             }
         }
-        // return response($onSale, 200);
 
         return response(["sale" => $onSale, "new" => $newArrivals, "best" => $bestSellers], 200);
-
-
     }
 
     public function create(Request $request)
@@ -171,6 +172,9 @@ class ProductController extends Controller
         $newProduct = $request->all();
         $product = Product::find($id);
 
+        $cartItem = CartItem::all();
+        $wishList = Wishlist::all();
+
         if (!isset($product)) return response(['message' => 'product not found'], 404);
         if (isset($newProduct['name'])) $product->name = $newProduct['name'];
         if (isset($newProduct['short_description'])) $product->short_description = $newProduct['short_description'];
@@ -181,6 +185,9 @@ class ProductController extends Controller
         if (isset($newProduct['id_category'])) $product->id_category = $newProduct['id_category'];
 
         $product->variations()->delete();
+        $cartItem->each->delete();
+        $wishList->each->delete();
+
 
         //Varianti
         $variation = $newProduct['variations'];

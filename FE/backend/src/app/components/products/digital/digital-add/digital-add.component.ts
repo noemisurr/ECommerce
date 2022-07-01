@@ -31,9 +31,10 @@ export class DigitalAddComponent implements OnInit {
     id_category: ['', [Validators.required]],
     variations: this.fb.array([
       this.fb.group({
+        name: ['Choose Variation Name', [Validators.required]],
         id_color: ['', [Validators.required]],
         media: this.fb.array([new FormControl()]),
-        tag: this.fb.array([new FormControl()]),
+        tag_names: this.fb.array([new FormControl()]),
       }),
     ])
   });
@@ -84,11 +85,11 @@ export class DigitalAddComponent implements OnInit {
   }
 
   addTag(index: number) {
-    ((this.productForm.get('variations') as FormArray).at(index).get('tag') as FormArray).insert(0, new FormControl(''));
+    ((this.productForm.get('variations') as FormArray).at(index).get('tag_names') as FormArray).insert(0, new FormControl(''));
   }
 
   deleteTag(variationIndex, index) {
-    ((this.productForm.get('variations') as FormArray).at(variationIndex).get('tag') as FormArray).removeAt(index);
+    ((this.productForm.get('variations') as FormArray).at(variationIndex).get('tag_names') as FormArray).removeAt(index);
   }
 
   onDiscard() {
@@ -101,9 +102,10 @@ export class DigitalAddComponent implements OnInit {
 
   newTab(): void {
     (this.productForm.get('variations')as FormArray).push(this.fb.group({
+      name: ['Choose Variation Name', [Validators.required]],
       id_color: ['', [Validators.required]],
       media: this.fb.array([new FormControl()]),
-      tag: this.fb.array([new FormControl()]),
+      tag_names: this.fb.array([new FormControl()]),
     }))
 
     this.selectedIndex = (this.productForm.get('variations') as FormArray).length

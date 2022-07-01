@@ -73,7 +73,7 @@ class Variation extends Model
     protected function discount(): Attribute
     {
         return new Attribute(
-            get: fn () =>  $this->discountInfo()->select(DB::raw('MAX(value) as value'))->where('active', false)->groupBy('active')->get()->pluck('value')->pop(),
+            get: fn () =>  $this->discountInfo()->get()->pluck('value')->pop(),
         );
     }
 

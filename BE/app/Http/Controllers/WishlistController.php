@@ -16,11 +16,6 @@ class WishlistController extends Controller
         $payload = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
 
         $wishItems = Wishlist::with('variation')->where('id_user', '=', $payload->user_id)->get();
-        foreach($wishItems as $i=>$wish){  
-            //TODO: mi serve?
-            $product = Product::find($wish->variation->id_product);  
-            $wishItems[$i]->product = $product;
-        };
 
         return response($wishItems, 201);
     }

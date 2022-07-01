@@ -19,6 +19,7 @@ export class CollectionNoSidebarComponent implements OnInit {
   public obj: string = 'name';
   public search: string[];
   take: number = 12;
+  loader: boolean = true
 
   constructor(
     private route: ActivatedRoute,
@@ -27,25 +28,29 @@ export class CollectionNoSidebarComponent implements OnInit {
     private productService: ProductService
   ) {
     // Get Query params..
-    this.route.queryParams.subscribe((params) => {
-      this.sortBy = params.sortBy
-      if (params.sortBy === "low" || params.sortBy === "high") {
-        this.obj = 'discounted_price'
-        this.sortBy = params.sortBy == "low" ? "asc" : "desc";
-      }
-      if (params.search)
-        this.search = decodeURIComponent(params.search).match(
-          /("[^"]+"|[^"\s]+)/g
+    if(this.loader){
+      this.route.queryParams.subscribe((params) => {
+        this.sortBy = params.sortBy
+        if (params.sortBy === "low" || params.sortBy === "high") {
+          this.obj = 'discounted_price'
+          this.sortBy = params.sortBy == "low" ? "asc" : "desc";
+        }
+        if (params.search)
+          this.search = decodeURIComponent(params.search).match(
+            /("[^"]+"|[^"\s]+)/g
+          );
+        this.pageNo = params.page ? params.page : this.pageNo;
+        this.getProducts(
+          (this.pageNo - 1) * this.take,
+          this.take,
+          this.sortBy,
+          this.obj,
+          params.search
         );
-      this.pageNo = params.page ? params.page : this.pageNo;
-      this.getProducts(
-        (this.pageNo - 1) * this.take,
-        this.take,
-        this.sortBy,
-        this.obj,
-        params.search
-      );
-    });
+        this.loader = false
+      });
+
+    }
   }
 
   ngOnInit(): void {}

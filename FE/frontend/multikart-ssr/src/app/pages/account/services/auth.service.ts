@@ -59,7 +59,7 @@ export class AuthService {
   }
 
   updateUser(user: User) {
-    return this.http.post<User>(`${environment.apiUrl}/auth/me`, user);
+    return this.http.put<User>(`${environment.apiUrl}/auth/me`, user);
   }
 
   getToken() {

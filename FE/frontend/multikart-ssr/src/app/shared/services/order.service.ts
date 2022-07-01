@@ -49,5 +49,9 @@ export class OrderService {
     // localStorage.removeItem("cartItems");
     this.router.navigate(['/shop/checkout/success', orderId]);
   }
+
+  getUserOrders() {
+    return this.http.get<IOrder[]>(`${environment.apiUrl}/order/me`)
+  }
   
 }

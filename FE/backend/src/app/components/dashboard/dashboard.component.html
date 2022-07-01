@@ -11,8 +11,8 @@
                             </div>
                         </div>
                         <div class="media-body col-8"><span class="m-0">Users</span>
-                            <h3 class="mb-0"><span class="counter" [CountTo]="6659" [from]="0"
-                                    [duration]="2">6659</span><small> This Month</small></h3>
+                            <h3 class="mb-0"><span class="counter" [CountTo]="general?.users" [from]="0"
+                                    [duration]="2">{{general?.users}}</span><small></small></h3>
                         </div>
                     </div>
                 </div>
@@ -28,8 +28,8 @@
                             </div>
                         </div>
                         <div class="media-body col-8"><span class="m-0">Products</span>
-                            <h3 class="mb-0"><span class="counter" [CountTo]="9856" [from]="0"
-                                    [duration]="2">9856</span><small> This Month</small></h3>
+                            <h3 class="mb-0"><span class="counter" [CountTo]="general?.products" [from]="0"
+                                    [duration]="2">{{general?.products}}</span><small></small></h3>
                         </div>
                     </div>
                 </div>
@@ -45,8 +45,8 @@
                             </div>
                         </div>
                         <div class="media-body col-8"><span class="m-0">Review</span>
-                            <h3 class="mb-0"><span class="counter" [CountTo]="893" [from]="0"
-                                    [duration]="2">893</span><small> This Month</small></h3>
+                            <h3 class="mb-0"><span class="counter" [CountTo]="general?.review" [from]="0"
+                                    [duration]="2">{{general?.products}}</span><small></small></h3>
                         </div>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                             </div>
                         </div>
                         <div class="media-body col-8"><span class="m-0">Orders</span>
-                            <h3 class="mb-0"><span class="counter" [CountTo]="5631" [from]="0"
-                                    [duration]="2">5631</span><small> This Month</small></h3>
+                            <h3 class="mb-0"><span class="counter" [CountTo]="general?.orders" [from]="0"
+                                    [duration]="2">{{general?.orders}}</span><small></small></h3>
                         </div>
                     </div>
                 </div>
@@ -96,39 +96,15 @@
                                     <th scope="col">Order ID</th>
                                     <th scope="col">Order Total</th>
                                     <th scope="col">Payment Method</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Shipping Code</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td class="digits">$120.00</td>
-                                    <td class="font-danger">Bank Transfers</td>
-                                    <td class="digits">On Way</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td class="digits">$90.00</td>
-                                    <td class="font-secondary">Ewallets</td>
-                                    <td class="digits">Delivered</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td class="digits">$240.00</td>
-                                    <td class="font-warning">Cash</td>
-                                    <td class="digits">Delivered</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td class="digits">$120.00</td>
-                                    <td class="font-primary">Direct Deposit</td>
-                                    <td class="digits">$6523</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td class="digits">$50.00</td>
-                                    <td class="font-primary">Bank Transfers</td>
-                                    <td class="digits">Delivered</td>
+                                <tr *ngFor="let data of orders">
+                                    <td>{{data.id}}</td>
+                                    <td class="digits">{{data.total}} €</td>
+                                    <td class="font-secondary">Bank Transfers</td>
+                                    <td class="digits">{{data.shipping_code}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -137,176 +113,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-xl-3 col-md-6 xl-50">
-            <div class="card order-graph sales-carousel">
-                <div class="card-header">
-                    <h6>Total Sales</h6>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="small-chartjs">
-                                <canvas baseChart id="small-graph-1" height="60vw" width="140vw"
-                                    [datasets]="smallLineChartData" [labels]="smallLineChartLabels"
-                                    [options]="smallLineChartOptions" [colors]="smallLineChartColors"
-                                    [legend]="smallLineChartLegend" [chartType]="smallLineChartType"
-                                    (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="value-graph">
-                                <h3>42% <span><i class="fa fa-angle-up font-primary"></i></span></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="media">
-                        <div class="media-body">
-                            <span>Sales Last Month</span>
-                            <h2 class="mb-0">9054</h2>
-                            <p>0.25% <span><i class="fa fa-angle-up"></i></span></p>
-                            <h5 class="f-w-600">Gross sales of August</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                        </div>
-                        <div class="bg-primary b-r-8">
-                            <div class="small-box">
-
-                                <i data-feather="briefcase"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- <div class="col-xl-3 col-md-6 xl-50">
-            <div class="card order-graph sales-carousel">
-                <div class="card-header">
-                    <h6>Total purchase</h6>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="small-chartjs">
-                                <canvas baseChart id="small-graph-2" height="60vw" width="140vw"
-                                    [datasets]="smallLine2ChartData" [labels]="smallLine2ChartLabels"
-                                    [options]="smallLine2ChartOptions" [colors]="smallLine2ChartColors"
-                                    [legend]="smallLine2ChartLegend" [chartType]="smallLine2ChartType"
-                                    (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="value-graph">
-                                <h3>20% <span><i class="fa fa-angle-up font-secondary"></i></span></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="media">
-                        <div class="media-body">
-                            <span>Monthly purchase</span>
-                            <h2 class="mb-0">2154</h2>
-                            <p>0.13% <span><i class="fa fa-angle-up"></i></span></p>
-                            <h5 class="f-w-600">Avg Gross purchase</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                        </div>
-                        <div class="bg-secondary b-r-8">
-                            <div class="small-box">
-                                <i data-feather="credit-card"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- <div class="col-xl-3 col-md-6 xl-50">
-            <div class="card order-graph sales-carousel">
-                <div class="card-header">
-                    <h6>Total cash transaction</h6>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="small-chartjs">
-                                <canvas baseChart id="small-graph-3" height="60vw" width="140vw"
-                                    [datasets]="smallLine3ChartData" [labels]="smallLine3ChartLabels"
-                                    [options]="smallLine3ChartOptions" [colors]="smallLine3ChartColors"
-                                    [legend]="smallLine3ChartLegend" [chartType]="smallLine3ChartType"
-                                    (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="value-graph">
-                                <h3>28% <span><i class="fa fa-angle-up font-warning"></i></span></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="media">
-                        <div class="media-body">
-                            <span>Cash on hand</span>
-                            <h2 class="mb-0">4672</h2>
-                            <p>0.8% <span><i class="fa fa-angle-up"></i></span></p>
-                            <h5 class="f-w-600">Details about cash</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                        </div>
-                        <div class="bg-warning b-r-8">
-                            <div class="small-box">
-                                <i data-feather="shopping-cart"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- <div class="col-xl-3 col-md-6 xl-50">
-            <div class="card order-graph sales-carousel">
-                <div class="card-header">
-                    <h6>Daily Deposits</h6>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="small-chartjs">
-                                <canvas baseChart id="small-graph-4" height="60vw" width="140vw"
-                                    [datasets]="smallLine4ChartData" [labels]="smallLine4ChartLabels"
-                                    [options]="smallLine4ChartOptions" [colors]="smallLine4ChartColors"
-                                    [legend]="smallLine4ChartLegend" [chartType]="smallLine4ChartType"
-                                    (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="value-graph">
-                                <h3>75% <span><i class="fa fa-angle-up font-danger"></i></span></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="media">
-                        <div class="media-body">
-                            <span>Security Deposits</span>
-                            <h2 class="mb-0">0782</h2>
-                            <p>0.25% <span><i class="fa fa-angle-up"></i></span></p>
-                            <h5 class="f-w-600">Gross sales of June</h5>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                        </div>
-                        <div class="bg-danger b-r-8">
-                            <div class="small-box">
-                                <i data-feather="calendar"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Buy / Sell</h5>
-                </div>
-                <div class="card-body sell-graph">
-                    <canvas baseChart id="myGraph" [datasets]="lineChartData" [labels]="lineChartLabels"
-                        [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
-                        [chartType]="lineChartType" (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"></canvas>
-                </div>
-            </div>
-        </div> -->
         <div class="col-xl-6 xl-100">
             <div class="card height-equal">
                 <div class="card-header">
@@ -319,52 +125,17 @@
                                 <tr>
                                     <th scope="col">Details</th>
                                     <th scope="col">Quantity</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Discount</th>
                                     <th scope="col">Price</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Simply dummy text of the printing</td>
-                                    <td class="digits">1</td>
-                                    <td class="font-primary">Pending</td>
-                                    <td class="digits">$6523</td>
-                                </tr>
-                                <tr>
-                                    <td>Long established</td>
-                                    <td class="digits">5</td>
-                                    <td class="font-secondary">Cancle</td>
-                                    <td class="digits">$6523</td>
-                                </tr>
-                                <tr>
-                                    <td>sometimes by accident</td>
-                                    <td class="digits">10</td>
-                                    <td class="font-secondary">Cancle</td>
-                                    <td class="digits">$6523</td>
-                                </tr>
-                                <tr>
-                                    <td>Classical Latin literature</td>
-                                    <td class="digits">9</td>
-                                    <td class="font-primary">Return</td>
-                                    <td class="digits">$6523</td>
-                                </tr>
-                                <tr>
-                                    <td>keep the site on the Internet</td>
-                                    <td class="digits">8</td>
-                                    <td class="font-primary">Pending</td>
-                                    <td class="digits">$6523</td>
-                                </tr>
-                                <tr>
-                                    <td>Molestiae consequatur</td>
-                                    <td class="digits">3</td>
-                                    <td class="font-secondary">Cancle</td>
-                                    <td class="digits">$6523</td>
-                                </tr>
-                                <tr>
-                                    <td>Pain can procure</td>
-                                    <td class="digits">8</td>
-                                    <td class="font-primary">Return</td>
-                                    <td class="digits">$6523</td>
+                                <tr *ngFor="let data of cartItems">
+                                    <td>{{data.variation.name}}</td>
+                                    <td class="digits">{{data.quantity}}</td>
+                                    <td class="font-primary" *ngIf="data.variation.discount">{{data.variation.discount}} %</td>
+                                    <td class="font-primary" *ngIf="!data.variation.discount">-</td>
+                                    <td class="digits">{{data.variation.price}} €</td>
                                 </tr>
                             </tbody>
                         </table>

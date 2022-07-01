@@ -71,12 +71,16 @@ const routes: Routes = [
     component: CheckoutComponent 
   },
   { 
-    path: 'aboutus', 
-    component: AboutUsComponent 
+    path: 'order', 
+    component: AboutUsComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],  
   },
   { 
-    path: 'search', 
-    component: SearchComponent 
+    path: 'orders', 
+    component: SearchComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard], 
   },
   { 
     path: 'typography', 

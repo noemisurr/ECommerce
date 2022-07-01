@@ -33,6 +33,7 @@ export class MediaComponent implements OnInit {
   ngOnInit() {
     this.mediaService.getHomeMedia().subscribe((res) => {
       this.settings = res;
+      console.log(res)
       this.updateEditCache();
     });
   }

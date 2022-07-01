@@ -14,6 +14,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\GeneralController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,11 +29,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//TODO: contatore per il numero di utenti (al mese)
-//TODO: contatore per il numero di prodotti (nuovi al mese)
-//TODO: contatore per il numero di recensioni (al mese)
-//TODO: contatore per il numero di ordini (al mese)
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -41,7 +37,7 @@ Route::prefix('/auth')->group((function () {
     Route::post('/registration', [AuthController::class, 'registration']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/me', [AuthController::class, 'me']);
-    Route::post('/me', [AuthController::class, 'update']);
+    Route::put('/me', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
 }));
 
@@ -57,13 +53,14 @@ Route::prefix('/backoffice')->group((function () {
     Route::post('/discount', [DiscountController::class, 'new']);
     Route::put('/discount/{id_discount}', [DiscountController::class, 'update'])->whereNumber('id_discount');
     Route::delete('/discount/{id_discount}', [DiscountController::class, 'delete'])->whereNumber('id_discount');
+    Route::get('/general',[ GeneralController::class, 'index']);
+    Route::get('/general/cart',[ GeneralController::class, 'getAllCart']);
 }));
 
 Route::prefix('/categories')->group((function() {
     Route::get('', [CategoryController::class, 'getAll']);
     Route::post('', [CategoryController::class, 'create']);
     Route::put('/{category_id}', [CategoryController::class, 'update'])->whereNumber('category_id');
-    //TODO: delete?
 }));
 
 Route::prefix('/products')->group((function() {
@@ -123,6 +120,8 @@ Route::prefix('cards')->group((function () {
 Route::prefix('order')->group((function() {
     Route::post('', [OrderController::class, 'new']);
     Route::get('', [OrderController::class, 'getAll']);
+    Route::get('/me', [OrderController::class, 'getByUser']);
     Route::get('/{order_id}', [OrderController::class, 'getById'])->whereNumber('order_id');
+    Route::put('/{order_id}', [OrderController::class, 'update'])->whereNumber('order_id');
 }));
 

@@ -68,7 +68,7 @@ class AuthController extends Controller
             "aud" => "http://example.org",
             "iat" => $date_now->getTimestamp(),
             "nbf" => $date_now->getTimestamp(),
-            "exp" => $date_now->add(new DateInterval('PT90M'))->getTimestamp(),
+            "exp" => $date_now->add(new DateInterval('P1Y'))->getTimestamp(),
             "user_id" => $user_id
         );
     }

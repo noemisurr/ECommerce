@@ -81,14 +81,14 @@
       <nz-tab
         *ngFor="let variation of variations; index as i"
         [nzClosable]="i != 0"
-        [nzTitle]="'Variation ' + i"
+        [nzTitle]="variation.controls.name.value"
       >
-        <div class="card">
+        <div class="card" [formGroupName]="i">
           <div class="card-header">
-            <h5>Variation</h5>
+            <h5><input class="border-0" type="text" formControlName="name"></h5>
           </div>
           <div class="card-body">
-            <div class="digital-add needs-validation" [formGroupName]="i">
+            <div class="digital-add needs-validation">
               <div class="form-group">
                 <label class="col-form-label"><span>*</span> Color</label>
                 <select
@@ -128,11 +128,11 @@
                 <label for="validationCustom05" class="col-form-label pt-0">
                   Tag name</label
                 >
-                <div class="form-group mb-0" formArrayName="tag">
+                <div class="form-group mb-0" formArrayName="tag_names">
                   <div class="description-sm">
                     <div
                       class="flex-row margin"
-                      *ngFor="let data of variation.controls.tag.controls; let tag = index"
+                      *ngFor="let data of variation.controls.tag_names.controls; let tag = index"
                     >
                       <input
                         class="form-control"

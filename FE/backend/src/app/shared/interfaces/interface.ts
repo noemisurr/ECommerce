@@ -24,7 +24,8 @@ export interface SettingsHome {
   url: string,
   alt: string,
   size: string,
-  id_position: number
+  id_position: number,
+  position_name?: string
 }
 
 export interface ProductRequest {

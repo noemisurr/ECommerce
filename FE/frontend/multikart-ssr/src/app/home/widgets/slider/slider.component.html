@@ -10,7 +10,7 @@
 	                <h4>{{slider.title}}</h4>
 	                <h1>{{slider.subTitle}}</h1>
 	                <a [routerLink]="['/shop/list']"  
-	                   [queryParams]="{ search: category}" 
+	                   [queryParams]="{ search: slider.subTitle}" 
 	                   class="btn btn-solid" [ngClass]="buttonClass">
 	                   {{buttonText}}
 	                </a>

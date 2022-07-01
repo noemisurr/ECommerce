@@ -43,7 +43,8 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout().subscribe(() => {
-      this.router.navigateByUrl('/');
+      localStorage.removeItem('jwt')
+      this.router.navigateByUrl('/login');
     });
   }
 }

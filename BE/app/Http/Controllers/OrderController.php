@@ -64,4 +64,34 @@ class OrderController extends Controller
         $orders = Order::with('user')->get();
         return response($orders, 200);
     }
+
+    public function getByUser(Request $request) {
+
+        $token = $request->bearerToken();
+        $payload = JWT::decode($token, new Key($_ENV['JWT_SECRET'], 'HS256'));
+
+        $order = Order::where('id_user', '=', $payload->user_id)->get();
+        return response($order, 200);
+    }
+
+    public function update( Request $request, $id ) {
+
+        $newData = $request->all();
+        $order = Order::find($id);
+
+        if (!isset($order)) return response(['message' => 'user not found'], 404);
+
+        if (isset($newData['total'])) $order->total = $newData['total'];
+        if (isset($newData['delivery_date'])) $order->delivery_date = $newData['delivery_date'];
+        if (isset($newData['shipping_date'])) $order->shipping_date = $newData['shipping_date'];
+        if (isset($newData['shipping_code'])) $order->shipping_code = $newData['shipping_code'];
+
+        try {
+            $order->save();
+            return response(Order::with('user')->where('id', $id)->get()->pop(), 200);
+        } catch (Exception $exc) {
+            return response(['message' => 'order not updated'], 500);
+        }
+        
+    }
 }

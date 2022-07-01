@@ -6,40 +6,47 @@
         <ngb-tab title="General">
           <ng-template ngbTabContent>
             <form class="needs-validation" novalidate="">
-              <h4>General</h4>
-              <div class="row">
-                <div class="col-sm-12">
+              <div class="header">
+                <h4>General</h4>
+                <div>
+                  <a *ngIf="!isEdit" (click)="onEdit()">Edit<i nz-icon nzType="edit" style="color: black; font-size: large;" nzTheme="outline"></i></a>
+                  <a *ngIf="isEdit" (click)="onSave()">Save</a>
+                  <a *ngIf="isEdit" (click)="onCancel()">Cancel</a>
+                </div>
+              </div>
+              <div class="row" [formGroup]="generalForm">
+                <form class="col-sm-12">
                   <div class="form-group row">
                     <label for="validationCustom0" class="col-xl-3 col-md-4"
                       >Order ID</label
                     >
-                    {{ order.id }}
+                    {{ order?.id }}
                   </div>
                   <div class="form-group row">
                     <label for="validationCustom1" class="col-xl-3 col-md-4"
                       >Total</label
                     >
-                    {{ order.total }}
+                    <input type="text" formControlName="total">
                   </div>
                   <div class="form-group row">
                     <label class="col-xl-3 col-md-4">Delivery Date</label>
                     <div class="input-group col-md-7 input-grp-p">
-                      {{ order.delivery_date | date }}
+                      <input type="date" formControlName="delivery_date">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-xl-3 col-md-4">Shipping Date</label>
                     <div class="input-group col-md-7 input-grp-p">
-                      {{ order.shipping_date | date }}
+                      <input *ngIf="isEdit || order?.shipping_date" type="date" formControlName="shipping_date">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-xl-3 col-md-4">Shipping Code</label>
-                    <div class="checkbox checkbox-primary col-md-7">
-                      {{ order.shipping_code }}
+                    <div class="input-group col-md-7 input-grp-p">
+                      <input type="text" formControlName="shipping_code">
                     </div>
                   </div>
-                </div>
+                </form>
               </div>
             </form>
           </ng-template>
@@ -128,7 +135,8 @@
                   <td nzWidth="25%">{{ data.variation.name }}</td>
                   <td nzWidth="50%">{{ data.quantity }}</td>
                   <td nzWidth="25%">{{ data.variation.price }} €</td>
-                  <td nzWidth="25%">{{ data.variation.discount }}%</td>
+                  <td nzWidth="25%" *ngIf="data.variation.discount">{{ data.variation.discount }}%</td>
+                  <td nzWidth="25%" *ngIf="!data.variation.discount">-</td>
                   <td nzWidth="25%">{{ (data.variation.price * data.variation.discount /100) * data.quantity }} €</td>
                 </tr>
               </tbody>

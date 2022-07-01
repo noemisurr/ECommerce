@@ -1,0 +1,15 @@
+form {
+    input {
+        border: none;
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        a {
+            color: black;
+            margin-right: 10px;
+        }
+    }
+}

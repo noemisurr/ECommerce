@@ -17,11 +17,11 @@ export class ProfileComponent implements OnInit {
     email: ['', Validators.required],
     telephone: ['', Validators.required],
     birth: ['', Validators.required],
-    addresses: this.fb.array([])
+    address: this.fb.array([])
   })
 
-  get addresses() {
-    return (this.meForm.get('addresses') as FormArray).controls;
+  get address() {
+    return (this.meForm.get('address') as FormArray).controls;
   }
 
   constructor(private authService: AuthService, private fb: FormBuilder, private modal: NzModalService) { }
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
       this.meForm.patchValue(res)
 
       res.address.forEach((address) => {
-        const addressGroup = this.meForm.get('addresses') as FormArray
+        const addressGroup = this.meForm.get('address') as FormArray
 
         addressGroup.push(this.fb.group({
           flat: address.flat,
@@ -54,13 +54,13 @@ export class ProfileComponent implements OnInit {
   onEdit() {
     this.editMode = true;
     this.meForm.enable();
-    (this.meForm.get('addresses') as FormArray).enable();
+    (this.meForm.get('address') as FormArray).enable();
   }
 
   onSave() {
     this.editMode = false;
     this.meForm.disable();
-    (this.meForm.get('addresses') as FormArray).disable()
+    (this.meForm.get('address') as FormArray).disable()
     this.authService.updateUser(this.meForm.value).subscribe((res) => {
       const modal = this.modal.success({
         nzTitle: 'User Updated',
@@ -73,15 +73,15 @@ export class ProfileComponent implements OnInit {
   onCancel() {
     this.editMode = false;
     this.meForm.disable();
-    (this.meForm.get('addresses') as FormArray).disable()
+    (this.meForm.get('address') as FormArray).disable()
   }
 
   closeTab({ index }: { index: number }) {
-    (this.meForm.get('addresses') as FormArray).removeAt(index);
+    (this.meForm.get('address') as FormArray).removeAt(index);
   }
 
   newTab(): void {
-    (this.meForm.get('addresses') as FormArray).push(
+    (this.meForm.get('address') as FormArray).push(
       this.fb.group({
         flat: [''],
           address: ['', [Validators.required]],
@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit {
     );
 
     this.selectedIndex = (
-      this.meForm.get('addresses') as FormArray
+      this.meForm.get('address') as FormArray
     ).length;
   }
 

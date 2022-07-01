@@ -81,12 +81,13 @@
                 *ngIf="product?.variations[currentVariationIndex].discount"
                 >{{ product?.price }}</del
               >
-              <span
+              <span *ngIf="product?.variations[currentVariationIndex].discount"
                 >{{ product?.variations[currentVariationIndex].discount }}%
                 off</span
               >
             </h4>
-            <h3>{{ product?.price }} €</h3>
+            <!-- <h3 *ngIf="product?.variations[currentVariationIndex].discount">{{ product?.price }} €</h3> -->
+            <h3>{{ product?.price | discount:product?.variations[currentVariationIndex].discount }} €</h3>
             <ul class="color-variant">
               <li
                 [class.active]="currentVariationIndex == i"
@@ -163,7 +164,7 @@
               </div>
             </div>
             <div class="border-product">
-              <app-countdown [date]="'Apr 21 2021'"></app-countdown>
+              <!-- <app-countdown [date]="'Apr 21 2021'"></app-countdown> -->
             </div>
           </div>
         </div>

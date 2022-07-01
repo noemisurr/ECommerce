@@ -1,27 +1,93 @@
-<app-breadcrumb [title]="'Search'" [breadcrumb]="'Search'"></app-breadcrumb>
+<app-breadcrumb [title]="'Orders'" [breadcrumb]="'Orders'"></app-breadcrumb>
 <!-- section start -->
-<section class="authentication-page section-b-space">
-    <div class="container">
-      <section class="search-block">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6 offset-lg-3">
-              <form class="form-header">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Search a Product">
-                </div>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-        <div class="col-sm-12 text-center">
-          <img src="assets/images/empty-search.jpg" class="img-fluid mb-4">
-            <h3>Sorry! Couldn't find the product you were looking For!!!    </h3>
-            <p>Please check if you have misspelt something or try searching with other words.</p>
-            <a [routerLink]="['/shop']" class="btn btn-solid">continue shopping</a>
-        </div>
+<section class="wishlist-section section-b-space">
+  <div class="container">
+    <div
+      class="col-md-12 empty-cart-cls text-center"
+      *ngIf="orders.length == 0 && !loader"
+    >
+      <!-- <img src="assets/images/empty-orders.png" alt="Empty cart" title="Emprt cart"> -->
+
+      <h3 class="mt-4"><b>your orders is Empty</b></h3>
     </div>
- </section>
+    <div class="row" *ngIf="orders.length != 0">
+      <div class="col-sm-12">
+        <table class="table cart-table table-responsive-xs">
+          <thead>
+            <tr class="table-head">
+              <th scope="col">Imgs</th>
+              <th scope="col">total</th>
+              <th scope="col">delivery_date</th>
+              <th scope="col">shipping_date</th>
+              <th scope="col">shipping_code</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let data of orders; let i = index">
+            <tr>
+              <td >
+                <a
+                  [routerLink]="['/shop/product/detail']"
+                  [queryParams]="{
+                    id: data?.variations[0]?.variation?.id_product
+                  }"
+                >
+                  <img
+                    class="variation-img"
+                    [src]="data?.variations[0]?.variation?.media[0]?.url"
+                  />
+                </a>
+              </td>
+              <td>
+                <div class="col-xs-3">
+                  <h2>
+                    <a>{{ data.total | number: "1.2-2" }} €</a>
+                  </h2>
+                </div>
+              </td>
+              <td>
+                <div class="col-xs-3">
+                  <p>{{ data.delivery_date | date }}</p>
+                </div>
+              </td>
+              <td>
+                <div class="col-xs-3">
+                  <p>{{ data.shipping_date | date }}</p>
+                </div>
+              </td>
+              <td>
+                <div class="col-xs-3">
+                  <p>{{ data.shipping_code }}</p>
+                </div>
+              </td>
+              <td>
+                <a
+                  routerLink="/pages/order"
+                  [queryParams]="{ id: data.id }"
+                  class="icon mr-3 cart"
+                  style="color: black"
+                  ><i class="ti-eye"></i
+                ></a>
+                <!-- <a href="javascript:void(0)" (click)="removeItem(data.id_variation)" class="icon mr-3">
+                    <i class="ti-close"></i>
+                  </a>
+                  <a href="javascript:void(0)" (click)="addToCart(data)" class="cart">
+                    <i class="ti-shopping-cart"></i>
+                  </a> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row wishlist-buttons" *ngIf="orders.length != 0">
+      <div class="col-12">
+        <a [routerLink]="['/shop/list']" class="btn btn-solid"
+          >continue shopping</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
 <!-- section end -->
+<app-skeleton-product-box *ngIf="loader"></app-skeleton-product-box>

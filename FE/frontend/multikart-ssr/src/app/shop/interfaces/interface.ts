@@ -67,8 +67,7 @@ export interface IWishList {
   id?: number,
   id_user: number,
   id_variation: number,
-  variation?: IVariation,
-  product?: IProduct
+  variation?: IVariation
 }
 
 export interface IReview {
