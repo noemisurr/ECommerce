@@ -28,7 +28,8 @@ class ColorSeeder extends Seeder
         Color::create(['name' => 'Sand', 'hex' => '#C2B280']);      // 11
         Color::create(['name' => 'Pale Pink', 'hex' => '#FFE0E3']); // 12
         Color::create(['name' => 'Walnut', 'hex' => '#7c624a']);    // 13
-        Color::create(['name' => 'Walnut', 'hex' => '#55342b']);    // 13
+        Color::create(['name' => 'Gold', 'hex' => '#D4AF37']);    // 14
+        Color::create(['name' => 'Brown', 'hex' => '#8B4F39']);    // 15
 
     }
 }
