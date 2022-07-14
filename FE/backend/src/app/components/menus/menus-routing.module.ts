@@ -8,19 +8,19 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'list-menu',
+        path: 'list',
         component: ListMenuComponent,
         data: {
-          title: "Menu Lists",
-          breadcrumb: "Menu Lists"
+          title: "Categories Lists",
+          breadcrumb: "Categories Lists"
         }
       },
       {
-        path: 'create-menu',
+        path: 'sub',
         component: CreateMenuComponent,
         data: {
-          title: "Create Menu",
-          breadcrumb: "Create Menu"
+          title: "Sub Categories Lists",
+          breadcrumb: "Sub Categories Lists"
         }
       }
     ]

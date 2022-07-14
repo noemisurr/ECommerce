@@ -14,15 +14,20 @@ class ProductFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition($short_description = '', $long_description = '', $price = '', $brand = '', $id_category = '', $id_subcategory = '', $material = '', $size = '', $other = '')
     {
         return [
             'name' => $this->faker->firstName(),
-            'short_description' => $this->faker->text(100),
-            'long_description' => $this->faker->paragraph(),
-            'price' => $this->faker->numberBetween(10, 500),
+            'short_description' => $short_description,
+            'long_description' => $long_description,
+            'price' => $price,
+            'brand' => $brand,
+            'material' => $material,
+            'size' => $size,
+            'other' => $other,
             'deleted' => false,
-            'id_category' =>  $this->faker->numberBetween(1, 5),
+            'id_category' => $id_category,
+            'id_subcategory' => $id_subcategory
         ];
     }
 }

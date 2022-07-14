@@ -131,3 +131,23 @@ export interface IDiscount {
   value: number,
   active: boolean
 }
+
+export interface ICategory {
+  id: number,
+  name: string,
+  title: string,
+  description: string,
+  n_products?: number
+  subcategory?: ISubCategory
+}
+
+export interface ISubCategory {
+  id?: number,
+  name: string,
+  title: string,
+  description: string,
+  id_category?: number,
+  category_name?: string,
+  n_products?: number
+  
+}

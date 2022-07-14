@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamp('created_at');
-            $table->integer('id_color')->references('id')->on('color');
+            $table->integer('id_color')->references('id')->on('color')->nullable();
             $table->integer('id_product')->references('id')->on('product');
             $table->integer('id_discount')->references('id')->on('discount')->nullable();
         });

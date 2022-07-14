@@ -24,11 +24,9 @@ export class DashboardComponent implements OnInit {
     })
     this.oderService.getAll().subscribe((res) => {
       this.orders = res.slice(0, 5)
-      console.log(this.orders)
     })
     this.generalService.cartItems().subscribe((res) => {
       this.cartItems = res.slice(0, 6)
-      console.log(this.cartItems)
     })
   }
 

@@ -86,7 +86,6 @@
                 off</span
               >
             </h4>
-            <!-- <h3 *ngIf="product?.variations[currentVariationIndex].discount">{{ product?.price }} €</h3> -->
             <h3>{{ product?.price | discount:product?.variations[currentVariationIndex].discount }} €</h3>
             <ul class="color-variant">
               <li

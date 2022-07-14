@@ -15,7 +15,7 @@ class HomePositionSeeder extends Seeder
      */
     public function run()
     {
-        HomePositionModel::create(['name' => 'backgruond']);
+        HomePositionModel::create(['name' => 'background']);
         HomePositionModel::create(['name' => 'slide']);
         HomePositionModel::create(['name' => 'other']);
     }

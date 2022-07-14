@@ -19,9 +19,14 @@ return new class extends Migration
             $table->string('short_description');
             $table->longText('long_description');
             $table->integer('price');
+            $table->string('brand')->nullable();
+            $table->string('material')->nullable();
+            $table->string('size')->nullable();
+            $table->string('other')->nullable();
             $table->boolean('deleted');
             $table->timestamp('created_at')->nullable();
-            $table->integer('id_category')->references('id')->on('category');
+            $table->integer('id_category')->references('id')->on('product_category');
+            $table->integer('id_subcategory')->references('id')->on('subcategory')->nullable();
         });
     }
 

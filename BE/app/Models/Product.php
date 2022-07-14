@@ -21,9 +21,14 @@ class Product extends Model
         'short_description',
         'long_description',
         'price',
+        'brand',
+        'material',
+        'size',
+        'other',
         'deleted',
         'created_at',
-        'id_category'
+        'id_category',
+        'id_subcategory'
     ];
     protected $appends = ['star'];
 

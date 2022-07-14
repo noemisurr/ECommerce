@@ -17,6 +17,7 @@ class Settings extends Model
         'address',
         'city',
         'postal_code',
-        'telephone'
+        'telephone',
+        'info'
     ];
 }

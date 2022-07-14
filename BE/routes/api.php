@@ -63,6 +63,13 @@ Route::prefix('/categories')->group((function() {
     Route::put('/{category_id}', [CategoryController::class, 'update'])->whereNumber('category_id');
 }));
 
+Route::prefix('/sub_categories')->group((function() {
+    Route::get('', [CategoryController::class, 'getAllSub']);
+    Route::post('', [CategoryController::class, 'createSub']);
+    Route::put('/{subcategory_id}', [CategoryController::class, 'updateSub'])->whereNumber('subcategory_id');
+    Route::delete('/{subcategory_id}', [CategoryController::class, 'deleteSub'])->whereNumber('subcategory_id');
+}));
+
 Route::prefix('/products')->group((function() {
     Route::get('', [ProductController::class, 'getAll']);
     Route::get('/special', [ProductController::class, 'getAllSpecial']);

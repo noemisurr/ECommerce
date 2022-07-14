@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('settings_home', function (Blueprint $table) {
+        Schema::create('product_sub_category', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('url');
-            $table->string('alt')->nullable();
-            $table->string('size')->nullable();
-            $table->string('id_position')->references('id')->on('home_position');
+            $table->string('title');
+            $table->longText('description');
+            $table->integer('id_category')->references('id')->on('product_category');
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings_home');
+        Schema::dropIfExists('product_sub_category');
     }
 };

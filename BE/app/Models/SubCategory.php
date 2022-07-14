@@ -4,36 +4,35 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\SubCategory;
-use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class Category extends Model
+class SubCategory extends Model
 {
     use HasFactory;
     public $timestamps = false;
 
-    protected $table = 'product_category';
+    protected $table = 'product_sub_category';
     protected $fillable = [
         'id',
         'name',
         'title',
-        'description'
+        'description',
+        'id_category'
     ];
+    protected $appends = ['category_name', 'n_products'];
 
-    protected $appends = ['subcategories', 'n_products'];
-
-    public function sub() {
-        return $this->hasMany(SubCategory::class, 'id_category', 'id');
+    public function category() {
+        return $this->hasMany(Category::class, 'id', 'id_category');
     }
     public function products() {
-        return $this->hasMany(Product::class, 'id_category', 'id');
+        return $this->hasMany(Product::class, 'id_subcategory', 'id');
     }
 
-    protected function subcategories(): Attribute
+    protected function categoryName(): Attribute
     {
         return new Attribute(
-            get: fn () =>  $this->sub()->get(),
+            get: fn () =>  $this->category()->get()->pluck('name')->pop(),
         );
     }
     protected function nProducts(): Attribute
