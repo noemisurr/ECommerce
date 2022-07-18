@@ -28,12 +28,19 @@ export class AuthGuard implements CanActivate {
   }
 
   private authenticate(): boolean | UrlTree {
+    console.log('AUTH')
     const jwt = localStorage.getItem('jwt')
-    var decoded: JWT = jwt_decode(jwt);
-    if (Date.now() >= decoded.exp * 1000) {
-      return this.router.parseUrl('/auth/login');
+    if(jwt) {
+      var decoded: JWT = jwt_decode(jwt);
+      if (Date.now() >= decoded.exp * 1000) {
+        return this.router.parseUrl('/pages/login');
+      }else{
+        return true
+      }
+    }else {
+      return this.router.parseUrl('/pages/login')
     }
-    return localStorage.getItem('jwt') ? true : this.router.parseUrl('/auth/login')
+    
   }
   
 }

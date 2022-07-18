@@ -7,8 +7,9 @@ import {
 } from '@angular/forms';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import {
-  Category,
-  Color
+  ICategory,
+  Color,
+  ISubCategory
 } from 'src/app/shared/interfaces/interface';
 import { ProductService } from '../../services/product.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -19,7 +20,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrls: ['./digital-add.component.scss'],
 })
 export class DigitalAddComponent implements OnInit {
-  categories: Category[] = [];
+  categories: ICategory[] = [];
+  subcategories: ISubCategory[] = [];
   colors: Color[] = [];
   selectedIndex = 0;
 
@@ -28,7 +30,12 @@ export class DigitalAddComponent implements OnInit {
     short_description: ['', [Validators.required]],
     long_description: ['', [Validators.required]],
     price: ['', [Validators.required]],
+    brand: ['', [Validators.required]],
+    material: ['', [Validators.required]],
+    size: ['', [Validators.required]],
+    other: [''],
     id_category: ['', [Validators.required]],
+    id_subcategory: [{value: '', disabled: true}, [Validators.required]],
     variations: this.fb.array([
       this.fb.group({
         name: ['Choose Variation Name', [Validators.required]],
@@ -76,6 +83,13 @@ export class DigitalAddComponent implements OnInit {
     });
   }
 
+  onCategoryChange(event) {
+    this.productService.getSubById(event.target.value).subscribe((res) => {
+      this.subcategories = res
+      res.length == 0 ? this.productForm.get('id_subcategory').disable() : this.productForm.get('id_subcategory').enable()
+    })
+  }
+
   addUrl(index: number) {
     ((this.productForm.get('variations') as FormArray).at(index).get('media') as FormArray).insert(0, new FormControl(''));
   }
@@ -92,7 +106,7 @@ export class DigitalAddComponent implements OnInit {
     ((this.productForm.get('variations') as FormArray).at(variationIndex).get('tag_names') as FormArray).removeAt(index);
   }
 
-  onDiscard() {
+  onReset() {
     this.productForm.reset();
   }
 

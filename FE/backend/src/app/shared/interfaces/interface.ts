@@ -34,14 +34,15 @@ export interface ProductRequest {
   short_description: string,
   long_description: string,
   price: number,
+  brand: string,
+  material: string,
+  size: string,
+  other?: string,
   created_at?: Date,
   id_category: number,
-  variations: VariationRequest[]
-}
-
-export interface Category {
-  id: number,
-  name: string
+  variations: VariationRequest[],
+  category_name?: string,
+  subcategory_name?: string
 }
 
 export interface Color {
@@ -70,10 +71,17 @@ export interface ProductResponse {
   short_description: string,
   long_description: string,
   price: string,
+  brand: string,
+  material: string,
+  size: string,
+  other?: string,
   created_at?: Date,
   id_category: number,
+  id_subcategory: number,
   deleted: boolean,
-  variations?: VariationResponse[]
+  variations?: VariationResponse[],
+  category_name?: string,
+  subcategory_name?: string
 }
 
 export interface VariationResponse {
@@ -138,7 +146,7 @@ export interface ICategory {
   title: string,
   description: string,
   n_products?: number
-  subcategory?: ISubCategory
+  subcategory?: ISubCategory[]
 }
 
 export interface ISubCategory {

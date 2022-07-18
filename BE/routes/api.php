@@ -60,7 +60,9 @@ Route::prefix('/backoffice')->group((function () {
 Route::prefix('/categories')->group((function() {
     Route::get('', [CategoryController::class, 'getAll']);
     Route::post('', [CategoryController::class, 'create']);
+    Route::get('/{category_id}', [CategoryController::class, 'getSubById']);
     Route::put('/{category_id}', [CategoryController::class, 'update'])->whereNumber('category_id');
+    Route::delete('/{category_id}', [CategoryController::class, 'delete'])->whereNumber('category_id');
 }));
 
 Route::prefix('/sub_categories')->group((function() {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Category, ISubCategory } from 'src/app/shared/interfaces/interface';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ICategory, ISubCategory } from 'src/app/shared/interfaces/interface';
 import { CategoryService } from '../category.service';
 
 @Component({
@@ -11,11 +12,15 @@ import { CategoryService } from '../category.service';
 })
 export class CreateMenuComponent implements OnInit {
   subcategories: ISubCategory[] = [];
+  searchedSubcategories: ISubCategory[] = [];
   closeResult: string;
   isEdit: boolean = false;
-  categories: Category[] = [];
+  categories: ICategory[] = [];
+  searchValue = '';
+  visible = false;
 
   subcategoryForm = this.fb.group({
+    id: [''],
     name: ['', [Validators.required]],
     title: ['', [Validators.required]],
     description: ['', [Validators.required]],
@@ -26,11 +31,13 @@ export class CreateMenuComponent implements OnInit {
     private categoryService: CategoryService,
     private modal: NgbModal,
     private fb: FormBuilder,
+    private message: NzModalService
   ) {}
 
   ngOnInit() {
     this.categoryService.getAllSubCategories().subscribe((res) => {
       this.subcategories = res;
+      this.searchedSubcategories = [...this.subcategories]
     });
     this.categoryService.getAllCategories().subscribe((res) => {
       this.categories = res
@@ -59,15 +66,25 @@ export class CreateMenuComponent implements OnInit {
     }
   }
 
-  onCreate() {}
+  onCreate() {
+    this.categoryService.createSubCategory(this.subcategoryForm.value).subscribe((res) => {
+      this.subcategories.push(res)
+      this.searchedSubcategories = [...this.subcategories]
+      this.subcategories = [...this.subcategories]
+      const modal = this.message.success({
+        nzTitle: 'Sub Category Created',
+      });
+  
+      setTimeout(() => modal.destroy(), 2000);
+    })  
+  }
 
   onEdit(content, subCategoryId: number) {
     this.isEdit = true;
-    const discount = this.subcategories.find((res) => {
-      return (res.id = subCategoryId);
+    const sub = this.subcategories.filter((res) => {
+      return (res.id === subCategoryId);
     });
-    this.subcategoryForm.patchValue(discount);
-    console.log(this.subcategoryForm.value);
+    this.subcategoryForm.patchValue(sub[0]);
     this.modal
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -85,12 +102,37 @@ export class CreateMenuComponent implements OnInit {
       this.subcategories = this.subcategories.map((sub) => {
         return sub.id == res.id ? res : sub;
       })
+      this.modal.dismissAll();
+      this.subcategoryForm.reset();
+      const modal = this.message.success({
+        nzTitle: 'Sub Category Updated',
+      });
+      this.isEdit = false;
+      setTimeout(() => modal.destroy(), 2000);
     })
   }
 
   onDelete(subCategoryId: number) {
-    // this.categoryService.deleteSubCategory(subCategoryId).subscribe((res) => {
-    //   //TODO: da testare
-    // })
+    this.categoryService.deleteSubCategory(subCategoryId).subscribe((res) => {
+      this.subcategories = this.subcategories.filter((sub) => {
+        return sub.id != res.id
+      })
+      const modal = this.message.success({
+        nzTitle: 'Sub Category Deleted',
+      });
+  
+      setTimeout(() => modal.destroy(), 2000);
+  
+    })
+  }
+
+  reset(): void {
+    this.searchValue = '';
+    this.search();
+  }
+
+  search(): void {
+    this.visible = false;
+    this.searchedSubcategories = this.subcategories.filter((item) => item.name.indexOf(this.searchValue) !== -1);
   }
 }

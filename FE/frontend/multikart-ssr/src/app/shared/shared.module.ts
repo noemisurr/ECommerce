@@ -63,6 +63,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 import {
   NzSkeletonAvatarShape,
   NzSkeletonAvatarSize,
@@ -125,7 +127,8 @@ import {
     NzInputModule,
     NzRadioModule,
     NzTagModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    MatTooltipModule
   ],
   exports: [
     CommonModule,
@@ -172,7 +175,8 @@ import {
     NzInputModule,
     NzRadioModule,
     NzTagModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    MatTooltipModule
   ]
 })
 export class SharedModule { }

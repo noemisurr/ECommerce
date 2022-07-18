@@ -72,7 +72,6 @@ export class ListCouponComponent implements OnInit {
       return (res.id = id);
     });
     this.discountForm.patchValue(discount);
-    console.log(this.discountForm.value);
     this.modal
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(

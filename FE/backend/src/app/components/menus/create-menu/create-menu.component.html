@@ -11,25 +11,30 @@
                     <div class="custom-datatable">
                         <button class="btn btn-primary mr-1 mb-3" style="float: right;" (click)="open(content)">Create</button>
                         <div class="clearfix"></div>
-                        <nz-table #table [nzData]="subcategories" nzTableLayout="fixed">
+                        <nz-table #table [nzData]="searchedSubcategories" nzTableLayout="fixed">
                             <thead>
-                                <tr>
-                                  <th nzWidth="20%">Name</th>
+                              <tr>
+                                  <th nzWidth="10%">Category</th>
+                                  <th nzWidth="20%" style="display: flex;
+                                  justify-content: space-between;">Name
+                                    <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                                      <i nz-icon nzType="search"></i>
+                                    </nz-filter-trigger>
+                                  </th>
                                   <th nzWidth="20%">Title</th>
                                   <th nzWidth="50%">Description</th>
                                   <th nzWidth="10%">Products</th>
-                                  <th nzWidth="10%">Category</th>
                                   <th nzWidth="10%">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr *ngFor="let data of table.data">
                                     <ng-container>
+                                      <td nzWidth="10%">{{ data.category_name }}</td>
                                         <td nzWidth="20%">{{ data.name }}</td>
                                         <td nzWidth="20%">{{ data.title }}</td>
                                         <td nzWidth="50%">{{ data.description }}</td>
                                         <td nzWidth="10%">{{ data.n_products }}</td>
-                                        <td nzWidth="10%">{{ data.category_name }}</td>
                                         <td nzWidth="10%">
                                           <a (click)="onEdit(content, data.id)"><i nz-icon nzType="edit" style="color: black; font-size: large;" nzTheme="outline"></i></a>
                                           <i style="color: white;">OK</i>
@@ -45,6 +50,15 @@
                                 </tr>
                               </tbody>
                         </nz-table>
+                        <nz-dropdown-menu #menu="nzDropdownMenu">
+                          <div class="ant-table-filter-dropdown">
+                            <div class="search-box custom">
+                              <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+                              <button nz-button nzSize="small" (click)="search()" class="search-button btn-primary">Search</button>
+                              <button nz-button nzSize="small" (click)="reset()">Reset</button>
+                            </div>
+                          </div>
+                        </nz-dropdown-menu>
                     </div>
                 </div>
             </div>
@@ -61,7 +75,7 @@
           <div class="modal-body">
               <form class="needs-validation" [formGroup]="subcategoryForm">
                   <div class="form">
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="!isEdit">
                       <label for="validationCustom01" class="mb-1">Category :</label>
                       <select
                         class="custom-select"

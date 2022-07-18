@@ -6,7 +6,8 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class 
+CategoryService {
 
   constructor(private http: HttpClient) { }
 
@@ -19,8 +20,14 @@ export class CategoryService {
   }
 
   updateCategory(category: ICategory) {
-    return this.http.post<ICategory>(`${environment.apiUrl}/categories/${category.id}`, category)
+    return this.http.put<ICategory>(`${environment.apiUrl}/categories/${category.id}`, category)
   }
+
+  deleteCategory(id: number) {
+    return this.http.delete<ICategory>(`${environment.apiUrl}/categories/${id}`)
+  }
+
+  // SUB CATEGORIES
 
   getAllSubCategories() {
     return this.http.get<ISubCategory[]>(`${environment.apiUrl}/sub_categories`)
@@ -31,7 +38,7 @@ export class CategoryService {
   }
 
   updateSubCategory(sub: ISubCategory) {
-    return this.http.post<ISubCategory>(`${environment.apiUrl}/sub_categories/${sub.id}`, sub)
+    return this.http.put<ISubCategory>(`${environment.apiUrl}/sub_categories/${sub.id}`, sub)
   }
 
   deleteSubCategory(id: number) {

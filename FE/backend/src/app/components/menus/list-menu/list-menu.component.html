@@ -10,7 +10,7 @@
                     <div class="custom-datatable">
                         <button class="btn btn-primary mr-1 mb-3" style="float: right;" (click)="open(content)">Create</button>
                         <div class="clearfix"></div>
-                        <nz-table #table [nzData]="categories" nzTableLayout="fixed">
+                        <nz-table #table [nzData]="searchedCategories" nzTableLayout="fixed">
                             <thead>
                                 <tr>
                                   <th nzWidth="20%">Name</th>
@@ -31,6 +31,7 @@
                                           <a (click)="onEdit(content, data.id)"><i nz-icon nzType="edit" style="color: black; font-size: large;" nzTheme="outline"></i></a>
                                           <i style="color: white;">OK</i>
                                             <a
+                                                *ngIf="data.n_products == 0"
                                               nz-popconfirm
                                               nzPopconfirmTitle="Sure to delete?"
                                               (nzOnConfirm)="onDelete(data.id)"
@@ -51,7 +52,8 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-      <h5 class="modal-title f-w-600" id="exampleModalLabel">Add Category</h5>
+    <h5 class="modal-title f-w-600" id="exampleModalLabel" *ngIf="!isEdit">Add Category</h5>
+    <h5 class="modal-title f-w-600" id="exampleModalLabel" *ngIf="isEdit">Modify Category</h5>
       <button type="button" class="close" aria-label="Close"
           (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">&times;</span>

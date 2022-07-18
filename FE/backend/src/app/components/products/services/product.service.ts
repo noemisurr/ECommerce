@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Category, Color, ProductRequest, ProductResponse, VariationRequest } from 'src/app/shared/interfaces/interface';
+import { Color, ICategory, ISubCategory, ProductRequest, ProductResponse, VariationRequest } from 'src/app/shared/interfaces/interface';
 import { environment } from 'src/environments/environment';
+import { SubCategoryComponent } from '../physical/sub-category/sub-category.component';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,17 @@ export class ProductService {
   // CATEGORY
 
   getAllCategories() {
-    return this.http.get<Category[]>(`${environment.apiUrl}/categories`);
+    return this.http.get<ICategory[]>(`${environment.apiUrl}/categories`);
+  }
+
+  // SUBCATEGORY
+
+  getAllSubCategory() {
+    return this.http.get<ISubCategory[]>(`${environment.apiUrl}/sub_categories`)
+  }
+
+  getSubById(idCategory: number) {
+    return this.http.get<ISubCategory[]>(`${environment.apiUrl}/categories/${idCategory}`)
   }
 
   // PRODUCT
@@ -31,6 +42,10 @@ export class ProductService {
 
   updateProduct(product: ProductRequest) {
     return this.http.put<ProductResponse>(`${environment.apiUrl}/products/${product.id}`, product);
+  }
+
+  delete(productId: number) {
+    return this.http.delete<ProductResponse>(`${environment.apiUrl}/products/${productId}`);
   }
 
   // VARIATION

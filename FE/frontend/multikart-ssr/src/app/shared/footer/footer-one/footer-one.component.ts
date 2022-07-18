@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { CategoryService } from "src/app/pages/account/services/category.service";
 import { ContactService } from "src/app/pages/account/services/contact.service";
-import { IContact } from "src/app/shop/interfaces/interface";
+import { ICategory, IContact } from "src/app/shop/interfaces/interface";
 
 @Component({
   selector: "app-footer-one",
@@ -14,11 +15,12 @@ export class FooterOneComponent implements OnInit {
 
   public today: number = Date.now();
   contact: IContact;
-  telephone: string;
+  categories: ICategory[]
 
-  constructor(private contactService: ContactService) {}
+  constructor(private contactService: ContactService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.contact = this.contactService.contact
+    this.categories = this.categoryService.categories
   }
 }

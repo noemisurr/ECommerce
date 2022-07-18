@@ -19,18 +19,34 @@
                 formControlName="name"
               />
             </div>
-            <div class="form-group">
-              <label class="col-form-label"><span>*</span> Categories</label>
-              <select
-                class="custom-select"
-                required=""
-                formControlName="id_category"
-              >
-                <option value="">--Select--</option>
-                <option *ngFor="let data of categories" [value]="data.id">
-                  {{ data.name }}
-                </option>
-              </select>
+            <div class="form-group column">
+              <div>
+                <label class="col-form-label"><span>*</span> Categories</label>
+                <select
+                  class="custom-select"
+                  required=""
+                  formControlName="id_category"
+                  (change)="onCategoryChange($event)"
+                >
+                  <option value="">--Select--</option>
+                  <option *ngFor="let data of categories" [value]="data.id">
+                    {{ data.name }}
+                  </option>
+                </select>
+              </div>
+              <div>
+                <label class="col-form-label"><span>*</span> Sub Categories</label>
+                <select
+                  class="custom-select"
+                  required=""
+                  formControlName="id_subcategory"
+                >
+                  <option value="">--Select--</option>
+                  <option *ngFor="let data of subcategories" [value]="data.id">
+                    {{ data.name }}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="form-group">
               <label for="validationCustomtitle" class="col-form-label pt-0"
@@ -49,21 +65,68 @@
                 ><span>*</span> Long Description</label
               >
               <textarea
+                style="resize: none"
                 rows="4"
                 cols="12"
                 formControlName="long_description"
               ></textarea>
             </div>
+            <div class="form-group column">
+              <div>
+                <label for="validationCustom02" class="col-form-label"
+                  >Price</label
+                >
+                <input
+                  class="form-control"
+                  id="validationCustom02"
+                  type="number"
+                  formControlName="price"
+                />
+              </div>
+              <div>
+                <label class="col-form-label">Brand</label>
+                <input
+                  class="form-control"
+                  id="validationCustom02"
+                  type="text"
+                  formControlName="brand"
+                />
+              </div>
+            </div>
+            <div class="form-group column">
+              <div>
+                <label for="validationCustom02" class="col-form-label"
+                  >Material</label
+                >
+                <input
+                  class="form-control"
+                  id="validationCustom02"
+                  type="text"
+                  required=""
+                  formControlName="material"
+                />
+              </div>
+              <div>
+                <label class="col-form-label">Size</label>
+                <input
+                  class="form-control"
+                  id="validationCustom02"
+                  type="text"
+                  required=""
+                  formControlName="size"
+                />
+              </div>
+            </div>
             <div class="form-group">
-              <label for="validationCustom02" class="col-form-label"
-                ><span>*</span> Price</label
+              <label for="validationCustomtitle" class="col-form-label pt-0"
+                >Other</label
               >
               <input
                 class="form-control"
-                id="validationCustom02"
-                type="number"
+                id="validationCustomtitle"
+                type="text"
                 required=""
-                formControlName="price"
+                formControlName="other"
               />
             </div>
           </div>
@@ -85,7 +148,9 @@
       >
         <div class="card" [formGroupName]="i">
           <div class="card-header">
-            <h5><input class="border-0" type="text" formControlName="name"></h5>
+            <h5>
+              <input class="border-0" type="text" formControlName="name" />
+            </h5>
           </div>
           <div class="card-body">
             <div class="digital-add needs-validation">
@@ -111,7 +176,10 @@
                 >
                 <div
                   class="flex-row margin"
-                  *ngFor="let data of variation.controls.media.controls; let url = index"
+                  *ngFor="
+                    let data of variation.controls.media.controls;
+                    let url = index
+                  "
                 >
                   <input
                     class="form-control"
@@ -120,7 +188,9 @@
                     [formControlName]="url"
                   />
                   <button *ngIf="url == 0" (click)="addUrl(i)">+</button>
-                  <button *ngIf="url != 0" (click)="deleteUrl(i, url)">-</button>
+                  <button *ngIf="url != 0" (click)="deleteUrl(i, url)">
+                    -
+                  </button>
                 </div>
               </div>
               <h6>Tag</h6>
@@ -132,7 +202,10 @@
                   <div class="description-sm">
                     <div
                       class="flex-row margin"
-                      *ngFor="let data of variation.controls.tag_names.controls; let tag = index"
+                      *ngFor="
+                        let data of variation.controls.tag_names.controls;
+                        let tag = index
+                      "
                     >
                       <input
                         class="form-control"
@@ -141,7 +214,9 @@
                         [formControlName]="tag"
                       />
                       <button *ngIf="tag == 0" (click)="addTag(i)">+</button>
-                      <button *ngIf="tag != 0" (click)="deleteTag(i, tag)">-</button>
+                      <button *ngIf="tag != 0" (click)="deleteTag(i, tag)">
+                        -
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -161,8 +236,8 @@
     >
       Add
     </button>
-    <button type="button" class="btn btn-light" (click)="onDiscard()">
-      Discard
+    <button type="button" class="btn btn-light" (click)="onReset()">
+      Reset
     </button>
   </div>
 </div>

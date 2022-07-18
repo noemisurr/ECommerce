@@ -30,7 +30,8 @@ class Variation extends Model
         'tag_names',
         'price',
         'discount',
-        'discounted_price'
+        'discounted_price',
+        'color_name'
     ];
 
     public function imgs() {
@@ -47,6 +48,10 @@ class Variation extends Model
 
     public function discountInfo() {
         return $this->hasOne(Discount::class, 'id', 'id_discount');
+    }
+
+    public function color() {
+        return $this->hasOne(Color::class, 'id', 'id_color');
     }
 
     protected function media(): Attribute
@@ -80,6 +85,13 @@ class Variation extends Model
     protected function discountedPrice(): Attribute {
         return new Attribute(
             get: fn () => $this->price - ($this->price * $this->discount / 100),
+        );
+    }
+
+    protected function colorName(): Attribute
+    {
+        return new Attribute(
+            get: fn () =>  $this->color()->get()->pluck('name')->pop(),
         );
     }
 }

@@ -18,3 +18,14 @@
 .border-0 {
     border: 0;
 }
+
+.column{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    > div {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+    }
+}

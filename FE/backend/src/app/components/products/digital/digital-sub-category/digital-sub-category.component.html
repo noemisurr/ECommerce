@@ -7,89 +7,33 @@
           <h5>List of Products</h5>
         </div>
         <div class="card-body">
-          <div class="btn-popup pull-right">
-            <!-- <button
-              type="button"
-              class="btn btn-secondary"
-              data-toggle="modal"
-              data-original-title="test"
-              data-target="#exampleModal"
-              (click)="open(content)"
-            >
-              Add Product
-            </button> -->
-            <ng-template #content let-modal>
-              <div class="modal-header">
-                <h5 class="modal-title f-w-600" id="exampleModalLabel">
-                  Add Digital Product
-                </h5>
-                <button
-                  type="button"
-                  class="close"
-                  aria-label="Close"
-                  (click)="modal.dismiss('Cross click')"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form class="needs-validation">
-                  <div class="form">
-                    <div class="form-group">
-                      <label for="validationCustom01" class="mb-1"
-                        >Sub Category Name :</label
-                      >
-                      <input
-                        class="form-control"
-                        id="validationCustom01"
-                        type="text"
-                      />
-                    </div>
-                    <div class="form-group mb-0">
-                      <label for="validationCustom02" class="mb-1"
-                        >Sub Category Image :</label
-                      >
-                      <input
-                        class="form-control"
-                        id="validationCustom02"
-                        type="file"
-                      />
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
-                <button
-                  class="btn btn-secondary"
-                  type="button"
-                  data-dismiss="modal"
-                  (click)="modal.dismiss('Cross click')"
-                >
-                  Close
-                </button>
-              </div>
-            </ng-template>
-          </div>
           <div id="batchDelete" class="category-table custom-datatable">
             <div class="table-responsive">
-              <nz-table #table [nzData]="products" nzTableLayout="fixed">
+              <nz-table #table [nzData]="searchedProduct" nzTableLayout="fixed">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Action</th>
+                    <th nzWidth="25%" style="display: flex; justify-content: space-between;">Name
+                      <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                        <i nz-icon nzType="search"></i>
+                      </nz-filter-trigger>
+                    </th>
+                    <th nzWidth="25%">Description</th>
+                    <th nzWidth="10%">Price</th>
+                    <th nzWidth="10%">Brand</th>
+                    <th nzWidth="25%">Size</th>
+                    <th nzWidth="25%">Info</th>
+                    <th nzWidth="10%">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let data of table.data">
                     <ng-container>
                       <td nzWidth="25%">{{ data.name }}</td>
-                      <td nzWidth="50%">{{ data.short_description }}</td>
-                      <td nzWidth="25%">{{ data.price }}€</td>
-                      <td nzWidth="25%">{{ data.id_category }}</td>
+                      <td nzWidth="25%">{{ data.short_description }}</td>
+                      <td nzWidth="10%">{{ data.price }} €</td>
+                      <td nzWidth="25%">{{ data.brand }}</td>
+                      <td nzWidth="25%">{{ data.size }}</td>
+                      <td nzWidth="15%">{{ data.other }}</td>
                       <td>
                         <a [routerLink]="'/products/detail'" [queryParams]="{id: data.id}"><i nz-icon nzType="eye" style="color: black; font-size: large;" nzTheme="outline"></i></a>
                         <!-- <a
@@ -103,6 +47,15 @@
                   </tr>
                 </tbody>
               </nz-table>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <div class="ant-table-filter-dropdown">
+                  <div class="search-box custom">
+                    <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+                    <button nz-button nzSize="small" (click)="search()" class="search-button btn-primary">Search</button>
+                    <button nz-button nzSize="small" (click)="reset()">Reset</button>
+                  </div>
+                </div>
+              </nz-dropdown-menu>
             </div>
           </div>
         </div>

@@ -10,8 +10,6 @@ export class MediaHomeService {
 
   constructor(private http: HttpClient) { }
 
-  //TODO: mappare gli id_position dei media così da mostrarlo nel FE
-
   getHomeMedia() {
     return this.http.get<SettingsHome[]>(`${environment.apiUrl}/backoffice/settings_home`)
   }

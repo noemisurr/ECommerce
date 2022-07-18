@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { digitalSubCategoryDB } from 'src/app/shared/tables/digital-sub-category';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../../services/product.service';
-import { map } from 'rxjs/operators';
 import { ProductResponse } from 'src/app/shared/interfaces/interface';
 
 @Component({
@@ -11,8 +9,11 @@ import { ProductResponse } from 'src/app/shared/interfaces/interface';
   styleUrls: ['./digital-sub-category.component.scss']
 })
 export class DigitalSubCategoryComponent implements OnInit {
-  public closeResult: string;
-  public products: ProductResponse[] = []
+  closeResult: string;
+  products: ProductResponse[] = []
+  searchValue = '';
+  visible = false;
+  searchedProduct: ProductResponse[] = []
 
   constructor(private modalService: NgbModal, private productService: ProductService) {}
 
@@ -41,6 +42,17 @@ export class DigitalSubCategoryComponent implements OnInit {
   getAllProducts() {
     this.productService.getAll().subscribe((res) => {
       this.products = res
+      this.searchedProduct = [...this.products]
     })
+  }
+
+  reset(): void {
+    this.searchValue = '';
+    this.search();
+  }
+
+  search(): void {
+    this.visible = false;
+    this.searchedProduct = this.products.filter((item) => item.name.indexOf(this.searchValue) !== -1);
   }
 }

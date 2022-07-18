@@ -1,29 +1,5 @@
 <!--footer section -->
 <footer [class]="class">
-	<!-- <div class="light-layout" *ngIf="newsletter">
-		<div class="container">
-			<section class="small-section border-section border-top-0">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="subscribe">
-							<div>
-								<h4>KNOW IT ALL FIRST!</h4>
-								<p>Never Miss Anything From Multikart By Signing Up To Our Newsletter. </p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<form class="form-inline subscribe-form" action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda" target="_blank" method="post">
-							<div class="form-group mx-sm-3">
-								<input type="email" #name name="EMAIL" id="mce-EMAIL" class="form-control" placeholder="Enter your email">
-							</div>
-							<button type="submit" class="btn btn-solid">subscribe</button>
-						</form>
-					</div>
-				</div>
-			</section>
-		</div>
-	</div> -->
 	<section class="section-b-space light-layout">
 		<div class="container">
 			<div class="row footer-theme partition-f">
@@ -35,58 +11,35 @@
 						<div class="footer-logo">
 							<img [src]="themeLogo" alt="logo">
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-						<!-- <div class="footer-social">
-                            <ul>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fa fa-google-plus" aria-hidden="true"></i></a>                 
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><i class="fa fa-rss" aria-hidden="true"></i></a>
-                                </li>
-                            </ul>
-                        </div> -->
+						<p>{{contact.info}}</p>
 					</div>
 				</div>
-				<div class="col offset-xl-1">
-					<!-- <div class="sub-title">
+				<div class="col">
+					<div class="sub-title">
 						<div class="footer-title">
                             <h4>Categories</h4>
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="javascript:void(0)">Womens Fashion</a></li>
-                                <li><a href="javascript:void(0)">Mens Fashion</a></li>
-                                <li><a href="javascript:void(0)">Kids Fashion</a></li>
-                                <li><a href="javascript:void(0)">Featured</a></li>
+                                <li *ngFor="let data of categories"><a href="javascript:void(0)">{{data.name}}</a></li>
                             </ul>
                         </div>
-					</div> -->
+					</div>
 				</div>
 				<div class="col">
-					<!-- <div class="sub-title">
+					<div class="sub-title">
 						<div class="footer-title">
-                            <h4>why we choose</h4>
+                            <h4>My account</h4>
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li><a href="javascript:void(0)">shipping & return</a></li>
-                                <li><a href="javascript:void(0)">secure shopping</a></li>
-                                <li><a href="javascript:void(0)">gallary</a></li>
-                                <li><a href="javascript:void(0)">affiliates</a></li>
-                                <li><a href="javascript:void(0)">contacts</a></li>
+                                <li><a href="/pages/profile">My Profile</a></li>
+                                <li><a href="/pages/orders">My Orders</a></li>
+                                <li><a href="/shop/cart">Shopping list</a></li>
+                                <li><a href="/pages/wishlist">Wish list</a></li>
                             </ul>
                         </div>
-					</div> -->
+					</div>
 				</div>
 				<div class="col">
 					<div class="sub-title">

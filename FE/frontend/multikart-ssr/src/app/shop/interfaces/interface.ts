@@ -6,11 +6,17 @@ export interface IProduct {
   short_description: string;
   long_description: string;
   price: number;
+  brand: string,
+  material: string,
+  size: string,
+  other?: string,
   created_at?: Date;
   id_category: number;
   deleted: boolean;
   star?: number,
   variations?: IVariation[];
+  category_name?: string,
+  subcategory_name?: string
 }
 
 export interface IProductResponse {
@@ -33,7 +39,8 @@ export interface IVariation {
   media?: IMedia[];
   tag?: ITag[];
   price: number,
-  discount?: number
+  discount?: number,
+  color_name: string
 }
 
 export interface IMedia {
@@ -60,7 +67,8 @@ export interface IContact {
   address: string,
   city: string,
   postal_code: string,
-  telephone: string
+  telephone: string,
+  info: string
 }
 
 export interface IWishList {
@@ -108,8 +116,22 @@ export interface ICart {
   total: number,
   cartItems: ICartItem[]
 }
-
-export interface ICategory{
+export interface ICategory {
   id: number,
-  name: string
+  name: string,
+  title: string,
+  description: string,
+  n_products?: number
+  subcategories?: ISubCategory[]
+}
+
+export interface ISubCategory {
+  id?: number,
+  name: string,
+  title: string,
+  description: string,
+  id_category?: number,
+  category_name?: string,
+  n_products?: number
+  
 }

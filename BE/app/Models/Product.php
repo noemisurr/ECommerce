@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Variation;
 use App\Models\Review;
+use App\Models\Category;
+use App\Models\SubCategory;
 
 class Product extends Model
 {
@@ -30,7 +32,7 @@ class Product extends Model
         'id_category',
         'id_subcategory'
     ];
-    protected $appends = ['star'];
+    protected $appends = ['star', 'category_name', 'subcategory_name'];
 
     public function variations() {
         return $this->hasMany(Variation::class, 'id_product', 'id');
@@ -38,6 +40,14 @@ class Product extends Model
 
     public function stars() {
         return $this->hasMany(Review::class, 'id_product', 'id');
+    }
+
+    public function cat() {
+        return $this->hasMany(Category::class, 'id', 'id_category');
+    }
+
+    public function sub() {
+        return $this->hasMany(SubCategory::class, 'id', 'id_subcategory');
     }
 
     protected function star(): Attribute
@@ -49,6 +59,20 @@ class Product extends Model
                 })->avg();
                 return $star;
             }
+        );
+    }
+
+    protected function categoryName(): Attribute
+    {
+        return new Attribute(
+            get: fn () =>  $this->cat()->get()->pluck('name')->pop(),
+        );
+    }
+
+    protected function subcategoryName(): Attribute
+    {
+        return new Attribute(
+            get: fn () =>  $this->sub()->get()->pluck('name')->pop(),
         );
     }
 }

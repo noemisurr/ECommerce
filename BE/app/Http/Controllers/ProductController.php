@@ -111,6 +111,10 @@ class ProductController extends Controller
                 'short_description' => $product['short_description'],
                 'long_description' => $product['long_description'],
                 'price' => $product['price'],
+                'brand' => $product['brand'],
+                'material' => $product['material'],
+                'size' => $product['size'],
+                'other' => $product['other'],
                 'deleted' => false,
                 'id_category' => $product['id_category'],
             ]);

@@ -1,6 +1,6 @@
 <app-breadcrumb
   [title]="product?.name"
-  [breadcrumb]="'Product'"
+  breadcrumb="Detail"
 ></app-breadcrumb>
 <!-- section start -->
 <section class="section-b-space" *ngIf="product">
@@ -40,7 +40,8 @@
                 >
                   <ng-container
                     *ngFor="
-                      let image of product.variations[currentVariationIndex].media;
+                      let image of product.variations[currentVariationIndex]
+                        .media;
                       index as i
                     "
                   >
@@ -56,8 +57,11 @@
                           [lazyLoad]="image.url"
                           class="img-fluid"
                           [src]="image.url"
-                          (click)="owlCar.to(currentImageIndex = i)"
+                          (click)="
+                            owlCar.to((currentImageIndex = i.toString()))
+                          "
                         />
+                        <!-- TODO: sfumatura bordi per far capire che si puo andare a desrra e sx -->
                       </div>
                     </ng-template>
                   </ng-container>
@@ -69,13 +73,14 @@
         <div class="col-lg-6 rtl-text">
           <div class="product-right">
             <div class="product-row">
-              <h2>{{ product?.name }}</h2>
+              <h2>{{ product?.variations[currentVariationIndex].name }}</h2>
               <ul class="product-icon">
                 <button class="wishlist-btn" (click)="onWishlist()">
                   <i class="fa fa-heart" [class.active]="isWish"></i>
                 </button>
               </ul>
             </div>
+            <p>{{ product.short_description }}</p>
             <h4>
               <del
                 *ngIf="product?.variations[currentVariationIndex].discount"
@@ -86,9 +91,19 @@
                 off</span
               >
             </h4>
-            <h3>{{ product?.price | discount:product?.variations[currentVariationIndex].discount }} €</h3>
+            <h3>
+              {{
+                product?.price
+                  | discount
+                    : product?.variations[currentVariationIndex].discount
+                  | number: "1.2-2"
+              }}
+              €
+            </h3>
             <ul class="color-variant">
               <li
+                mat-raised-button
+                [matTooltip]="variation.color_name"
                 [class.active]="currentVariationIndex == i"
                 *ngFor="let variation of product.variations; index as i"
                 [ngStyle]="{
@@ -97,8 +112,44 @@
                 (click)="changeVariations(i)"
               ></li>
             </ul>
+
+            <div class="border-product">
+              <p class="product-title">product details</p>
+              <p>{{ product.long_description }}</p><br>
+              <p class="p-black">Size:</p>
+              <p>{{product.size}}</p><br>
+              <p class="p-black">Material:</p>
+              <p>{{product.material}}</p><br>
+              <p class="p-black">Brand:</p>
+              <p>{{product.brand}}</p><br>
+              <p class="p-black" *ngIf="product.other">Other:</p>
+              <p *ngIf="product.other">{{product.other}}</p><br>
+            </div>
+            <div class="border-product">
+              <p class="p-black">Category:</p>
+              <p>{{product.category_name}}</p><br>
+              <p class="p-black">Sub Category:</p>
+              <p>{{product.subcategory_name}}</p>
+            </div>
+            <div class="border-product" *ngIf="product.star">
+              <div class="product-icon">
+                <div class="d-inline-block">
+                  <nz-rate
+                    class="ant-rate-text"
+                    formControlName="star"
+                    nzDisabled
+                  ></nz-rate>
+                  <a
+                    [routerLink]="'/shop/product/review'"
+                    [queryParams]="{ id: product.id }"
+                    >View all reviews</a
+                  >
+                </div>
+              </div>
+            </div>
+            <!-- <app-countdown [date]="'Apr 21 2021'"></app-countdown> -->
             <div class="product-description border-product">
-              <h6 class="product-title">quantity</h6>
+              <h5 class="product-title">quantity</h5>
               <div class="qty-box">
                 <div class="input-group">
                   <span class="input-group-prepend">
@@ -129,41 +180,15 @@
                     </button>
                   </span>
                 </div>
+                <a class="btn" aria-disabled="true"></a>
+                <a class="btn btn-solid" (click)="addToCart()">add to cart</a>
+                <!-- <a
+                      href="javascrip:void(0)"
+                      class="btn btn-solid"
+                      (click)="buyNow(product)"
+                      >buy now</a
+                    > -->
               </div>
-            </div>
-            <div class="product-buttons">
-              <a class="btn btn-solid" (click)="addToCart()">add to cart</a>
-              <!-- <a
-                href="javascrip:void(0)"
-                class="btn btn-solid"
-                (click)="buyNow(product)"
-                >buy now</a
-              > -->
-            </div>
-            <div class="border-product">
-              <h6 class="product-title">product details</h6>
-              <p>{{ product.short_description }}</p>
-            </div>
-            <div class="border-product">
-              <div class="product-icon">
-                <!-- <app-social></app-social> -->
-                <div class="d-inline-block" *ngIf="product.star">
-                  <nz-rate
-                    class="ant-rate-text"
-                    formControlName="star"
-                    nzDisabled
-                  ></nz-rate>
-                  <a
-                    [routerLink]="'/shop/product/review'" 
-                    
-                    [queryParams]="{ id: product.id }"
-                    >View all reviews</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="border-product">
-              <!-- <app-countdown [date]="'Apr 21 2021'"></app-countdown> -->
             </div>
           </div>
         </div>
@@ -172,12 +197,13 @@
         <div class="row">
           <div class="col-sm-12 col-lg-12">
             <ngb-tabset [type]="'tabs'" class="nav-material">
-              <ngb-tab>
+              <!-- <ngb-tab>
                 <ng-template ngbTabTitle>Description</ng-template>
                 <ng-template ngbTabContent>
+                  <h4>{{ product.name | uppercase }}</h4>
                   <p>{{ product.long_description }}</p>
                 </ng-template>
-              </ngb-tab>
+              </ngb-tab> -->
               <ngb-tab *ngIf="isLogged">
                 <ng-template ngbTabTitle>Write Review</ng-template>
                 <ng-template ngbTabContent>

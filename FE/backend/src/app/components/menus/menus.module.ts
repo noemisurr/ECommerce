@@ -12,6 +12,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 @NgModule({
   declarations: [ListMenuComponent, CreateMenuComponent],
@@ -26,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NzModalModule,
     FormsModule,
     ReactiveFormsModule,
+    NzDropDownModule
   ]
 })
 export class MenusModule { }

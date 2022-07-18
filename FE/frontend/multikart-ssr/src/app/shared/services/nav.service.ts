@@ -5,7 +5,7 @@ import { CategoryService } from "src/app/pages/account/services/category.service
 // Menu
 export interface Menu {
   path?: string;
-  queryParams?: string
+  queryParams?: string;
   title?: string;
   type?: string;
   megaMenu?: boolean;
@@ -43,45 +43,22 @@ export class NavService {
       title: "Shop",
       megaMenu: true,
       type: "link",
-      children: [
-        {
-          title: "shop",
-          type: "sub",
-          active: false,
-          children: [
-            {
-              path: '/shop/list',
-              title: 'View all products',
-              type: "link",
-            }
-          ],
-        },
-        {
-          title: "categories",
-          type: "sub",
-          active: false,
-          children: this.categoryService.categories.map((res) => {
+      children: this.categoryService.categories.map((res) => {
+        return {
+          queryParams: res.name,
+          title: res.name,
+          type: "link",
+          active: true,
+          children: res.subcategories.map((sub) => {
             return {
-              path: '/shop/list',
-              queryParams:  res.name,
-              title: res.name,
-              type: "category",
+              path: "/shop/list",
+              queryParams: sub.name,
+              title: sub.name,
+              type: "link",
             };
           }),
-        },
-        // {
-        //   title: "add-to-cart",
-        //   type: "sub",
-        //   active: false,
-        //   children: [
-        //     { path: "/home/vegetable", title: "cart-right", type: "link" },
-        //     { path: "/home/watch", title: "cart-left", type: "link" },
-        //     { path: "/home/furniture", title: "cart-top", type: "link" },
-        //     { path: "/home/flower", title: "cart-bottom", type: "link" },
-        //     { path: "/home/fashion", title: "cart-model-popup", type: "link" },
-        //   ],
-        // },
-      ],
+        };
+      }),
     },
     {
       path: "/pages/contact",

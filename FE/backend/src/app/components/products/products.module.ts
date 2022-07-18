@@ -28,6 +28,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
@@ -52,7 +53,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     NzPopconfirmModule,
     NzTabsModule,
     NzIconModule,
-    NzModalModule
+    NzModalModule,
+    NzDropDownModule
   ],
   providers: [
     {
