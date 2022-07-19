@@ -195,6 +195,7 @@
       </div>
       <section class="tab-product m-0">
         <div class="row">
+          <div *ngIf="product.variations.length !== 2" style="height: 120px;">-</div>
           <div class="col-sm-12 col-lg-12">
             <ngb-tabset [type]="'tabs'" class="nav-material">
               <!-- <ngb-tab>

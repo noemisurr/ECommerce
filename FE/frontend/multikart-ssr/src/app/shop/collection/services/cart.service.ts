@@ -30,7 +30,6 @@ export class CartService {
           (err) => {
             const items = JSON.parse(localStorage.getItem("cart"));
             this.addCartItem(items.cartItems).subscribe(() => {
-              console.log("new");
               localStorage.removeItem("cart");
             });
           }

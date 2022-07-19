@@ -22,14 +22,14 @@ class ColorSeeder extends Seeder
         Color::create(['name' => 'Gray', 'hex' => '#808080']);      // 5
         Color::create(['name' => 'Purple', 'hex' => '#800080']);    // 6 
         Color::create(['name' => 'Lavender', 'hex' => '#E3E4FA']);  // 7
-        Color::create(['name' => 'Lavender', 'hex' => '#E3E4FA']);  // 8
+        Color::create(['name' => 'Teal', 'hex' => '#008080']);      // 8
         Color::create(['name' => 'Mint', 'hex' => '#3EB489']);      // 9
         Color::create(['name' => 'Beige', 'hex' => '#F5F5DC']);     // 10
         Color::create(['name' => 'Sand', 'hex' => '#C2B280']);      // 11
         Color::create(['name' => 'Pale Pink', 'hex' => '#FFE0E3']); // 12
         Color::create(['name' => 'Walnut', 'hex' => '#7c624a']);    // 13
-        Color::create(['name' => 'Gold', 'hex' => '#D4AF37']);    // 14
-        Color::create(['name' => 'Brown', 'hex' => '#8B4F39']);    // 15
+        Color::create(['name' => 'Gold', 'hex' => '#D4AF37']);      // 14
+        Color::create(['name' => 'Brown', 'hex' => '#8B4F39']);     // 15
 
     }
 }

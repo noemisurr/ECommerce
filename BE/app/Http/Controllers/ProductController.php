@@ -27,49 +27,62 @@ class ProductController extends Controller
         $obj = $request->query('obj');
         $sortBy = $request->query('sortBy');
         $search = $request->query('search');
+        $category = $request->query('category');
+        $subcategory = $request->query('subcategory');
 
-        if (isset($search)) {
-            $search_terms = preg_split("/[^\p{L}]+/u", urldecode($search), null, PREG_SPLIT_NO_EMPTY);
-        }
-
-        $product = Product::with(['variations' => function ($q) use($search) {
-            if (isset($search_terms)) {
-                $q->whereHas('tags', function($q) use($search_terms) {
-                    $q->whereHas('tag', function($q) use($search_terms) {
-                        $q->whereIn('name', $search_terms);
-                    });
-                });   
+            if (isset($search)) {
+                $search_terms = preg_split("/[^\p{L}]+/u", urldecode($search), null, PREG_SPLIT_NO_EMPTY);
             }
-        }])->where('deleted', '=', false);
-
-        if(!isset($skip) || !isset($take))  return response($product->get(), 200);
-
-        if (isset($search_terms)) {
-            $product->whereHas('variations', function($q) use($search_terms) {
-                $q->whereHas('tags', function($q) use($search_terms) {
-                    $q->whereHas('tag', function($q) use($search_terms) {
-                        $q->whereIn('name', $search_terms);
+    
+            $product = Product::with(['variations' => function ($q) use($search) {
+                if (isset($search_terms)) {
+                    $q->whereHas('tags', function($q) use($search_terms) {
+                        $q->whereHas('tag', function($q) use($search_terms) {
+                            $q->whereIn('name', $search_terms);
+                        });
+                    });   
+                }
+            }])->where('deleted', '=', false);
+    
+            if(!isset($skip) || !isset($take))  return response($product->get(), 200);
+    
+            if (isset($search_terms)) {
+                $product->whereHas('variations', function($q) use($search_terms) {
+                    $q->whereHas('tags', function($q) use($search_terms) {
+                        $q->whereHas('tag', function($q) use($search_terms) {
+                            $q->whereIn('name', $search_terms);
+                        });
                     });
                 });
-            });
-        }
+            }
+    
+            $count = $product->count();
+            
+            if(isset($category)){
+                $someProduct = $product->where('id_category', '=', $category);
+                $count = $someProduct->count();
+            }else if(isset($subcategory)){
+                $someProduct = $product->where('id_subcategory', '=', $subcategory);
+                $count = $someProduct->count();
+            }
+            $someProduct = $product
+            ->skip($skip)
+            ->take($take)->get();
 
-        $count = $product->count();
+            
+            if(isset($sortBy) && $sortBy == 'asc'){
+                $someProduct = $someProduct->sortBy(function($prod) use($obj) {
+                    return $prod['variations'][0][$obj];
+                });
+            }else if(isset($sortBy) && $sortBy == 'desc'){
+                $someProduct = $someProduct->sortByDesc(function($prod) use($obj) {
+                    return $prod['variations'][0][$obj];
+                });
+            }
+            
+            return response(["products" => $someProduct->values(), "numberItems" => $count], 200);
         
-        $someProduct = $product
-        ->skip($skip)
-        ->take($take)->get();
-        
-        if(isset($sortBy) && $sortBy == 'asc'){
-            $someProduct = $someProduct->sortBy(function($prod) use($obj) {
-                return $prod['variations'][0][$obj];
-            });
-        }else if(isset($sortBy) && $sortBy == 'desc'){
-            $someProduct = $someProduct->sortByDesc(function($prod) use($obj) {
-                return $prod['variations'][0][$obj];
-            });
-        }
-        return response(["products" => $someProduct->values(), "numberItems" => $count], 200);
+
     }
 
     public function getAllSpecial() {
@@ -117,6 +130,7 @@ class ProductController extends Controller
                 'other' => $product['other'],
                 'deleted' => false,
                 'id_category' => $product['id_category'],
+                'id_subcategory' => $product['id_subcategory'],
             ]);
             
             foreach($variation as $var) {

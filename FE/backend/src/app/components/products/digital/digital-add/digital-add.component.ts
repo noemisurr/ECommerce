@@ -74,6 +74,7 @@ export class DigitalAddComponent implements OnInit {
   }
 
   onSave() {
+    console.log(this.productForm.value)
     this.productService.create(this.productForm.value).subscribe((res) => {
       const modal = this.modal.success({
         nzTitle: 'Product Created',

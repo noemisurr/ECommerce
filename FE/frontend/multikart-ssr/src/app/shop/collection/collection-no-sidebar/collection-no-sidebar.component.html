@@ -1,4 +1,6 @@
-<app-breadcrumb [title]="'Collection'" [breadcrumb]="'Collection'"></app-breadcrumb>
+<!-- <app-breadcrumb [title]="'Collection'" [breadcrumb]="'Collection'"></app-breadcrumb> -->
+<app-breadcrumb *ngIf="paramsCategory" [title]="titleCat" [middle]="middleCat" [breadcrumb]="'Collection'"></app-breadcrumb>
+<app-breadcrumb *ngIf="paramsSubCategory" [title]="titleSub" [middle]="middleSub" [breadcrumb]="'Collection'"></app-breadcrumb>
 <!-- section start -->
 <section class="section-b-space">
     <div *ngIf="search" class="tags-container">

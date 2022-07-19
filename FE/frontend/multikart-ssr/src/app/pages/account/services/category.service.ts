@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { ICategory } from 'src/app/shop/interfaces/interface';
+import { ICategory, ISubCategory } from 'src/app/shop/interfaces/interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -18,5 +18,9 @@ export class CategoryService {
         this.categories = res;
       })
     );
+  }
+
+  getAllSubCategory() {
+    return this.http.get<ISubCategory[]>(`${environment.apiUrl}/sub_categories`)
   }
 }

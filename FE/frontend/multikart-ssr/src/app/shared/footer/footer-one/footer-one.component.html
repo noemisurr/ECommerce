@@ -21,7 +21,7 @@
                         </div>
                         <div class="footer-contant">
                             <ul>
-                                <li *ngFor="let data of categories"><a href="javascript:void(0)">{{data.name}}</a></li>
+                                <li *ngFor="let data of categories"><a [routerLink]="'/shop/list'" [queryParams]="{category: data.id}">{{data.name}}</a></li>
                             </ul>
                         </div>
 					</div>

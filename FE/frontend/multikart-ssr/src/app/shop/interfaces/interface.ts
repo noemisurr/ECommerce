@@ -12,6 +12,7 @@ export interface IProduct {
   other?: string,
   created_at?: Date;
   id_category: number;
+  id_subcategory: number;
   deleted: boolean;
   star?: number,
   variations?: IVariation[];

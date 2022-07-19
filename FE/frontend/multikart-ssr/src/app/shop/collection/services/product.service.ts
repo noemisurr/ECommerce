@@ -21,7 +21,7 @@ export class ProductService {
   ---------------------------------------------
   */
 
-  getAll(skip: number, take: number, sortBy: string, obj: string, search: string) {
+  getAll(skip: number, take: number, sortBy: string, obj: string, search: string, category: number, subcategory: number) {
     let queryString: string = `?skip=${skip}&take=${take}`
     if (sortBy) {
       queryString += `&sortBy=${sortBy}`
@@ -31,6 +31,12 @@ export class ProductService {
     }
     if(search) {
       queryString += `&search=${search}`
+    }
+    if(category) {
+      queryString += `&category=${category}`
+    }
+    if(subcategory) {
+      queryString += `&subcategory=${subcategory}`
     }
     return this.http.get<IProductResponse>(
       `${environment.apiUrl}/products${queryString}`

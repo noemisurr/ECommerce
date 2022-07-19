@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ViewportScroller } from "@angular/common";
 import { ProductService } from "../services/product.service";
-import { IProduct } from "../../interfaces/interface";
+import { ICategory, IProduct, ISubCategory } from "../../interfaces/interface";
+import { CategoryService } from "src/app/pages/account/services/category.service";
 
 @Component({
   selector: "app-collection-no-sidebar",
@@ -16,23 +17,53 @@ export class CollectionNoSidebarComponent implements OnInit {
   public pageNo: number = 1;
   public paginate: any = {}; // Pagination use only
   public sortBy: string; // Sorting Order
-  public obj: string = 'name';
+  public obj: string = "name";
   public search: string[];
   take: number = 12;
-  loader: boolean = true
+  loader: boolean = true;
+  paramsCategory: number;
+  paramsSubCategory: number;
+  categories: ICategory[];
+  subcategories: ISubCategory[];
+  currentSubcartegory: ISubCategory;
+  titleSub: string
+  titleCat: string
+  middleCat: string
+  middleSub: string
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private viewScroller: ViewportScroller,
-    private productService: ProductService
+    private productService: ProductService,
+    private categoryservice: CategoryService
   ) {
     // Get Query params..
-    if(this.loader){
+    if (this.loader) {
       this.route.queryParams.subscribe((params) => {
-        this.sortBy = params.sortBy
+        this.paramsCategory = params.category ? params.category : 0;
+        this.paramsSubCategory = params.subcategory ? params.subcategory : 0;
+        this.sortBy = params.sortBy;
+        if (this.paramsCategory != 0) {
+          this.categories = this.categoryservice.categories;
+          this.categories = this.categories.filter((res) => {
+            return this.paramsCategory == res.id;
+          });
+          this.titleCat = this.categories[0].name 
+          this.middleCat = this.categories[0].title
+        }
+        if (this.paramsSubCategory != 0) {
+          this.categoryservice.getAllSubCategory().subscribe((res) => {
+            this.subcategories = res;
+            this.subcategories = this.subcategories.filter((res) => {
+              return this.paramsSubCategory == res.id;
+            });
+            this.titleSub = this.subcategories[0].category_name  + '  >  ' +this.subcategories[0].name 
+            this.middleSub = this.subcategories[0].title
+          });
+        }
         if (params.sortBy === "low" || params.sortBy === "high") {
-          this.obj = 'discounted_price'
+          this.obj = "discounted_price";
           this.sortBy = params.sortBy == "low" ? "asc" : "desc";
         }
         if (params.search)
@@ -45,21 +76,35 @@ export class CollectionNoSidebarComponent implements OnInit {
           this.take,
           this.sortBy,
           this.obj,
-          params.search
+          params.search,
+          parseInt(params.category),
+          parseInt(params.subcategory)
         );
-        this.loader = false
+        this.loader = false;
       });
-
     }
   }
 
   ngOnInit(): void {}
 
-  getProducts(skip: number, take: number, sortBy: string, obj: string, search: string) {
-    this.productService.getAll(skip, take, sortBy, obj, search).subscribe((res) => {
-      this.products = res.products;
-      this.paginate = this.productService.getPager( res.numberItems, +this.pageNo);
-    });
+  getProducts(
+    skip: number,
+    take: number,
+    sortBy: string,
+    obj: string,
+    search: string,
+    category: number,
+    subcategory: number
+  ) {
+    this.productService
+      .getAll(skip, take, sortBy, obj, search, category, subcategory)
+      .subscribe((res) => {
+        this.products = res.products;
+        this.paginate = this.productService.getPager(
+          res.numberItems,
+          +this.pageNo
+        );
+      });
   }
 
   // SortBy Filter
@@ -96,7 +141,9 @@ export class CollectionNoSidebarComponent implements OnInit {
       this.take,
       this.sortBy,
       this.obj,
-      params
+      params,
+      this.paramsCategory,
+      this.paramsSubCategory
     );
   }
 

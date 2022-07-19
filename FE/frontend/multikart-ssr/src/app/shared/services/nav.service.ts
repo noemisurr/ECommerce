@@ -5,7 +5,7 @@ import { CategoryService } from "src/app/pages/account/services/category.service
 // Menu
 export interface Menu {
   path?: string;
-  queryParams?: string;
+  queryParams?: number;
   title?: string;
   type?: string;
   megaMenu?: boolean;
@@ -45,14 +45,15 @@ export class NavService {
       type: "link",
       children: this.categoryService.categories.map((res) => {
         return {
-          queryParams: res.name,
+          path: "/shop/list",
+          queryParams: res.id,
           title: res.name,
           type: "link",
           active: true,
           children: res.subcategories.map((sub) => {
             return {
               path: "/shop/list",
-              queryParams: sub.name,
+              queryParams: sub.id,
               title: sub.name,
               type: "link",
             };

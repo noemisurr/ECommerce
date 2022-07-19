@@ -42,8 +42,8 @@
                   formControlName="id_subcategory"
                 >
                   <option value="">--Select--</option>
-                  <option *ngFor="let data of subcategories" [value]="data.id">
-                    {{ data.name }}
+                  <option *ngFor="let sub of subcategories" [value]="sub.id">
+                    {{ sub.name }}
                   </option>
                 </select>
               </div>
@@ -125,7 +125,6 @@
                 class="form-control"
                 id="validationCustomtitle"
                 type="text"
-                required=""
                 formControlName="other"
               />
             </div>

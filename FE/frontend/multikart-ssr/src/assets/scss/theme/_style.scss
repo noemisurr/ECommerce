@@ -7037,7 +7037,7 @@ footer {
             font: normal normal normal 14px/1 $font-awesome;
             opacity: 1;
             color: black;
-            background-color: white;
+            // background-color: #D6D6D6;
             border-radius: 100%;
             height: 100%;
             display: flex;
@@ -7072,10 +7072,11 @@ footer {
             transition: all 0.5s ease;
             &:before {
                 opacity: 1;
-            }
+            }            
         }
         .owl-next {
             right: 20px;
+            
         }
         .owl-prev {
             left: 20px;
